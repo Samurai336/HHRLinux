@@ -113,6 +113,7 @@ void MainApp::OnLoop()
 
 void MainApp::OnRender()
 {
+	MainRenderTarget.Render(); 
 }
 
 
