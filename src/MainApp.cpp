@@ -1,42 +1,65 @@
 #include "MainApp.h"
 
 
+/*Singleton Suff */
+
+
+
+MainApp* MainApp::m_pInstance = NULL;
+
+MainApp* MainApp::Instance()
+{
+    if(!m_pInstance)
+    {
+        m_pInstance = new MainApp();
+    }
+
+    return m_pInstance;
+}
+
+
+
+/****************/
+
+
+
+
 MainApp::MainApp()
 {
 	MainWindow = NULL;
 
-	Running = true; 
+	Running = true;
 }
 
 int MainApp::OnExecute()
 {
 		if(OnInit() == false)
 		{
-			return -1; 
+			return -1;
 		}
 
-		SDL_Event Event; 
+		SDL_Event Event;
 
 
 		while (Running)
 		{
 			while (SDL_PollEvent(&Event))
 			{
-				OnEvent(&Event); 
+				OnEvent(&Event);
 			}
 
-			OnLoop(); 
+			OnLoop();
 
-			//OnRender();
+			OnRender();
 
-			MainRenderTarget.Render(); 
+			MainRenderTarget.Render();
 
 
 		}
 
-		OnCleanup(); 
+		OnCleanup();
 
-		return 0; 
+		return 0;
 }
 
 
@@ -45,12 +68,12 @@ bool MainApp::OnInit()
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		printf("failed to initi\n");
-		printf("SDL_Init failed: %s\n", SDL_GetError()); 
+		printf("SDL_Init failed: %s\n", SDL_GetError());
         	return false;
 	}
 
 	MainWindow = SDL_CreateWindow("HHR_X",
-							  SDL_WINDOWPOS_CENTERED, 
+							  SDL_WINDOWPOS_CENTERED,
 							  SDL_WINDOWPOS_CENTERED,
 							  WWIDTH, WHEIGHT,
                               SDL_WINDOW_RESIZABLE );
@@ -58,7 +81,7 @@ bool MainApp::OnInit()
 
 	if(MainRenderTarget.InitRenderer(MainWindow) == false )
 	{
-		printf("Main Render Target Failed to Initilize\n"); 
+		printf("Main Render Target Failed to Initilize\n");
 		return false;
 	}
 
@@ -66,32 +89,32 @@ bool MainApp::OnInit()
 
 
 
-	return true; 
+	return true;
 }
 
 
-void MainApp::OnEvent(SDL_Event* Event) 
+void MainApp::OnEvent(SDL_Event* Event)
 {
     Events::OnEvent(Event);
 }
 
 
-void MainApp::OnKeyDown(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode) 
+void MainApp::OnKeyDown(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
 	switch(sym)
 	{
-		default: 
+		default:
 		{
 
 		}
 	}
 }
 
-void MainApp::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode) 
+void MainApp::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
 	switch(sym)
 	{
-		default: 
+		default:
 		{
 
 		}
@@ -101,7 +124,7 @@ void MainApp::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 
 void MainApp::OnExit()
 {
-	Running = false; 
+	Running = false;
 }
 
 
@@ -113,15 +136,15 @@ void MainApp::OnLoop()
 
 void MainApp::OnRender()
 {
-	MainRenderTarget.Render(); 
+	MainRenderTarget.Render();
 }
 
 
 void MainApp::OnCleanup()
 {
 	//SDL_DestroyRenderer(Renderer);
-	MainRenderTarget.Clean(); 
-	SDL_DestroyWindow(MainWindow); 
+	MainRenderTarget.Clean();
+	SDL_DestroyWindow(MainWindow);
 
 
     SDL_Quit();

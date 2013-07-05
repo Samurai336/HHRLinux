@@ -3,7 +3,7 @@
 
 MainRender::MainRender(void)
 {
-	Renderer = NULL; 
+	Renderer = NULL;
 }
 
 
@@ -14,29 +14,29 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 
 	if(this->Renderer == NULL)
 	{
-		return false; 
+		return false;
 	}
 
-	return true; 
+	return true;
 }
 
 bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation)
 {
 	if(theTexture == NULL)
 	{
-		return false; 
+		return false;
 	}
-	
-	
+
+
 	SDL_Rect DestR;
 
 	DestR.x = X;
 	DestR.y = Y;
 
-	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE); 
+	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
 
-	return true; 
+	return true;
 
 }
 
@@ -44,7 +44,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 {
 	if(theTexture == NULL)
 	{
-		return false; 
+		return false;
 	}
 
 
@@ -62,10 +62,10 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 	SrcR.w = W;
 	SrcR.h = H;
 
-	SDL_RenderCopyEx(this->Renderer, theTexture, &SrcR, &DestR, rotation, NULL, SDL_FLIP_NONE); 
+	SDL_RenderCopyEx(this->Renderer, theTexture, &SrcR, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
 
-	return true; 
+	return true;
 
 }
 
@@ -78,7 +78,11 @@ void MainRender::Render()
 	DisplayRect.y = 0;
 	DisplayRect.w = WWIDTH;
 	DisplayRect.h = WHEIGHT;
-	
+
+
+    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+
+    SDL_RenderClear(Renderer);
 
 	SDL_RenderFillRect(Renderer, &DisplayRect);
 
@@ -93,7 +97,7 @@ void MainRender::Clean()
 
 SDL_Texture* LoadTexture(char* File, SDL_Renderer* Renderer)
 {
-	return IMG_LoadTexture(Renderer, File); 
+	return IMG_LoadTexture(Renderer, File);
 }
 
 

@@ -6,9 +6,15 @@
 int main(int argc, char* argv[])
 {
 
-    //printf("I Started!\n"); 
+    //printf("I Started!\n");
 
-    MainApp theApp;
+    //run forever
+    while(MainApp::Instance()->OnExecute())
 
-    return theApp.OnExecute();
+    //clearn up memory
+    delete MainApp::Instance();
+
+
+    //DOne
+    return 0;
 }
