@@ -39,6 +39,10 @@ endif()
 file (GLOB SRCS src/*.c src/*.cpp)
 file (GLOB HDRS src/*.h src/*.hpp)
 
+file(GLOB renderer_files src/Renderer/*.h src/Renderer/*.cpp)
+
+SOURCE_GROUP(Renderer FILES ${renderer_files})
+
 link_directories(
 )
 
@@ -50,6 +54,7 @@ if(WIN32)
 	add_executable(${App_Name} WIN32
 	${SRCS}
 	${HDRS}
+	${renderer_files}
 	)
 
 	SET_TARGET_PROPERTIES(${App_Name} PROPERTIES COMPILE_FLAGS "/Od /ZI")

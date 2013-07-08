@@ -1,6 +1,8 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
+#include <SDL2\SDL.h> 
+
 
 class Environment
 {
@@ -14,15 +16,15 @@ class Environment
         int Width;
         int Height;
 
-        virtual bool LoadEnvirement(char *File, SDL_Renderer* targetRenderer)
+		virtual bool LoadEnvirement(char *File, SDL_Renderer* targetRenderer) {return true;}; 
 
-        virtual void UpDate();
+		virtual void UpDate(){};
 
-        virtual void Render();
+		virtual void Render(){};
 
-        virtual void Cleanup();
+		virtual void Cleanup(){};
 
-        virtual void CheckCollision();
+		virtual void CheckCollision(){};
 
 
     protected:
