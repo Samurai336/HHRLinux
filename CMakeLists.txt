@@ -36,12 +36,17 @@ endif()
 
 ###############################################################################
 
-file (GLOB SRCS src/*.c src/*.cpp)
-file (GLOB HDRS src/*.h src/*.hpp)
+file(GLOB game_files src/*.c src/*.cpp src/*.h src/*.hpp)
 
 file(GLOB renderer_files src/Renderer/*.h src/Renderer/*.cpp)
 
+file(GLOB baseClasses_files src/BaseClasses/*.h src/BaseClasses/*.cpp)
+
 SOURCE_GROUP(Renderer FILES ${renderer_files})
+
+SOURCE_GROUP(Game FILES ${game_files})
+
+SOURCE_GROUP(BaseClasses FILES ${baseClasses_files})
 
 link_directories(
 )
@@ -52,8 +57,8 @@ include_directories(
 
 if(WIN32)
 	add_executable(${App_Name} WIN32
-	${SRCS}
-	${HDRS}
+	${game_files}
+	${baseClasses_files}
 	${renderer_files}
 	)
 
@@ -62,8 +67,9 @@ if(WIN32)
 	
 else ()
 	add_executable (${App_Name}
-	${SRCS}
-	${HDRS}
+	${game_files}
+	${baseClasses_files}
+	${renderer_files}
 	)
 endif () 
 

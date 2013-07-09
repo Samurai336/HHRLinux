@@ -5,9 +5,9 @@
 #include <SDL2/SDL.h>
 
 #include "Define.h"
-#include "Events.h"
+#include "BaseClasses/Events.h"
 #include "Renderer/MainRender.h"
-#include "Level.h"
+#include "BaseClasses/Level.h"
 
 
 class MainApp : public Events
