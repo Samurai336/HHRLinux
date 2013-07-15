@@ -105,10 +105,10 @@ if (Option_SDL_Dev)
 	
 endif(Option_SDL_Dev) 
 
-#message("${CMAKE_SOURCE_DIR}/assets")
+#message("${CMAKE_SOURCE_DIR}/Assets")
 #message("${CMAKE_BINARY_DIR}")
 
-#file(COPY "${CMAKE_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/Assets" DESTINATION "${CMAKE_BINARY_DIR}")
 
 
 

@@ -31,7 +31,7 @@ void BounceSquare::OnLoop()
 		speedX *= -1; 
 	}
 
-	if(Y < 0 || (Y+width) > WHEIGHT)
+	if(Y < 0 || (Y+height) > WHEIGHT)
 	{
 		speedY *= -1;
 	}
