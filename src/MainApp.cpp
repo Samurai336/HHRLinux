@@ -52,7 +52,7 @@ int MainApp::OnExecute()
 
 			OnRender();
 
-			MainRenderTarget.Render();
+			//MainRenderTarget.Render();
 
 
 		}
@@ -87,9 +87,16 @@ bool MainApp::OnInit()
 
 
 
+	Test.Load("Assets/chicken.png"); 
 
+	Test.setSpeed(5,10); 
 
 	return true;
+}
+
+void MainApp::LoadGame()
+{
+	
 }
 
 
@@ -130,13 +137,23 @@ void MainApp::OnExit()
 
 void MainApp::OnLoop()
 {
-
+	Test.OnLoop(); 
 }
 
 
 void MainApp::OnRender()
 {
-	MainRenderTarget.Render();
+	MainRenderTarget.CreateDisplayRect();
+	
+	Test.OnRender();
+
+	MainRenderTarget.RenderDisplay(); 
+}
+
+
+MainRender* MainApp::GetMainRenderTarget()
+{
+	return &MainRenderTarget; 
 }
 
 

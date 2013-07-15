@@ -17,6 +17,8 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 		return false;
 	}
 
+	
+
 	return true;
 }
 
@@ -27,11 +29,16 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation)
 		return false;
 	}
 
-
 	SDL_Rect DestR;
 
 	DestR.x = X;
 	DestR.y = Y;
+
+
+	//should render at default size however will it then 
+	//tank preformance? 
+	SDL_QueryTexture(theTexture, NULL,NULL, &DestR.w, &DestR.h); 
+
 
 	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
@@ -70,8 +77,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 }
 
 
-
-void MainRender::Render()
+void MainRender::CreateDisplayRect()
 {
 	SDL_Rect DisplayRect;
 	DisplayRect.x = 0;
@@ -79,14 +85,20 @@ void MainRender::Render()
 	DisplayRect.w = WWIDTH;
 	DisplayRect.h = WHEIGHT;
 
-
-    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
-
-    SDL_RenderClear(Renderer);
+	//but not above here. 
 
 	SDL_RenderFillRect(Renderer, &DisplayRect);
+}
+
+
+void MainRender::RenderDisplay()
+{
+	//rendering can happen here 
 
 	SDL_RenderPresent(Renderer);
+
+	//or it can happen here 
+
 }
 
 void MainRender::Clean()
@@ -95,7 +107,7 @@ void MainRender::Clean()
 }
 
 
-SDL_Texture* LoadTexture(char* File, SDL_Renderer* Renderer)
+SDL_Texture* MainRender::LoadTexture(char* File)
 {
 	return IMG_LoadTexture(Renderer, File);
 }

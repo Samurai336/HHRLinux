@@ -2,14 +2,17 @@
 #define _MAINAPP_H_
 
 
-#include <SDL2/SDL.h>
 
+
+
+#include <SDL2/SDL.h>
 #include "Define.h"
 #include "BaseClasses/Events.h"
 #include "Renderer/MainRender.h"
 #include "BaseClasses/Level.h"
+#include "BounceSquare.h"
 
-
+  
 class MainApp : public Events
 {
     /* Singleton stuff */
@@ -44,18 +47,27 @@ class MainApp : public Events
 
         void OnLoop();
 
+		void LoadGame(); 
+
+
+
         void OnRender();
 
         void OnCleanup();
 
+		MainRender* GetMainRenderTarget(); 
+
 
     private:
         bool            Running;
+		
+
+		BounceSquare		Test; 
 
         Level*          CurrentLevel;
 		SDL_Window*		MainWindow;
 		MainRender		MainRenderTarget;
-		SDL_Renderer*	theRenderer;
+		
 
 
 

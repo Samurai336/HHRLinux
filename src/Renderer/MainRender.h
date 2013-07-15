@@ -4,13 +4,15 @@
 #include <SDL2/SDL_image.h> 
 
 #include "../Define.h" 
+#include "../BaseClasses/BaseUnit.h"
+
 
 class MainRender
 {
 
 	public:
 
-		SDL_Texture* LoadTexture(char* File, SDL_Renderer* Renderer); 
+		SDL_Texture* LoadTexture(char* File); 
 
 
 	public:
@@ -24,7 +26,9 @@ class MainRender
 		
 
 
-		void Render(); 
+		void CreateDisplayRect(); 
+
+        void RenderDisplay();
 
 		void Clean(); 
 		//static SDL_Texture *OnLoad(char *filePath, SDL_Renderer *MainRenderer); 
@@ -32,5 +36,7 @@ class MainRender
 		
 	private: 
 		SDL_Renderer*    Renderer;
+
+
 };
 
