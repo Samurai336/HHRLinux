@@ -1,7 +1,7 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include <SDL2\SDL.h> 
+#include <SDL2/SDL.h> 
 
 
 class Environment
