@@ -57,6 +57,22 @@ namespace HHR_Physics
 
             void Normalize();
 
+            Vector3 AddScaledVector(const Vector3 &vec, real scale);
+
+            Vector3 ComponentProduct(const Vector3 &vec) const;
+
+            void ComponentProductUpdate(const Vector3 &vec);
+
+            real ScalerProduct(const Vector3 &vec) const ;
+
+            Vector3 VectorProduct(const Vector3 &vec) const;
+
+            void MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c);
+
+            void operator%=(const Vector3 &vec);
+
+            Vector3 operator%(const Vector3 &vec)const;
+
             void operator*=(const real value);
 
             Vector3 operator*(const real value);
@@ -69,24 +85,7 @@ namespace HHR_Physics
 
             Vector3 operator-(const Vector3 &v);
 
-            Vector3 AddScaledVector(const Vector3 &vec, real scale);
-
-            Vector3 ComponentProduct(const Vector3 &vec) const;
-
-            void ComponentProductUpdate(const Vector3 &vec);
-
-            real ScalerProduct(const Vector3 &vec) const ;
-
             real operator*(const Vector3 &vec) const ;
-
-            Vector3 VectorProduct(const Vector3 &vec) const;
-
-            void operator%=(const Vector3 &vec);
-
-            Vector3 operator%(const Vector3 &vec)const;
-
-            void MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c);
-
 
             ~Vector3();
 
