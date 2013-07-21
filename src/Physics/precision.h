@@ -9,7 +9,7 @@
 **  the Free Software Foundation, either version 3 of the License, or		  	**
 **  (at your option) any later version.										  	**
 **  																			**
-**  HHR_X is distributed in the hope that it will be useful,					**
+**  HHR_X is distributed in the hope that it will be useful,					**1111111111111111111111111111111111111111111111111111111111111
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of			  	**
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the			  	**
 **  GNU General Public License for more details.								**
@@ -35,9 +35,12 @@ namespace HHR_Physics
 
 
     //create a function pointer to our
-    //math libs squart function for floats
+    //math libs function for floats
     typedef real (*p_sqrtf) (real);
     static p_sqrtf real_sqrt = &sqrtf;
+
+    typedef real (*p_fabs) (real);
+    static  p_fabs real_abs = &fabsf;
 
 
 

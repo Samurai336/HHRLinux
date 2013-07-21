@@ -93,9 +93,9 @@ namespace HHR_Physics
 
     }
 
-    Vector3 Vector3::operator-(const Vector3 &v)
+    Vector3 Vector3::operator-(const Vector3 &v) const
     {
-        return (Vector3(x-v.x,y-v.y, z-v.z));
+        return (Vector3(x-v.x,y-v.y,z-v.z));
     }
 
     Vector3 Vector3::AddScaledVector(const Vector3 &vec, real scale)
@@ -169,6 +169,16 @@ namespace HHR_Physics
 
     }
 
+    real* Vector3::GetXYZAsArray()
+    {
+         real xyzAsArray[3];
+
+         xyzAsArray[0] = x;
+         xyzAsArray[1] = y;
+         xyzAsArray[2] = z;
+
+         return xyzAsArray;
+    }
 
     Vector3::~Vector3()
     {

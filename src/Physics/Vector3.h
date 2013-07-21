@@ -55,6 +55,8 @@ namespace HHR_Physics
 
             real SquareMagnatude() const;
 
+            real* GetXYZAsArray();
+
             void Normalize();
 
             Vector3 AddScaledVector(const Vector3 &vec, real scale);
@@ -83,7 +85,7 @@ namespace HHR_Physics
 
             void operator-=(const Vector3 &v);
 
-            Vector3 operator-(const Vector3 &v);
+            Vector3 operator-(const Vector3 &v) const;
 
             real operator*(const Vector3 &vec) const ;
 
