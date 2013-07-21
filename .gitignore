@@ -21,6 +21,8 @@ Thumbs.db
 .directory
 *.swp
 *~
+*.cbTemp
+
 
 build/
 build\ 
