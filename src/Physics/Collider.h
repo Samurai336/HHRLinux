@@ -25,6 +25,7 @@
 
 #include "BoundingBox.h"
 #include "Sphere.h"
+#include "OrientedBoundingBox.h"
 
 namespace HHR_Physics
 {
@@ -35,7 +36,8 @@ namespace HHR_Physics
             Collider();
             static bool Check(const BoundingBox &A, const BoundingBox &B) ;
             static bool Check(const Sphere &A, const Sphere &B);
-            static bool Check(const BoundingBox &A, const Sphere &B);
+            static bool Check(const BoundingBox &BB, const Sphere &SP);
+            static bool Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B) ;
 
 
         private:

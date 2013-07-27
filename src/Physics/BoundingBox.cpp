@@ -26,7 +26,44 @@
 namespace HHR_Physics
 {
 
+    real BoundingBox::Mininmum(const XYZ i) const
+    {
+        switch(i)
+        {
+            case(X):
+                return (this->position.x - this->extension.x);
+                break;
+            case(Y):
+                return (this->position.y - this->extension.y);
+                break;
+            case(Z):
+                return (this->position.z - this->extension.z);
+                break;
+            default:
+                return 0;
+                break;
+        }
 
+    }
+
+    real BoundingBox::Maximum(const XYZ i) const
+    {
+        switch(i)
+        {
+            case(X):
+                return (this->position.x + this->extension.x);
+                break;
+            case(Y):
+                return (this->position.y + this->extension.y);
+                break;
+            case(Z):
+                return (this->position.z + this->extension.z);
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
 
     BoundingBox::~BoundingBox()
     {

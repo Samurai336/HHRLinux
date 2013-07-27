@@ -28,6 +28,13 @@
 
 namespace HHR_Physics
 {
+    enum XYZ
+    {
+        X = 0,
+        Y,
+        Z,
+        enumTypeEnd
+    };
 
     class Vector3
     {
@@ -55,7 +62,7 @@ namespace HHR_Physics
 
             real SquareMagnatude() const;
 
-            real* GetXYZAsArray();
+            real* GetXYZAsArray() const;
 
             void Normalize();
 
@@ -88,6 +95,8 @@ namespace HHR_Physics
             Vector3 operator-(const Vector3 &v) const;
 
             real operator*(const Vector3 &vec) const ;
+
+            Vector3 operator=(const Vector3 &vec) const ;
 
             ~Vector3();
 

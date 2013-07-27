@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,7 +17,7 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #ifndef _MAINAPP_H_
 #define _MAINAPP_H_
@@ -33,7 +33,8 @@
 #include "BaseClasses/Level.h"
 #include "BounceSquare.h"
 
-  
+
+
 class MainApp : public Events
 {
     /* Singleton stuff */
@@ -47,6 +48,7 @@ class MainApp : public Events
         MainApp(MainApp const&){};
         MainApp& operator = (MainApp const&){};
         static MainApp* m_pInstance;
+
 
     /*************************/
 
@@ -68,7 +70,7 @@ class MainApp : public Events
 
         void OnLoop();
 
-		void LoadGame(); 
+		void LoadGame();
 
 
 
@@ -76,19 +78,19 @@ class MainApp : public Events
 
         void OnCleanup();
 
-		MainRender* GetMainRenderTarget(); 
+		MainRender* GetMainRenderTarget();
 
 
     private:
         bool            Running;
-		
 
-		BounceSquare		Test; 
+
+		BounceSquare		Test;
 
         Level*          CurrentLevel;
 		SDL_Window*		MainWindow;
 		MainRender		MainRenderTarget;
-		
+
 
 
 

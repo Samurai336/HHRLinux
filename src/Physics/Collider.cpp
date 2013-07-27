@@ -53,11 +53,39 @@ namespace HHR_Physics
 
     }
 
-    bool Collider::Check(const BoundingBox &A, const Sphere &B)
+    bool Collider::Check(const BoundingBox &BB,  const Sphere &SP)
     {
-        /*
-        real *
-        */
+        real s,d = 0;
+        real *CollisionAsArray = SP.position.GetXYZAsArray();
+
+        for(int i=0; i < 3; ++i)
+        {
+
+            if(CollisionAsArray[i] < BB.Mininmum(XYZ(i)))
+            {
+                s = CollisionAsArray[i] - BB.Mininmum(XYZ(i));
+                d += s*s ;
+            }
+            else if(CollisionAsArray[i] < BB.Mininmum(XYZ(i)))
+            {
+
+                s = CollisionAsArray[i] - BB.Maximum(XYZ(i));
+                d += s*s ;
+
+            }
+        }
+
+        return (d <= SP.radious);
+
+    }
+
+    bool Collider::Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B)
+    {
+
+
+
+        return true;
+
     }
 
 

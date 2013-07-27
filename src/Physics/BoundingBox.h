@@ -26,6 +26,8 @@
 
 namespace HHR_Physics
 {
+
+
     class BoundingBox
     {
 
@@ -34,9 +36,13 @@ namespace HHR_Physics
             Vector3 extension;
 
         public:
-            BoundingBox(Vector3 &Pos, Vector3 Ext):
+            BoundingBox(){}
+            BoundingBox(Vector3 &Pos, Vector3 &Ext):
             position(Pos), extension(Ext) {}
 
+            real Mininmum(const XYZ i) const;
+
+            real Maximum(const XYZ i) const;
 
             ~BoundingBox();
 

@@ -42,6 +42,12 @@ namespace HHR_Physics
     typedef real (*p_fabs) (real);
     static  p_fabs real_abs = &fabsf;
 
+    typedef real (*p_cosf) (real);
+    static p_cosf real_cos = &cosf;
+
+    typedef real (*p_sinf) (real);
+    static p_sinf real_sin= &sinf;
+
 
 
 

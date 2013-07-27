@@ -153,6 +153,12 @@ namespace HHR_Physics
 
     }
 
+     Vector3 Vector3::operator=(const Vector3 &vec)const
+    {
+        return Vector3(x,y,z);
+
+    }
+
     void Vector3::MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c)
     {
         a->Normalize();
@@ -169,7 +175,7 @@ namespace HHR_Physics
 
     }
 
-    real* Vector3::GetXYZAsArray()
+    real* Vector3::GetXYZAsArray() const
     {
          real xyzAsArray[3];
 
