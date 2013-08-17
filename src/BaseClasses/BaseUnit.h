@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,7 +17,7 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #ifndef BASEUNIT_H
 #define BASEUNIT_H
@@ -26,48 +26,57 @@
 
 
 
-#include <SDL2/SDL.h> 
+#include <SDL2/SDL.h>
+#include "../Renderer/MainRender.h"
+
+class MainRender;
 
 
 
 
 
-class BaseUnit 
+class BaseUnit
 {
 		public:
 			BaseUnit(void);
-			
-			virtual void Load(char* File);
+
+			virtual bool Load(char* File);
 
 			virtual void OnLoop();
 
-			virtual void OnRender(); 
+			virtual void OnRender(MainRender &theRenderer);
 
 			virtual void OnCleanup();
 
 			void  SetPosition(float MoveX, float MoveY);
 
 			void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
-			
+
+			int GetWidth(){return width;}
+
+			int GetHeight(){return height;}
+
 			~BaseUnit(void);
 
 		protected:
-			
-			SDL_Texture* unitTexture; 
-			
-			float X,Y; 
-			
-			double rotation; 
 
-			int renderOrder; 
-			
-			
+			SDL_Texture* unitTexture;
+
+			float X,Y;
+
+			int width, height;
+
+			double rotation;
+
+			int renderOrder;
 
 
-			
+
+
+
 
 
 
 };
 
-#endif 
+#endif

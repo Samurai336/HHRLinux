@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,7 +17,7 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 
 #include "MainApp.h"
@@ -107,24 +107,38 @@ bool MainApp::OnInit()
 		return false;
 	}
 
+	 CurrentLevel = new GameLevel1();
+
+	 if(CurrentLevel->LoadLevel() == false)
+     {
+         printf("Level Failed to load!\n");
+         return false;
+
+     }
 
 
-	Test.Load("Assets/chicken.png"); 
 
-	Test.setSpeed(5,10); 
+
+
 
 	return true;
 }
 
 void MainApp::LoadGame()
 {
-	
+
 }
 
 
 void MainApp::OnEvent(SDL_Event* Event)
 {
     Events::OnEvent(Event);
+
+    if(CurrentLevel != NULL)
+    {
+        CurrentLevel->OnEvent(Event);
+
+    }
 }
 
 
@@ -159,23 +173,30 @@ void MainApp::OnExit()
 
 void MainApp::OnLoop()
 {
-	Test.OnLoop(); 
+	if(CurrentLevel != NULL)
+    {
+        CurrentLevel->OnLoop();
+
+    }
 }
 
 
 void MainApp::OnRender()
 {
 	MainRenderTarget.CreateDisplayRect();
-	
-	Test.OnRender();
 
-	MainRenderTarget.RenderDisplay(); 
+    if(CurrentLevel != NULL)
+    {
+        CurrentLevel->OnRender(MainRenderTarget);
+    }
+
+	MainRenderTarget.RenderDisplay();
 }
 
 
 MainRender* MainApp::GetMainRenderTarget()
 {
-	return &MainRenderTarget; 
+	return &MainRenderTarget;
 }
 
 
@@ -184,6 +205,10 @@ void MainApp::OnCleanup()
 	//SDL_DestroyRenderer(Renderer);
 	MainRenderTarget.Clean();
 	SDL_DestroyWindow(MainWindow);
+
+	CurrentLevel->OnCleanup();
+
+	delete CurrentLevel;
 
 
     SDL_Quit();

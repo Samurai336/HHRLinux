@@ -34,11 +34,11 @@ class BounceSquare :
 	public:
 		BounceSquare(void);
 
-		void Load(char* File);
+		bool Load(char* File);
 
 		void OnLoop();
 
-		void OnRender();
+		void OnRender(MainRender	&theRenderer);
 
 		void OnCleanup();
 
@@ -47,7 +47,7 @@ class BounceSquare :
 		~BounceSquare(void);
 	private:
 		float speedX, speedY;
-		int width, height;
+
 
 
 };

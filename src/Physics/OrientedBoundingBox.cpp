@@ -4,10 +4,6 @@
 
 namespace HHR_Physics
 {
-    OrientedBoundingBox::~OrientedBoundingBox()
-    {
-        //dtor
-    }
 
 
 
@@ -30,7 +26,7 @@ namespace HHR_Physics
 
         return Vector3((this->position.x*cosineTheta) + (this->position.z * sineTheta),
                        this->position.y,
-                       (this->position.x (-1*sineTheta) + (this->position.z * cosineTheta));
+                       (this->position.x *(-1*sineTheta) + (this->position.z * cosineTheta)));
 
     }
     Vector3 OrientedBoundingBox::GetZAxis()
@@ -39,9 +35,9 @@ namespace HHR_Physics
         real cosineTheta = real_cos(Orientation.z);
         real sineTheta   = real_sin(Orientation.z);
 
-        return Vector3((this->position.x * cosineTheta) + (this->position.y (-1*sineTheta)),
+        return Vector3((this->position.x * cosineTheta) + (this->position.y *(-1*sineTheta)),
                        (this->position.x * sineTheta) + (this->position.y*cosineTheta),
-                        this->position.z)
+                        this->position.z);
 
     }
 

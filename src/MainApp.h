@@ -28,6 +28,7 @@
 
 #include <SDL2/SDL.h>
 #include "Define.h"
+#include "GameLevel1.h"
 #include "BaseClasses/Events.h"
 #include "Renderer/MainRender.h"
 #include "BaseClasses/Level.h"
@@ -85,7 +86,7 @@ class MainApp : public Events
         bool            Running;
 
 
-		BounceSquare		Test;
+		//BounceSquare		Test;
 
         Level*          CurrentLevel;
 		SDL_Window*		MainWindow;

@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,21 +17,36 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #ifndef GAMELEVEL1_H
 #define GAMELEVEL1_H
 
+#include "Define.h"
 #include "BaseClasses/Level.h"
+#include "Renderer/MainRender.h"
+#include "BounceSquare.h"
+#include "BaseClasses/SpriteAnimation.h"
 
+
+class SpriteAnimation;
 
 class GameLevel1 : public Level
 {
     public:
         GameLevel1();
+        bool LoadLevel();
+        void OnEvent(SDL_Event* Event);
+        void OnLoop();
+        void OnRender(MainRender	&theRenderer);
+        void OnCleanup();
         ~GameLevel1();
     protected:
+
     private:
+        BounceSquare Test;
+        SpriteAnimation Henry;
+
 };
 
 #endif // GAMELEVEL1_H

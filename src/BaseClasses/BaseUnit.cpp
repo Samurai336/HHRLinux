@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,35 +17,44 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #include "BaseUnit.h"
 
-//This is here due to circulalr dependency issue. 
+//This is here due to circulalr dependency issue.
 #include "../MainApp.h"
 
 
 
 BaseUnit::BaseUnit(void)
 {
-	
-	X = Y = 0.0f; 
-	unitTexture = NULL; 
-	rotation = 0.0; 
-	renderOrder = 1; 
-	
+
+	X = Y = 0.0f;
+	unitTexture = NULL;
+	rotation = 0.0;
+	renderOrder = 1;
+	width = 0;
+	height =0;
+
 }
 
 
 BaseUnit::~BaseUnit(void)
 {
-	
+
 }
 
 
-void BaseUnit::Load(char* File)
+bool BaseUnit::Load(char* File)
 {
-	 unitTexture = MainApp::Instance()->GetMainRenderTarget()->LoadTexture(File); 
+	 if((unitTexture = MainApp::Instance()->GetMainRenderTarget()->LoadTexture(File)) == NULL)
+     {
+         return true;
+     }
+
+     SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height);
+
+     return false;
 }
 
 
@@ -54,14 +63,14 @@ void BaseUnit::OnLoop()
 
 }
 
-void BaseUnit::OnRender()
+void BaseUnit::OnRender(MainRender	&theRenderer)
 {
-	MainApp::Instance()->GetMainRenderTarget()->Draw(unitTexture, X,Y, rotation);  
+	theRenderer.Draw(unitTexture, X,Y, rotation);
 }
 
 void BaseUnit::OnCleanup()
 {
-	 if(unitTexture) 
+	 if(unitTexture)
 	 {
         SDL_DestroyTexture(unitTexture);
 	 }
@@ -71,6 +80,6 @@ void BaseUnit::OnCleanup()
 
 void BaseUnit::SetPosition(float MoveX, float MoveY)
 {
-	X = MoveX; 
-	Y = MoveY; 
+	X = MoveX - (width/2);
+	Y = MoveY - (height/2);
 }

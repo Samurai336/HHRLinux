@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,30 +17,31 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #include "BounceSquare.h"
 
 
 BounceSquare::BounceSquare(void)
 {
-	BaseUnit(); 
-	speedX	= speedY = 0; 
+	BaseUnit();
+	speedX	= speedY = 0;
 
 }
 
-void BounceSquare::Load(char* File)
+bool BounceSquare::Load(char* File)
 {
-	BaseUnit::Load(File); 
+    bool loadStatus = BaseUnit::Load(File);
 
-	SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height); 
-	
+
+    return loadStatus;
+
 }
 
-void BounceSquare::setSpeed(float xSpeed, float ySpeed) 
+void BounceSquare::setSpeed(float xSpeed, float ySpeed)
 {
-	speedX = xSpeed; 
-	speedY = ySpeed; 
+	speedX = xSpeed;
+	speedY = ySpeed;
 }
 
 
@@ -49,7 +50,7 @@ void BounceSquare::OnLoop()
 
 	if(X < 0 || (X+width) > WWIDTH)
 	{
-		speedX *= -1; 
+		speedX *= -1;
 	}
 
 	if(Y < 0 || (Y+height) > WHEIGHT)
@@ -57,13 +58,13 @@ void BounceSquare::OnLoop()
 		speedY *= -1;
 	}
 
-	X += speedX; 
-	Y += speedY; 
+	X += speedX;
+	Y += speedY;
 }
-		
-void BounceSquare::OnRender()
+
+void BounceSquare::OnRender(MainRender	&theRenderer)
 {
-	BaseUnit::OnRender(); 
+	BaseUnit::OnRender(theRenderer);
 }
 
 void BounceSquare::OnCleanup()

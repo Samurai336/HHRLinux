@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,14 +17,14 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 #pragma once
 
-#include <SDL2/SDL.h> 
-#include <SDL2/SDL_image.h> 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
-#include "../Define.h" 
+#include "../Define.h"
 #include "../BaseClasses/BaseUnit.h"
 
 
@@ -33,29 +33,30 @@ class MainRender
 
 	public:
 
-		SDL_Texture* LoadTexture(char* File); 
+		SDL_Texture* LoadTexture(char* File);
 
 
 	public:
 
-		MainRender(void); 
+		MainRender(void);
 
-		bool InitRenderer(SDL_Window*); 
+		bool InitRenderer(SDL_Window*);
 
-		bool Draw(SDL_Texture* theTexture, int X, int Y, double rotation = 0.0);  
-		bool Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation = 0.0); 
-		
+		bool Draw(SDL_Texture* theTexture, int X, int Y, double rotation = 0.0);
+		bool Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation = 0.0);
+		bool Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation = 0.0);
 
 
-		void CreateDisplayRect(); 
+
+		void CreateDisplayRect();
 
         void RenderDisplay();
 
-		void Clean(); 
-		//static SDL_Texture *OnLoad(char *filePath, SDL_Renderer *MainRenderer); 
+		void Clean();
+		//static SDL_Texture *OnLoad(char *filePath, SDL_Renderer *MainRenderer);
 
-		
-	private: 
+
+	private:
 		SDL_Renderer*    Renderer;
 
 
