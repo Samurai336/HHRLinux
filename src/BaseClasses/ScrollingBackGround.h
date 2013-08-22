@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,7 +17,7 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 
 
@@ -28,6 +28,14 @@
 
 #include "../BaseClasses/Environment.h"
 
+enum ScrollDirection
+{
+    Up = 0,
+    Down,
+    Left,
+    Right
+
+};
 
 
 
@@ -35,43 +43,35 @@ class ScrollingBackGround :	public Environment
 {
 	public:
 
-		enum ScrollDirection
-		{
-			Up = 0, 
-			Down, 
-			Left, 
-			Right 
-
-		};
 
 
 		ScrollingBackGround(void);
-		
+
 		ScrollingBackGround(char* BaseBackGroundFile, char** MovingBackGroundFiles,  int numberOfBackgrounds, ScrollDirection setDirecton, int speed);
 
-		bool LoadEnvirement(char* BaseBackGroundFile, char** MovingBackGroundFiles,  int numberOfBackgrounds, ScrollDirection setDirecton, int speed); 
-	
+		bool LoadEnvirement(char* BaseBackGroundFile, char** MovingBackGroundFiles,  int numberOfBackgrounds, ScrollDirection setDirecton, int speed);
+
 		void UpDate();
-	
+
 		void Render(MainRender	&theRenderer);
-	
+
 		void Cleanup();
-	
+
 		void CheckCollision();
-	
+
 		virtual ~ScrollingBackGround(void);
 
 	protected:
-		void ScrollUp(); 
-		void ScrollDown(); 
-		void ScrollLeft(); 
-		void ScrollRight(); 
-		SDL_Texture **BackGroundTextures; 
-		SDL_Rect *BackGroundRects; 
-		unsigned int numberOfBackgrounds; 
-		ScrollDirection Direction; 
-		int maxSpeed; 
-		int currentSpeed; 
-		
+		void ScrollUp();
+		void ScrollDown();
+		void ScrollLeft();
+		void ScrollRight();
+		SDL_Texture **BackGroundTextures;
+		SDL_Rect *BackGroundRects;
+		unsigned int numberOfBackgrounds;
+		ScrollDirection Direction;
+		int maxSpeed;
+		int currentSpeed;
+
 };
 
