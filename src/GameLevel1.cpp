@@ -58,6 +58,18 @@ bool GameLevel1::LoadLevel()
 
     Henry.SetPosition((WWIDTH/2), (WHEIGHT/2) );
 
+	
+	char *Textures[2]= {"Assets/LageBackgound.png","Assets/LageBackgound.png"}; 
+	
+	background.LoadEnvirement("Assets/LageBackgound.png",
+								Textures,
+								2,
+								ScrollingBackGround::ScrollDirection::Up,
+								2); 
+				
+				
+
+
 
     return true;
 }
@@ -65,20 +77,26 @@ bool GameLevel1::LoadLevel()
 void GameLevel1::OnEvent(SDL_Event* Event)
 {
     Events::OnEvent(Event);
+	
 }
 void GameLevel1::OnLoop()
 {
     Henry.OnLoop();
     Test.OnLoop();
+	background.UpDate(); 
+	
+
 
 }
 void GameLevel1::OnRender(MainRender	&theRenderer)
 {
+	background.Render(theRenderer); 
     Henry.OnRender(theRenderer);
     Test.OnRender(theRenderer);
 
 }
 void GameLevel1::OnCleanup()
 {
+	background.Cleanup(); 
     Henry.OnCleanup();
 }

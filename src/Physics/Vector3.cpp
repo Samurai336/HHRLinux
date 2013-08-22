@@ -98,7 +98,7 @@ namespace HHR_Physics
         return (Vector3(x-v.x,y-v.y,z-v.z));
     }
 
-    Vector3 Vector3::AddScaledVector(const Vector3 &vec, real scale)
+    void Vector3::AddScaledVector(const Vector3 &vec, real scale)
     {
         x += vec.x * scale;
         y += vec.y * scale;

@@ -19,46 +19,59 @@
 **  																			**
 **********************************************************************************/	
 
-#include "Environment.h"
 
-#include "../MainApp.h"
 
-Environment::Environment()
+#pragma once
+
+
+#include "../Define.h"
+
+#include "../BaseClasses/Environment.h"
+
+
+
+
+class ScrollingBackGround :	public Environment
 {
-	BackGroundImage = NULL; 
-    //ctor
-}
+	public:
 
-Environment::Environment(char *File)
-{
-     if((BackGroundImage = MainApp::Instance()->GetMainRenderTarget()->LoadTexture(File)) == NULL)
-     {
-         return;
-     } 
-}
+		enum ScrollDirection
+		{
+			Up = 0, 
+			Down, 
+			Left, 
+			Right 
 
-bool Environment::LoadEnvirement(char *File)
-{
-	 if((BackGroundImage = MainApp::Instance()->GetMainRenderTarget()->LoadTexture(File)) == NULL)
-     {
-         return true;
-     }   
-
-     return false;
-}
-
-void Environment::Render(MainRender	&theRenderer)
-{
-	if(BackGroundImage == NULL)
-	{
-		return; 
-	}
-
-	theRenderer.Draw(BackGroundImage,0,0);  
-}
+		};
 
 
-Environment::~Environment()
-{
-    //dtor
-}
+		ScrollingBackGround(void);
+		
+		ScrollingBackGround(char* BaseBackGroundFile, char** MovingBackGroundFiles,  int numberOfBackgrounds, ScrollDirection setDirecton, int speed);
+
+		bool LoadEnvirement(char* BaseBackGroundFile, char** MovingBackGroundFiles,  int numberOfBackgrounds, ScrollDirection setDirecton, int speed); 
+	
+		void UpDate();
+	
+		void Render(MainRender	&theRenderer);
+	
+		void Cleanup();
+	
+		void CheckCollision();
+	
+		virtual ~ScrollingBackGround(void);
+
+	protected:
+		void ScrollUp(); 
+		void ScrollDown(); 
+		void ScrollLeft(); 
+		void ScrollRight(); 
+		SDL_Texture **BackGroundTextures; 
+		SDL_Rect *BackGroundRects; 
+		unsigned int numberOfBackgrounds; 
+		ScrollDirection Direction; 
+		int maxSpeed; 
+		int currentSpeed; 
+		
+};
+

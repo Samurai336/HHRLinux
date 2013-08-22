@@ -27,6 +27,8 @@
 #include "Renderer/MainRender.h"
 #include "BounceSquare.h"
 #include "BaseClasses/SpriteAnimation.h"
+#include "BaseClasses/ScrollingBackGround.h" 
+
 
 
 class SpriteAnimation;
@@ -46,6 +48,7 @@ class GameLevel1 : public Level
     private:
         BounceSquare Test;
         SpriteAnimation Henry;
+		ScrollingBackGround background; 
 
 };
 

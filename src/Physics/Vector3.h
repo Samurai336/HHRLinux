@@ -66,7 +66,7 @@ namespace HHR_Physics
 
             void Normalize();
 
-            Vector3 AddScaledVector(const Vector3 &vec, real scale);
+            void AddScaledVector(const Vector3 &vec, real scale);
 
             Vector3 ComponentProduct(const Vector3 &vec) const;
 

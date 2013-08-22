@@ -23,25 +23,23 @@
 #define ENVIRONMENT_H
 
 #include <SDL2/SDL.h> 
+#include "../Renderer/MainRender.h"
+
 
 
 class Environment
 {
     public:
         Environment();
+        Environment(char *File);
         ~Environment();
 
-        float X;
-        float Y;
-
-        int Width;
-        int Height;
-
-		virtual bool LoadEnvirement(char *File, SDL_Renderer* targetRenderer) {return true;}; 
+        
+		virtual bool LoadEnvirement(char *File); 
 
 		virtual void UpDate(){};
 
-		virtual void Render(){};
+		virtual void Render(MainRender	&theRenderer);
 
 		virtual void Cleanup(){};
 
