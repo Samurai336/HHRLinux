@@ -100,6 +100,11 @@ if (Option_SDL_Dev)
 		message (FATAL_ERROR "SDL_Image not found!")
 	endif (NOT SDL2IMAGE_FOUND)
 
+	find_package(SDL2_ttf)
+	if (NOT SDL2TTF_FOUND)
+		message (FATAL_ERROR "SDL_ttf not found!")
+	endif (NOT SDL2TTF_FOUND)
+
 	include_directories(
 		${SDL2_INCLUDE_DIR}
 		${INCLUDE_DIRECTORIES}
@@ -108,6 +113,7 @@ if (Option_SDL_Dev)
 		${SDL2_LIBRARY}
 		${SDL2MAIN_LIBRARY}
 		${SDL2IMAGE_LIBRARY}
+		${SDL2TTF_LIBRARY}
 		${TARGET_LINK_LIBRARIES}
 		)
 
