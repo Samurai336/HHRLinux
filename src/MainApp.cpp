@@ -216,6 +216,7 @@ void MainApp::OnCleanup()
 
 	delete CurrentLevel;
 
+    TTF_Quit();
 
     SDL_Quit();
 }

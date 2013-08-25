@@ -56,6 +56,18 @@ bool GameLevel1::LoadLevel()
         return false;
     }
 
+
+    if(!AMessage.LoadSpriteText("Assets/Romanesque_Serif.ttf", "Hello World"))
+    {
+        return false;
+    }
+
+    AMessage.setPosition((WWIDTH/2), (WHEIGHT/4));
+    AMessage.setColor({0,0,0});
+    AMessage.setFontSize(25);
+
+
+
     Henry.SetPosition((WWIDTH/2), (WHEIGHT/2) );
 
 
@@ -64,7 +76,7 @@ bool GameLevel1::LoadLevel()
 	background.LoadEnvirement("Assets/LageBackgound2.png",
 								Textures,
 								2,
-								Up,
+								Down,
 								2);
 
 
@@ -87,16 +99,20 @@ void GameLevel1::OnLoop()
 
 
 
+
 }
 void GameLevel1::OnRender(MainRender	&theRenderer)
 {
+
 	background.Render(theRenderer);
     Henry.OnRender(theRenderer);
     Test.OnRender(theRenderer);
+    AMessage.OnRender(theRenderer);
 
 }
 void GameLevel1::OnCleanup()
 {
 	background.Cleanup();
     Henry.OnCleanup();
+    AMessage.OnCleanup();
 }

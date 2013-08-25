@@ -8,6 +8,8 @@ SpriteText::SpriteText():theText(""), textSprite(NULL), fontFile(NULL)
 
     needsUpdate = false;
 
+    currentFontFile= "";
+
 
     //ctor
 }
@@ -26,6 +28,8 @@ bool SpriteText::LoadSpriteText(char* fontTTFFile, char* StartText, unsigned int
         return false;
     }
 
+    currentFontFile = fontTTFFile;
+
     theText = StartText;
     textFontSize = fontSize;
     TextDisplayRect.x = positionX;
@@ -37,18 +41,79 @@ bool SpriteText::LoadSpriteText(char* fontTTFFile, char* StartText, unsigned int
     return true;
 }
 
+void SpriteText::operator=(const char*newText)
+{
+    theText = newText;
+}
+
+void SpriteText::setX(int X)
+{
+
+    TextDisplayRect.x = X;
+
+}
+
+void SpriteText::setY(int Y)
+{
+
+    TextDisplayRect.y = Y;
+}
+
+void SpriteText::setPosition(int x, int y)
+{
+    setX(x);
+    setY(y);
+}
+
+
+void SpriteText::setColor(SDL_Color newFontColor)
+{
+    TextColor=newFontColor;
+    needsUpdate = true;
+}
+
+bool SpriteText::setFont(char* fontPath)
+{
+
+    if((fontFile = TTF_OpenFont( fontPath, textFontSize ))==NULL)
+    {
+        return false;
+    }
+
+    currentFontFile = fontPath;
+
+    return true;
+
+}
+
+void SpriteText::setFontSize(unsigned int newSize)
+{
+    textFontSize = newSize;
+
+    fontFile = TTF_OpenFont( currentFontFile.c_str(), textFontSize );
+
+    needsUpdate = true;
+
+}
+
+
 void SpriteText::UpDateText(char* newText)
 {
     theText = newText;
+    needsUpdate = true;
 
 
 }
 void SpriteText::UpdateSpriteTexture(MainRender &theRenderer)
 {
+
+
     SDL_Surface *surfSpriteText = TTF_RenderText_Solid(fontFile, theText.c_str(), TextColor);
     SDL_DestroyTexture(textSprite);
     textSprite = theRenderer.CreateTextureFromSurface(surfSpriteText );
-    needsUpdate = true;
+
+    SDL_QueryTexture(textSprite, NULL, NULL, &width, &height);
+
 }
 
 
@@ -60,8 +125,14 @@ void SpriteText::OnRender(MainRender &theRenderer)
         needsUpdate = false;
     }
 
-    theRenderer.Draw(textSprite, TextDisplayRect.x, TextDisplayRect.y);
+    theRenderer.Draw(textSprite, TextDisplayRect.x-(width/2), TextDisplayRect.y - (height/ 2 ));
 
+}
+
+void SpriteText::OnCleanup()
+{
+    SDL_DestroyTexture(textSprite);
+    TTF_CloseFont( fontFile );
 }
 
 SpriteText::~SpriteText()

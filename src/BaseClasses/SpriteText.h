@@ -14,7 +14,15 @@ class SpriteText
         SpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0, SDL_Color Color = {255, 255, 255 });
         bool LoadSpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0,  SDL_Color Color = {255, 255, 255 });
         virtual void UpDateText(char* newText);
+        void operator=(const char*);
         virtual void OnRender(MainRender &theRenderer);
+        void setX(int);
+        void setY(int);
+        void setPosition(int x, int y);
+        void setColor(SDL_Color);
+        bool setFont(char* fontPath);
+        void setFontSize(unsigned int);
+        virtual void OnCleanup();
 
         virtual ~SpriteText();
     protected:
@@ -23,7 +31,9 @@ class SpriteText
         SDL_Texture* textSprite;
         TTF_Font*    fontFile;
         SDL_Rect    TextDisplayRect;
+        int         height, width;
         SDL_Color   TextColor;
+        std::string currentFontFile;
         unsigned int textFontSize;
         std::string  theText;
 
@@ -32,3 +42,4 @@ class SpriteText
 };
 
 #endif // SPRITETEXT_H
+
