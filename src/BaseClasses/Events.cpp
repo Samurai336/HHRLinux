@@ -2,7 +2,7 @@
 **  Copyright 2013 Eric Basile 												  	**
 **  																			**
 **  This file is part of Henry Hudson's Revenge. A Cross Platform project,      **
-**  also Known as HHR_X and referd to as such thoughout.						**	
+**  also Known as HHR_X and referd to as such thoughout.						**
 **  																			**
 **  HHR_X is free software: you can redistribute it and/or modify			  	**
 **  it under the terms of the GNU General Public License as published by		**
@@ -17,7 +17,7 @@
 **  You should have received a copy of the GNU General Public License		  	**
 **  along with HHR_X.  If not, see <http://www.gnu.org/licenses/>.			  	**
 **  																			**
-**********************************************************************************/	
+**********************************************************************************/
 
 //==============================================================================
 #include "Events.h"
@@ -34,8 +34,8 @@ Events::~Events() {
 //==============================================================================
 void Events::OnEvent(SDL_Event* Event) {
 	switch(Event->type) {
-		
-		/* not sure how this translates in 2.0 
+
+		/* not sure how this translates in 2.0
 	case SDL_SYSWMEVENT: {
 			switch(Event->syswm.type) {
 				case SDL_WINDOW_MOUSE_FOCUS: {
@@ -62,12 +62,12 @@ void Events::OnEvent(SDL_Event* Event) {
 		*/
 
 		case SDL_KEYDOWN: {
-			OnKeyDown(Event->key.keysym.sym,KMOD_NONE,Event->key.keysym.unicode);
+			OnKeyDown(Event->key.keysym.sym,KMOD_NONE,Event->key.keysym.mod);
 			break;
 		}
 
 		case SDL_KEYUP: {
-			OnKeyUp(Event->key.keysym.sym,KMOD_NONE,Event->key.keysym.unicode);
+			OnKeyUp(Event->key.keysym.sym,KMOD_NONE,Event->key.keysym.mod);
 			break;
 		}
 
@@ -146,10 +146,10 @@ void Events::OnEvent(SDL_Event* Event) {
 			break;
 		}
 
-		 
+
 		case SDL_WINDOWEVENT: {
 
-			switch (Event->window.event) 
+			switch (Event->window.event)
 			{
 
 				case SDL_WINDOWEVENT_RESIZED:
@@ -169,10 +169,10 @@ void Events::OnEvent(SDL_Event* Event) {
 			}
 			}
 							  }
-		
-	
-		
-	  
+
+
+
+
 
 		default: {
 			OnUser(Event->user.type,Event->user.code,Event->user.data1,Event->user.data2);
