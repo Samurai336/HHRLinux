@@ -27,6 +27,7 @@
 
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "Define.h"
 #include "GameLevel1.h"
 #include "BaseClasses/Events.h"

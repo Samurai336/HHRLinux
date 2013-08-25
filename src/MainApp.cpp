@@ -107,6 +107,12 @@ bool MainApp::OnInit()
 		return false;
 	}
 
+    //Initialize SDL_ttf
+    if( TTF_Init() == -1 )
+    {
+        return false;
+    }
+
 	 CurrentLevel = new GameLevel1();
 
 	 if(CurrentLevel->LoadLevel() == false)

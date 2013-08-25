@@ -118,6 +118,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 }
 
 
+
 void MainRender::CreateDisplayRect()
 {
 	SDL_Rect DisplayRect;
@@ -151,6 +152,12 @@ void MainRender::Clean()
 SDL_Texture* MainRender::LoadTexture(char* File)
 {
 	return IMG_LoadTexture(Renderer, File);
+}
+
+SDL_Texture* MainRender::CreateTextureFromSurface(SDL_Surface* surface)
+{
+    return SDL_CreateTextureFromSurface(Renderer,surface);
+
 }
 
 
