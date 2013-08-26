@@ -63,7 +63,8 @@ bool GameLevel1::LoadLevel()
     }
 
     AMessage.setPosition((WWIDTH/2), (WHEIGHT/4));
-    AMessage.setColor({0,0,0});
+	SDL_Color TextColor = {0,0,0}; 
+    AMessage.setColor(TextColor);
     AMessage.setFontSize(25);
 
 

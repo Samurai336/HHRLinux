@@ -1,8 +1,17 @@
 #include "SpriteText.h"
 
-SpriteText::SpriteText():theText(""), textSprite(NULL), fontFile(NULL)
+struct something 
 {
-    TextColor = {255,255,255};
+	int i,j,k; 
+};
+
+SpriteText::SpriteText() :theText(""), textSprite(NULL), fontFile(NULL)
+{
+	//TextColor =  {255, 255, 255}; // This does no work on windows wtf
+
+	TextColor = TextColor; 
+
+	//something mine = {1,2,3}; 
 
     TextDisplayRect.x = TextDisplayRect.y = TextDisplayRect.h = TextDisplayRect.w  = 0;
 

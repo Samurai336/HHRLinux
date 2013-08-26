@@ -6,13 +6,14 @@
 #include <string>
 #include "../Renderer/MainRender.h"
 
+const SDL_Color DefualtColor = {255,255,255}; 
 
 class SpriteText
 {
     public:
         SpriteText();
-        SpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0, SDL_Color Color = {255, 255, 255 });
-        bool LoadSpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0,  SDL_Color Color = {255, 255, 255 });
+        SpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0, SDL_Color Color = DefualtColor);
+        bool LoadSpriteText(char* fontTTFFile, char* StartText = "", unsigned int fontSize = 12, int positionX = 0, int positionY =0, SDL_Color Color = DefualtColor);
         virtual void UpDateText(char* newText);
         void operator=(const char*);
         virtual void OnRender(MainRender &theRenderer);
@@ -26,6 +27,7 @@ class SpriteText
 
         virtual ~SpriteText();
     protected:
+		
         void UpdateSpriteTexture(MainRender &theRenderer);
         bool needsUpdate;
         SDL_Texture* textSprite;
