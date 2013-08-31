@@ -53,6 +53,7 @@ bool SpriteText::LoadSpriteText(char* fontTTFFile, char* StartText, unsigned int
 void SpriteText::operator=(const char*newText)
 {
     theText = newText;
+	needsUpdate = true;
 }
 
 void SpriteText::setX(int X)

@@ -48,7 +48,6 @@ class GameLevel1 : public Level
 
     private:
         BounceSquare Test;
-        SpriteAnimation Henry;
 		ScrollingBackGround background;
 		SpriteText AMessage;
 

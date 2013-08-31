@@ -51,10 +51,7 @@ bool GameLevel1::LoadLevel()
 
 
 
-    if(Henry.CreateAnimatedSprite("Assets/HenryHudsonHead2.png",4,4, 2500, true))
-    {
-        return false;
-    }
+   
 
 
     if(!AMessage.LoadSpriteText("Assets/Romanesque_Serif.ttf", "Hello World"))
@@ -64,12 +61,13 @@ bool GameLevel1::LoadLevel()
 
     AMessage.setPosition((WWIDTH/2), (WHEIGHT/4));
 	SDL_Color TextColor = {0,0,0}; 
+	TextColor = TextColor; 
     AMessage.setColor(TextColor);
     AMessage.setFontSize(25);
 
 
 
-    Henry.SetPosition((WWIDTH/2), (WHEIGHT/2) );
+   
 
 
 	char *Textures[2]= {"Assets/LageBackgound2.png","Assets/LageBackgound2.png"};
@@ -94,7 +92,7 @@ void GameLevel1::OnEvent(SDL_Event* Event)
 }
 void GameLevel1::OnLoop()
 {
-    Henry.OnLoop();
+   
     Test.OnLoop();
 	background.UpDate();
 
@@ -106,7 +104,7 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
 {
 
 	background.Render(theRenderer);
-    Henry.OnRender(theRenderer);
+   
     Test.OnRender(theRenderer);
     AMessage.OnRender(theRenderer);
 
@@ -114,6 +112,6 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
 void GameLevel1::OnCleanup()
 {
 	background.Cleanup();
-    Henry.OnCleanup();
+    
     AMessage.OnCleanup();
 }
