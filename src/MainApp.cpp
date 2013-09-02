@@ -65,20 +65,24 @@ int MainApp::OnExecute()
 
 		while (Running)
 		{
-			while (SDL_PollEvent(&Event))
+			if(!MainRenderTarget.FrameRateControl.TargetRateHit())
 			{
-				OnEvent(&Event);
+				while (SDL_PollEvent(&Event))
+				{
+					OnEvent(&Event);
+				}
+
+				OnLoop();
+
+				OnRender();
+			}
+			else 
+			{
+				Sleep(1); 
 			}
 
-			OnLoop();
-
-			OnRender();
-
 			//MainRenderTarget.Render();
-
-
 		}
-
 		OnCleanup();
 
 		return 0;

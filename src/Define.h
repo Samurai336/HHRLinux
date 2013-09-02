@@ -23,4 +23,13 @@
 #define WWIDTH		800
 #define	WHEIGHT		600
 
+#define DEBUG_MODE 
+
+#ifdef _WINDOWS
+#include <windows.h>
+#else
+#include <unistd.h>
+#define Sleep(x) usleep((x)*1000)
+#endif
+
 #include <stdio.h> 

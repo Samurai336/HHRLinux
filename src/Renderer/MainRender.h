@@ -25,7 +25,9 @@
 #include <SDL2/SDL_image.h>
 
 #include "../Define.h"
-#include "../BaseClasses/BaseUnit.h"
+
+#include "FrameRateController.h"
+
 
 
 class MainRender
@@ -49,6 +51,10 @@ class MainRender
 
 
 
+
+		FrameRateController FrameRateControl;
+
+
 		void CreateDisplayRect();
 
         void RenderDisplay();
@@ -58,7 +64,9 @@ class MainRender
 
 
 	private:
-		SDL_Renderer*    Renderer;
+		SDL_Renderer*       Renderer;
+		 
+
 
 
 };

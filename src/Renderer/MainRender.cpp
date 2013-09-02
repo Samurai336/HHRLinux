@@ -22,6 +22,8 @@
 #include "MainRender.h"
 
 
+
+
 MainRender::MainRender(void)
 {
 	Renderer = NULL;
@@ -115,12 +117,15 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 
 
     SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);
+
+	return true; 
 }
 
 
 
 void MainRender::CreateDisplayRect()
 {
+
 	SDL_Rect DisplayRect;
 	DisplayRect.x = 0;
 	DisplayRect.y = 0;
