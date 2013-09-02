@@ -2,6 +2,7 @@
 #define HHR_GAMEINTERFACE_H
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "BaseClasses/BaseInterface.h" 
 #include "BaseClasses/SpriteText.h" 

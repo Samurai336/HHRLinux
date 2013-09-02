@@ -42,7 +42,7 @@ void HHR_GameInterface::UpDate()
 		score++; 
 		scoreBuffer--; 
 		char buffer [256]; 
-		 itoa(score,buffer,10); 
+		sprintf(buffer,"%d", score); 
 		ScoreDisplayText = buffer; 
 	}
 	HenryHead.OnLoop();
