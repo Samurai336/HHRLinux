@@ -220,3 +220,8 @@ void MainApp::OnCleanup()
 
     SDL_Quit();
 }
+
+MainApp::~MainApp()
+{
+	delete m_pInstance;
+}

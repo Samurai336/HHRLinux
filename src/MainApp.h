@@ -50,6 +50,7 @@ class MainApp : public Events
         MainApp(MainApp const&){};
         MainApp& operator = (MainApp const&){};
         static MainApp* m_pInstance;
+		~MainApp();
 
 
     /*************************/

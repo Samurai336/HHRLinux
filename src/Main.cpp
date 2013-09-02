@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     while(MainApp::Instance()->OnExecute())
 
     //clearn up memory
-    delete MainApp::Instance();
+    
 
 
     //DOne
