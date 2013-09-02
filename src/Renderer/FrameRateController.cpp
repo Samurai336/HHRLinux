@@ -4,7 +4,7 @@
 FrameRateController::FrameRateController(void)
 {
 
-	TargetHertz = 60; 
+	TargetHertz = 30; 
 	OldTime = 0;
 	LastTime = 0;
 

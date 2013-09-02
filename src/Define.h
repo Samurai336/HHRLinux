@@ -20,7 +20,7 @@
 **********************************************************************************/	
 
 
-#define WWIDTH		800
+#define WWIDTH		800	
 #define	WHEIGHT		600
 
 #define DEBUG_MODE 
