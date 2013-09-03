@@ -4,14 +4,14 @@
 FrameRateController::FrameRateController(void)
 {
 
-	TargetHertz = 30; 
+	TargetHertz = 15;
 	OldTime = 0;
 	LastTime = 0;
 
 	NumFrames =0 ;
 	Frames = 0 ;
 
-	maxHzHit = false; 
+	maxHzHit = false;
 
 
 
@@ -19,14 +19,14 @@ FrameRateController::FrameRateController(void)
 
 FrameRateController::FrameRateController(unsigned int TargetHz)
 {
-	TargetHertz = TargetHz; 
+	TargetHertz = TargetHz;
 	OldTime = 0;
 	LastTime = 0;
 
 	NumFrames =0 ;
 	Frames = 0 ;
 
-	maxHzHit = false; 
+	maxHzHit = false;
 }
 
 
@@ -38,54 +38,55 @@ FrameRateController::~FrameRateController(void)
 
 void FrameRateController::OnLoop()
 {
-	if(OldTime + 1000 < SDL_GetTicks()) 
+    uint32_t CurrentTicks = SDL_GetTicks();
+	if(OldTime < CurrentTicks)
 	{
-		OldTime = SDL_GetTicks();
+	    uint32_t updateIntervel = (1000/TargetHertz);
+		OldTime = SDL_GetTicks() + updateIntervel;
 
-		NumFrames = Frames;
-
-
-
-		Frames = 0;
-	}
-	
-	if(Frames >= TargetHertz)
-	{
-		maxHzHit = true; 
-		
+		maxHzHit = true;
 	}
 	else
-	{
-		maxHzHit = false; 
-	}
+    {
+
+        Frames++;
+        maxHzHit = false;
+
+    }
+
+    CurrentTicks = SDL_GetTicks();
+    if(FPSTime < CurrentTicks)
+    {
+        NumFrames = Frames;
+        Frames = 0;
+        FPSTime = SDL_GetTicks() + 1000;
+    }
 
 	LastTime = SDL_GetTicks();
 
-	Frames++;
 
 }
 
 bool FrameRateController::TargetRateHit()
 {
-	OnLoop(); 
+	OnLoop();
 
-	return maxHzHit; 
+	return maxHzHit;
 }
-
 
 int FrameRateController::GetFPS()
 {
-	return NumFrames; 
+	return NumFrames ;
 }
 
 int	FrameRateController::GetTargetHerz()
 {
-	return TargetHertz; 
+	return TargetHertz;
 }
 
 void FrameRateController::SetTargetHz(unsigned int targetRate)
 {
-	TargetHertz = targetRate; 
+	TargetHertz = targetRate;
 }
 
 void FrameRateController::Render()

@@ -65,7 +65,7 @@ int MainApp::OnExecute()
 
 		while (Running)
 		{
-			if(!MainRenderTarget.FrameRateControl.TargetRateHit())
+		    if(!MainRenderTarget.FrameRateControl.TargetRateHit())
 			{
 				while (SDL_PollEvent(&Event))
 				{
@@ -76,9 +76,9 @@ int MainApp::OnExecute()
 
 				OnRender();
 			}
-			else 
+			else
 			{
-				Sleep(1); 
+				Sleep(1);
 			}
 
 			//MainRenderTarget.Render();
@@ -125,6 +125,16 @@ bool MainApp::OnInit()
          return false;
 
      }
+
+
+
+
+     #ifdef DEBUG_MODE
+
+     SDL_Color TextColor = {255,255,0};
+     FrameCountDisplay.LoadSpriteText("Assets/Romanesque_Serif.ttf", "0", 25,(WWIDTH-200), (WHEIGHT/6),TextColor);
+
+     #endif // DEBUG_MODE
 
 
 
@@ -183,6 +193,16 @@ void MainApp::OnExit()
 
 void MainApp::OnLoop()
 {
+
+#ifdef DEBUG_MODE
+
+    char buffer [256];
+    sprintf(buffer,"%d",  MainRenderTarget.FrameRateControl.GetFPS());
+
+    FrameCountDisplay = buffer;
+
+
+#endif // DEBUG_MODE
 	if(CurrentLevel != NULL)
     {
         CurrentLevel->OnLoop();
@@ -199,6 +219,12 @@ void MainApp::OnRender()
     {
         CurrentLevel->OnRender(MainRenderTarget);
     }
+
+
+
+    #ifdef DEBUG_MODE
+        FrameCountDisplay.OnRender(MainRenderTarget);
+    #endif // DEBUG_MODE
 
 	MainRenderTarget.RenderDisplay();
 }

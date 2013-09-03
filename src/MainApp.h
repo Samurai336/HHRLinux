@@ -34,6 +34,7 @@
 #include "Renderer/MainRender.h"
 #include "BaseClasses/Level.h"
 #include "BounceSquare.h"
+#include "BaseClasses/SpriteText.h"
 
 
 
@@ -93,6 +94,14 @@ class MainApp : public Events
         Level*          CurrentLevel;
 		SDL_Window*		MainWindow;
 		MainRender		MainRenderTarget;
+
+
+
+#ifdef DEBUG_MODE
+
+        SpriteText      FrameCountDisplay;
+
+#endif
 
 
 
