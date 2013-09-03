@@ -4,7 +4,7 @@
 FrameRateController::FrameRateController(void)
 {
 
-	TargetHertz = 15;
+	TargetHertz = 30;
 	OldTime = 0;
 	LastTime = 0;
 
@@ -38,32 +38,30 @@ FrameRateController::~FrameRateController(void)
 
 void FrameRateController::OnLoop()
 {
-    uint32_t CurrentTicks = SDL_GetTicks();
-	if(OldTime < CurrentTicks)
-	{
-	    uint32_t updateIntervel = (1000/TargetHertz);
-		OldTime = SDL_GetTicks() + updateIntervel;
+        if(Frames > (1000/TargetHertz))
+        {
+            NumFrames += Frames;
+            Frames = 0;
+            maxHzHit = true;
+        }
+        else
+        {
 
-		maxHzHit = true;
-	}
-	else
-    {
+            maxHzHit = false ;
+            Frames++;
+        }
 
-        Frames++;
-        maxHzHit = false;
 
-    }
+        uint32_t CurrentTime = SDL_GetTicks() ;
+        if( FPSTime < CurrentTime)
+        {
+            NumFrames = 0;
+            FPSTime = CurrentTime+ 1000;
 
-    CurrentTicks = SDL_GetTicks();
-    if(FPSTime < CurrentTicks)
-    {
-        NumFrames = Frames;
-        Frames = 0;
-        FPSTime = SDL_GetTicks() + 1000;
-    }
+        }
+
 
 	LastTime = SDL_GetTicks();
-
 
 }
 
@@ -76,7 +74,15 @@ bool FrameRateController::TargetRateHit()
 
 int FrameRateController::GetFPS()
 {
-	return NumFrames ;
+    if(NumFrames == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return   (1000/NumFrames);
+    }
+
 }
 
 int	FrameRateController::GetTargetHerz()
