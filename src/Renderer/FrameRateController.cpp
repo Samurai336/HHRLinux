@@ -40,24 +40,14 @@ void FrameRateController::OnLoop()
 {
         if(Frames > (1000/TargetHertz))
         {
-            NumFrames += Frames;
+            NumFrames = Frames;
             Frames = 0;
             maxHzHit = true;
         }
         else
         {
-
             maxHzHit = false ;
             Frames++;
-        }
-
-
-        uint32_t CurrentTime = SDL_GetTicks() ;
-        if( FPSTime < CurrentTime)
-        {
-            NumFrames = 0;
-            FPSTime = CurrentTime+ 1000;
-
         }
 
 
