@@ -42,6 +42,7 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 	else
     {
 
+
 #ifdef DEBUG_MODE
 
 
@@ -152,9 +153,11 @@ void MainRender::CreateDisplayRect()
 
 void MainRender::RenderDisplay()
 {
-	//rendering can happen here
 
+	//rendering can happen here
 	SDL_RenderPresent(Renderer);
+    SDL_RenderClear(Renderer);
+    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
 
 	//or it can happen here
 
