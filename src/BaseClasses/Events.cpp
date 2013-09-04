@@ -159,8 +159,12 @@ void Events::OnEvent(SDL_Event* Event) {
 				}
 
 				 default:
-				SDL_Log("Window %d got unknown event %d",
+				     {
+				        //SDL_Log("Window %d got unknown event %d",
 						Event->window.windowID, Event->window.event);
+
+				     }
+
 				break;
 
 				case SDL_WINDOWEVENT_EXPOSED: {
