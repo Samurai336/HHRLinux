@@ -37,7 +37,13 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 
 	if(this->Renderer == NULL)
 	{
+
+        printf("SDL Create failed: %s\n", SDL_GetError());
+
+
 		return false;
+
+
 	}
 	else
     {
