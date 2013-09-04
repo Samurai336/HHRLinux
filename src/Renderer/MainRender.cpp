@@ -33,12 +33,24 @@ MainRender::MainRender(void)
 
 bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 {
-	this->Renderer = SDL_CreateRenderer(windowToRenderTo, -1, SDL_RENDERER_TARGETTEXTURE|SDL_RENDERER_PRESENTVSYNC );
+	this->Renderer = SDL_CreateRenderer(windowToRenderTo, -1, SDL_RENDERER_ACCELERATED );
 
 	if(this->Renderer == NULL)
 	{
 		return false;
 	}
+	else
+    {
+
+#ifdef DEBUG_MODE
+
+
+        SDL_RendererInfo currentRenderInformation;
+        SDL_GetRendererInfo(Renderer, &currentRenderInformation);
+
+        printf("Render Information: name: %s, Flags: %zu \n",currentRenderInformation.name, currentRenderInformation.flags );
+#endif // DEBUG_MODE
+    }
 
 
 
@@ -118,7 +130,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 
     SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
-	return true; 
+	return true;
 }
 
 
