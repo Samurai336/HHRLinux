@@ -72,6 +72,18 @@ namespace HHR_Physics
 
     }
 
+    Vector3 Vector3::operator/(const real value)
+    {
+        return Vector3(x/value, y/value, z/value);
+    }
+
+    Vector3 Vector3::operator/=(const real value)
+    {
+        x /= value;
+        y /= value;
+        z /= value;
+    }
+
     void Vector3::operator+=(const Vector3 &v)
     {
         x += v.x;
@@ -80,7 +92,7 @@ namespace HHR_Physics
 
     }
 
-    Vector3 Vector3::operator+(const Vector3 &v)
+    Vector3 Vector3::operator+(const Vector3 &v)const
     {
         return (Vector3(x+v.x,y+v.y, z+v.z));
     }
@@ -124,6 +136,11 @@ namespace HHR_Physics
     {
         return x*vec.x + y*vec.y + z*vec.z;
 
+    }
+
+    real Vector3::DotProduct(const Vector3 &vec) const
+    {
+        return ScalerProduct(vec);
     }
 
     real Vector3::operator*(const Vector3 &vec) const

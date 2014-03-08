@@ -14,6 +14,8 @@ namespace HHR_Physics
             OrientedBoundingBox2D(const Vector3& center, const real w, const real h, real angle);
 
             void moveTo(const Vector3& center);
+
+            bool overlaps(const OrientedBoundingBox2D &other) const;
             
        private:
             Vector3 corner[4]; 
@@ -24,10 +26,6 @@ namespace HHR_Physics
             bool overlaps1Way(const OrientedBoundingBox2D& other) const;
 
             void computeAxes();
-
-
-
-
     };
 
 }

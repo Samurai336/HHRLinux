@@ -74,6 +74,8 @@ namespace HHR_Physics
 
             real ScalerProduct(const Vector3 &vec) const ;
 
+            real DotProduct(const Vector3 &vec) const ;
+
             Vector3 VectorProduct(const Vector3 &vec) const;
 
             void MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c);
@@ -86,9 +88,13 @@ namespace HHR_Physics
 
             Vector3 operator*(const real value);
 
+            Vector3 operator/(const real value);
+
+            Vector3 operator/=(const real value);
+
             void operator+=(const Vector3 &v);
 
-            Vector3 operator+(const Vector3 &v);
+            Vector3 operator+(const Vector3 &v) const;
 
             void operator-=(const Vector3 &v);
 
