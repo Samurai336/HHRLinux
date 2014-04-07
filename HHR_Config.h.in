@@ -1,4 +1,7 @@
 
 
+#cmakedefine DEBUG_MODE
 
 #cmakedefine PHYSICS_DEBUG
+
+

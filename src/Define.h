@@ -23,9 +23,6 @@
 #define WWIDTH		800
 #define	WHEIGHT		600
 
-#define DEBUG_MODE
-
-
 
 #ifdef _WINDOWS
 #include <windows.h>
@@ -35,3 +32,5 @@
 #endif
 
 #include <stdio.h>
+
+#include "HHR_Config.h"

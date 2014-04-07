@@ -23,6 +23,7 @@
 #include "BaseClasses/BaseUnit.h"
 #include "Define.h"
 #include "Physics/Vector3.h"
+#include "Physics/orientedboundingbox2d.h"
 
 
 
@@ -46,7 +47,8 @@ class BounceSquare :
 
 		~BounceSquare(void);
 	private:
-		float speedX, speedY;
+        float speedX, speedY, rotation;
+        HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
 
 
 

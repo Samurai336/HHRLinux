@@ -25,7 +25,10 @@
 BounceSquare::BounceSquare(void)
 {
 	BaseUnit();
-	speedX	= speedY = 0;
+
+
+    speedX	= speedY = rotation = 1.0f;
+
 
 }
 
@@ -33,6 +36,7 @@ bool BounceSquare::Load(char* File)
 {
     bool loadStatus = BaseUnit::Load(File);
 
+    orientedCollisionBox.SetUpBox(Position, width,height, rotation);
 
     return loadStatus;
 
@@ -48,23 +52,26 @@ void BounceSquare::setSpeed(float xSpeed, float ySpeed)
 void BounceSquare::OnLoop()
 {
 
-	if(X < 0 || (X+width) > WWIDTH)
+    if( Position.x < 0 || (Position.x+width) > WWIDTH)
 	{
 		speedX *= -1;
 	}
 
-	if(Y < 0 || (Y+height) > WHEIGHT)
+    if(Position.y < 0 || (Position.y+height) > WHEIGHT)
 	{
 		speedY *= -1;
 	}
 
-	X += speedX;
-	Y += speedY;
+    Position.x += speedX;
+    Position.y += speedY;
+
+    orientedCollisionBox.moveTo(Position);
 }
 
 void BounceSquare::OnRender(MainRender	&theRenderer)
 {
 	BaseUnit::OnRender(theRenderer);
+    orientedCollisionBox.OnRender(theRenderer);
 }
 
 void BounceSquare::OnCleanup()

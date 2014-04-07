@@ -27,12 +27,30 @@ if (NOT Build_Dir_OK)
   message (FATAL_ERROR "You must run cmake from a directory that is not in your source tree, or that is in a special subdirectory of the tree whose name begins with ‘build’.")
 endif ()
 
+
+
+
+
 ###########################################################################
-
-
 if (CMAKE_BUILD_TYPE STREQUAL "")
 	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif()
+
+#############################################################################
+
+
+
+if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    message("Debug ON")
+    set(DEBUG_MODE ON)
+    set(CMAKE_VERBOSE_MAKEFILE ON)
+    set(PHYSICS_DEBUG OFF CACHE BOOL "Show Physics Debug information") # Configurable by user
+endif()
+
+
+configure_file ( HHR_Config.h.in  src/HHR_Config.h )
+
+
 
 ###############################################################################
 
@@ -43,6 +61,8 @@ file(GLOB renderer_files src/Renderer/*.h src/Renderer/*.cpp)
 file(GLOB baseClasses_files src/BaseClasses/*.h src/BaseClasses/*.cpp)
 
 file(GLOB physics_files src/Physics/*.h src/Physics/*.cpp)
+
+
 
 SOURCE_GROUP(Renderer FILES ${renderer_files})
 
@@ -55,11 +75,11 @@ SOURCE_GROUP(Physics FILES ${physics_files})
 
 
 link_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}/src
 )
 
-include_directories(
-	${CMAKE_SOURCE_DIR}/include
-	)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/src)
+
 
 if(WIN32)
 	add_executable(${App_Name} WIN32
@@ -69,8 +89,10 @@ if(WIN32)
         ${physics_files}
 	)
 
-	SET_TARGET_PROPERTIES(${App_Name} PROPERTIES COMPILE_FLAGS "/Od /ZI")
-	SET_TARGET_PROPERTIES(${App_Name} PROPERTIES LINK_FLAGS "/DEBUG")
+        if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+            SET_TARGET_PROPERTIES(${App_Name} PROPERTIES COMPILE_FLAGS "/Od /ZI")
+            SET_TARGET_PROPERTIES(${App_Name} PROPERTIES LINK_FLAGS "/DEBUG")
+        endif()
 
 else ()
 	add_executable (${App_Name}
@@ -79,6 +101,11 @@ else ()
         ${renderer_files}
         ${physics_files}
 	)
+
+        set(CMAKE_CXX_FLAGS "-Wno-write-strings")
+
+
+
 endif ()
 
 target_link_libraries(${App_Name}

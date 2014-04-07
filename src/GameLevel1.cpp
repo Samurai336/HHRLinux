@@ -47,7 +47,7 @@ bool GameLevel1::LoadLevel()
     {
            return false;
     }
-    Test.setSpeed(5,10);
+    Test.setSpeed(1,1);
 
 
 

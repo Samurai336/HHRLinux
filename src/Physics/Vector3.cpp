@@ -194,7 +194,7 @@ namespace HHR_Physics
 
     real* Vector3::GetXYZAsArray() const
     {
-         real xyzAsArray[3];
+         static real xyzAsArray[3];
 
          xyzAsArray[0] = x;
          xyzAsArray[1] = y;

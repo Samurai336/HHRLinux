@@ -161,13 +161,13 @@ void SpriteAnimation::OnLoop()
 
 void SpriteAnimation::SetPosition(float MoveX, float MoveY)
 {
-    X = MoveX - (Sprite_Rect.w/2);
-	Y = MoveY - (Sprite_Rect.h/2);
+    Position.x  = MoveX - (Sprite_Rect.w/2);
+    Position.y  = MoveY - (Sprite_Rect.h/2);
 }
 
 void SpriteAnimation::OnRender(MainRender	&theRenderer)
 {
-    theRenderer.Draw(this->unitTexture, X, Y, Sprite_Rect);
+    theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect);
 }
 
 void SpriteAnimation::OnCleanup()

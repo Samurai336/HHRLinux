@@ -50,12 +50,10 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 
 
 #ifdef DEBUG_MODE
-
-
         SDL_RendererInfo currentRenderInformation;
         SDL_GetRendererInfo(Renderer, &currentRenderInformation);
 
-        printf("Render Information: name: %s, Flags: %zu \n",currentRenderInformation.name, currentRenderInformation.flags );
+        printf("Render Information: name: %s, Flags: %u \n",currentRenderInformation.name, currentRenderInformation.flags );
 #endif // DEBUG_MODE
     }
 
@@ -137,7 +135,17 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 
     SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
-	return true;
+    return true;
+}
+
+bool MainRender::DrawLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor)
+{
+    SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+
+    SDL_RenderDrawLine(this->Renderer, x1, y1, x2, y2);
+
+    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+
 }
 
 

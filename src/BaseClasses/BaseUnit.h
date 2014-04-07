@@ -28,6 +28,7 @@
 
 #include <SDL2/SDL.h>
 #include "../Renderer/MainRender.h"
+#include "../Physics/Vector3.h"
 
 class MainRender;
 
@@ -62,7 +63,9 @@ class BaseUnit
 
 			SDL_Texture* unitTexture;
 
-			float X,Y;
+            //float X,Y;
+
+            HHR_Physics::Vector3 Position;
 
 			int width, height;
 

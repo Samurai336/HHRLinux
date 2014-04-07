@@ -29,7 +29,8 @@
 BaseUnit::BaseUnit(void)
 {
 
-	X = Y = 0.0f;
+    Position.x = Position.y = 0.0f;
+    Position.z = 1.0f;
 	unitTexture = NULL;
 	rotation = 0.0;
 	renderOrder = 1;
@@ -65,7 +66,7 @@ void BaseUnit::OnLoop()
 
 void BaseUnit::OnRender(MainRender	&theRenderer)
 {
-	theRenderer.Draw(unitTexture, X,Y, rotation);
+    theRenderer.Draw(unitTexture, Position.x, Position.y, rotation);
 }
 
 void BaseUnit::OnCleanup()
@@ -80,6 +81,6 @@ void BaseUnit::OnCleanup()
 
 void BaseUnit::SetPosition(float MoveX, float MoveY)
 {
-	X = MoveX - (width/2);
-	Y = MoveY - (height/2);
+    Position.x = MoveX - (width/2);
+    Position.y = MoveY - (height/2);
 }

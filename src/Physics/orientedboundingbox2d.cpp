@@ -6,6 +6,32 @@ namespace HHR_Physics
 
     OrientedBoundingBox2D::OrientedBoundingBox2D(const Vector3& center, const real w, const real h, real angle)
     {
+
+
+        SetUpBox(center,w,h,angle );
+
+
+        /*
+        Vector3 X( real_cos(angle), real_sin(angle), 1.0f);
+        Vector3 Y(-real_sin(angle), real_cos(angle), 1.0f);
+
+
+        X *= w/2;
+        Y *= h/2;
+
+
+
+        corner[0] = center-(X-Y);
+        corner[1] = center +  (X-Y) ;
+        corner[2] = center +  (X+Y);
+        corner[3] = center-(X+Y);
+
+        computeAxes();
+        */
+    }
+
+    void OrientedBoundingBox2D::SetUpBox(const Vector3& center, const real w, const real h, real angle)
+    {
         Vector3 X( real_cos(angle), real_sin(angle), 1.0f);
         Vector3 Y(-real_sin(angle), real_cos(angle), 1.0f);
 
@@ -25,7 +51,9 @@ namespace HHR_Physics
 
     void OrientedBoundingBox2D::moveTo(const Vector3 &center)
     {
-        Vector3 centroid = (corner[0]+corner[1]+corner[2]+corner[3])/4;
+        Vector3 centroid;
+        centroid.x = (corner[0].x+corner[1].x+ corner[2].x+corner[3].x)/4;
+        centroid.y = (corner[0].y+corner[1].y +corner[2].y+corner[3].y)/4;
 
         Vector3 translation = center = centroid;
 
@@ -41,6 +69,7 @@ namespace HHR_Physics
     {
         return overlaps1Way(other) && other.overlaps1Way(*this);
     }
+
 
     bool OrientedBoundingBox2D::overlaps1Way(const OrientedBoundingBox2D &other) const
     {
@@ -86,6 +115,20 @@ namespace HHR_Physics
             origin[a] = corner[0].DotProduct(axis[a]);
         }
     }
+
+    void OrientedBoundingBox2D::OnRender(MainRender &theRenderer)
+    {
+
+#ifdef PHYSICS_DEBUG
+        SDL_Color Player1Color = {255,0,0};
+        theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[1].x, (int)corner[1].y, Player1Color);
+
+
+#endif
+
+    }
+
+
 
 
 } 

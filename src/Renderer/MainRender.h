@@ -48,6 +48,7 @@ class MainRender
 		bool Draw(SDL_Texture* theTexture, int X, int Y, double rotation = 0.0);
 		bool Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation = 0.0);
 		bool Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation = 0.0);
+        bool DrawLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor);
 
 
 
