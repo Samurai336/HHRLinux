@@ -22,7 +22,8 @@ Thumbs.db
 *.swp
 *~
 *.cbTemp
-
+*.user
+*.autosave
 
 build/
 build\ 

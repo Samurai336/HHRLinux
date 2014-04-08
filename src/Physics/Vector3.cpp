@@ -170,8 +170,12 @@ namespace HHR_Physics
 
     }
 
-     Vector3 Vector3::operator=(const Vector3 &vec)const
-    {
+     Vector3 Vector3::operator=(const Vector3 &vec)
+    {         
+         x = vec.x;
+         y = vec.y;
+         z = vec.z;
+
         return Vector3(x,y,z);
 
     }

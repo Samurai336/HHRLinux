@@ -33,6 +33,8 @@ namespace HHR_Physics
             bool overlaps1Way(const OrientedBoundingBox2D& other) const;
 
             void computeAxes();
+
+            float width,height;
     };
 
 }

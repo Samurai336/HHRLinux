@@ -34,17 +34,18 @@ namespace HHR_Physics
     {
         Vector3 X( real_cos(angle), real_sin(angle), 1.0f);
         Vector3 Y(-real_sin(angle), real_cos(angle), 1.0f);
-
+        width = w;
+        height = h;
 
         X *= w/2;
         Y *= h/2;
 
+        Vector3 Translation(w/2,h/2,0.0f);
 
-
-        corner[0] = center-(X-Y);
-        corner[1] = center +  (X-Y) ;
-        corner[2] = center +  (X+Y);
-        corner[3] = center-(X+Y);
+        corner[0] = ((center) - X-Y)+Translation;
+        corner[1] = ((center) + X-Y)+Translation;
+        corner[2] = ((center) + X+Y)+Translation;
+        corner[3] = ((center) - X+Y)+Translation;
 
         computeAxes();
     }
@@ -55,7 +56,9 @@ namespace HHR_Physics
         centroid.x = (corner[0].x+corner[1].x+ corner[2].x+corner[3].x)/4;
         centroid.y = (corner[0].y+corner[1].y +corner[2].y+corner[3].y)/4;
 
-        Vector3 translation = center = centroid;
+        Vector3 AdjustedCenter(center.x + width/2, center.y + height/2, center.z);
+
+        Vector3 translation =   AdjustedCenter - centroid;
 
         for(int c = 0; c<4; ++c)
         {
@@ -111,7 +114,7 @@ namespace HHR_Physics
 
         for (int a = 0; a < 2; ++a)
         {
-            axis[a] /= axis[a].Magnatude();
+            axis[a] /= axis[a].SquareMagnatude();
             origin[a] = corner[0].DotProduct(axis[a]);
         }
     }
@@ -120,8 +123,11 @@ namespace HHR_Physics
     {
 
 #ifdef PHYSICS_DEBUG
-        SDL_Color Player1Color = {255,0,0};
+        SDL_Color Player1Color = {255,0,0,255};
         theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[1].x, (int)corner[1].y, Player1Color);
+        theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[3].x, (int)corner[3].y, Player1Color);
+        theRenderer.DrawLine((int)corner[1].x, (int)corner[1].y, (int)corner[2].x, (int)corner[2].y, Player1Color);
+        theRenderer.DrawLine((int)corner[2].x, (int)corner[2].y, (int)corner[3].x, (int)corner[3].y, Player1Color);
 
 
 #endif
