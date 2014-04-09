@@ -27,7 +27,7 @@ BounceSquare::BounceSquare(void)
     BaseUnit();
 
 
-    speedX	= speedY = rotation = 0.0f;
+    speedX	= speedY = roataitonSpeed = 0.0f;
 
 
 }
@@ -45,7 +45,12 @@ bool BounceSquare::Load(char* File)
 void BounceSquare::setSpeed(float xSpeed, float ySpeed)
 {
 	speedX = xSpeed;
-	speedY = ySpeed;
+    speedY = ySpeed;
+}
+
+void BounceSquare::setRotationSpeed(float newSpeed)
+{
+    roataitonSpeed = newSpeed;
 }
 
 
@@ -62,7 +67,7 @@ void BounceSquare::OnLoop()
 		speedY *= -1;
 	}
 
-    rotation += 1.0f;
+    rotation += roataitonSpeed;
 
     Position.x += speedX;
     Position.y += speedY;

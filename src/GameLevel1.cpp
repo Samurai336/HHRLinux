@@ -49,6 +49,8 @@ bool GameLevel1::LoadLevel()
     }
     Test.setSpeed(1,0);
 
+    Test.setRotationSpeed(2.2);
+
     Test.SetPosition(WWIDTH-50, (WHEIGHT)/2);
 
     if(Test2.Load("Assets/skullPowerUp2.png"))
@@ -57,7 +59,11 @@ bool GameLevel1::LoadLevel()
     }
     Test2.setSpeed(-1,0);
 
+    Test2.setRotationSpeed(12.5);
+
     Test2.SetPosition(50, (WHEIGHT)/2);
+
+
 
     if(!AMessage.LoadSpriteText("Assets/Romanesque_Serif.ttf", "Hello World"))
     {
@@ -109,7 +115,7 @@ void GameLevel1::OnLoop()
 void GameLevel1::CheckCollision()
 {
 
-    if(HHR_Physics::Collider::Check(*(Test.GetCollisionObject()), *(Test2.GetCollisionObject())))
+    if(HHR_Physics::Collider::Check(Test.GetCollisionObject(), Test2.GetCollisionObject()))
     {
         Colliding = true;
     }

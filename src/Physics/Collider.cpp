@@ -86,10 +86,10 @@ namespace HHR_Physics
 
     }
 
-    bool Collider::Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)
+    bool Collider::Check(const OrientedBoundingBox2D *A, const OrientedBoundingBox2D *B)
     {
 
-           return Oriented2DBBCheck(A,B) && Oriented2DBBCheck(B,A);
+           return Oriented2DBBCheck(*(A),*(B)) && Oriented2DBBCheck(*(B),*(A));
 
     }
 

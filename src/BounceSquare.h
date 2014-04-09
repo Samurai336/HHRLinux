@@ -47,11 +47,13 @@ class BounceSquare :
 
 		void setSpeed(float xSpeed =0, float ySpeed=0);
 
+        void setRotationSpeed(float newSpeed);
+
 
 
 		~BounceSquare(void);
 	private:
-        float speedX, speedY;
+        float speedX, speedY, roataitonSpeed;
         HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
 
 
