@@ -30,6 +30,8 @@
 namespace HHR_Physics
 {
 
+    #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 
     typedef float real;
 

@@ -4,25 +4,27 @@
 
 
 #include "Vector3.h"
+#include "Collider.h"
+#include "collisionobject.h"
 #include "../Renderer/MainRender.h"
 
 
 namespace HHR_Physics
 {
 
-    class OrientedBoundingBox2D
+    class OrientedBoundingBox2D:public CollisionObject
     {
+        friend class Collider;
+
         public:
             OrientedBoundingBox2D(const Vector3& center, const real w, const real h, real angle);
             OrientedBoundingBox2D(){}
 
             void SetUpBox(const Vector3& center, const real w, const real h, real angle);
 
-            void moveTo(const Vector3& center);
+            void moveTo(const Vector3 &center,real angle);
 
-            bool overlaps(const OrientedBoundingBox2D &other) const;
-
-            void OnRender(MainRender	&theRenderer);
+            void OnRender(MainRender	&theRenderer, bool isColliding = false);
             
        private:
             Vector3 corner[4]; 
@@ -30,7 +32,7 @@ namespace HHR_Physics
             
             real    origin[2]; 
             
-            bool overlaps1Way(const OrientedBoundingBox2D& other) const;
+
 
             void computeAxes();
 

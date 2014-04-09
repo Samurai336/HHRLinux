@@ -29,6 +29,7 @@
 #include <SDL2/SDL.h>
 #include "../Renderer/MainRender.h"
 #include "../Physics/Vector3.h"
+#include "../Physics/collisionobject.h"
 
 class MainRender;
 
@@ -43,15 +44,17 @@ class BaseUnit
 
 			virtual bool Load(char* File);
 
-			virtual void OnLoop();
+            virtual void OnLoop();
 
 			virtual void OnRender(MainRender &theRenderer);
 
 			virtual void OnCleanup();
 
+            virtual HHR_Physics::CollisionObject* GetCollisionObject() const {return NULL;};
+
 			void  SetPosition(float MoveX, float MoveY);
 
-			void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
+            void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
 
 			int GetWidth(){return width;}
 

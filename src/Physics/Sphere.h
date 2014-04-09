@@ -23,10 +23,12 @@
 #define SPHERE_H
 
 #include "Vector3.h"
+#include "collisionobject.h"
+
 
 namespace HHR_Physics
 {
-    class Sphere
+    class Sphere: public CollisionObject
     {
         public:
             Vector3 position;

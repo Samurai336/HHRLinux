@@ -23,12 +23,13 @@
 #define BOUNDINGBOX_H
 
 #include "Vector3.h"
+#include "collisionobject.h"
 
 namespace HHR_Physics
 {
 
 
-    class BoundingBox
+    class BoundingBox: public CollisionObject
     {
 
         public:

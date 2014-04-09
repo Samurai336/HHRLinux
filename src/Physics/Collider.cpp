@@ -82,10 +82,48 @@ namespace HHR_Physics
     bool Collider::Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B)
     {
 
+       return true;
 
+    }
+
+    bool Collider::Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)
+    {
+
+           return Oriented2DBBCheck(A,B) && Oriented2DBBCheck(B,A);
+
+    }
+
+    bool Collider::Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)
+    {
+        for(int a = 0; a<2; ++a)
+        {
+            real t = A.corner[a].DotProduct(B.axis[a]);
+
+            real tMin = t;
+            real tMax = t;
+
+            for (int c = 1; c <4; ++c)
+            {
+                t = A.corner[c].DotProduct(B.axis[a]);
+
+                if (t< tMin)
+                {
+                    tMin = t;
+                }
+                else if(t> tMax)
+                {
+                    tMax = t;
+                }
+
+            }
+
+            if((tMin > 1 + B.origin[a]) ||(tMax< B.origin[a]))
+            {
+                return false;
+            }
+        }
 
         return true;
-
     }
 
 

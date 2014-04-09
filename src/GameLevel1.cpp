@@ -47,12 +47,17 @@ bool GameLevel1::LoadLevel()
     {
            return false;
     }
-    Test.setSpeed(1,1);
+    Test.setSpeed(1,0);
 
+    Test.SetPosition(WWIDTH-50, (WHEIGHT)/2);
 
+    if(Test2.Load("Assets/skullPowerUp2.png"))
+    {
+        return false;
+    }
+    Test2.setSpeed(-1,0);
 
-   
-
+    Test2.SetPosition(50, (WHEIGHT)/2);
 
     if(!AMessage.LoadSpriteText("Assets/Romanesque_Serif.ttf", "Hello World"))
     {
@@ -66,8 +71,6 @@ bool GameLevel1::LoadLevel()
     AMessage.setFontSize(25);
 
 
-
-   
 
 
 	char *Textures[2]= {"Assets/LageBackgound2.png","Assets/LageBackgound2.png"};
@@ -94,24 +97,50 @@ void GameLevel1::OnLoop()
 {
    
     Test.OnLoop();
+    Test2.OnLoop();
+    CheckCollision();
 	background.UpDate();
 
 
 
 
 }
+
+void GameLevel1::CheckCollision()
+{
+
+    if(HHR_Physics::Collider::Check(*(Test.GetCollisionObject()), *(Test2.GetCollisionObject())))
+    {
+        Colliding = true;
+    }
+    else
+    {
+        Colliding = false;
+    }
+
+}
+
+
 void GameLevel1::OnRender(MainRender	&theRenderer)
 {
 
 	background.Render(theRenderer);
    
     Test.OnRender(theRenderer);
+    Test2.OnRender(theRenderer);
+#ifdef PHYSICS_DEBUG
+    Test.GetCollisionObject()->OnRender(theRenderer, Colliding);
+    Test2.GetCollisionObject()->OnRender(theRenderer, Colliding);
+#endif
+
     AMessage.OnRender(theRenderer);
 
 }
 void GameLevel1::OnCleanup()
 {
 	background.Cleanup();
+    Test.OnCleanup();
+    Test2.OnCleanup();
     
     AMessage.OnCleanup();
 }

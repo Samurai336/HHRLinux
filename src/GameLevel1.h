@@ -41,13 +41,15 @@ class GameLevel1 : public Level
         bool LoadLevel();
         void OnEvent(SDL_Event* Event);
         void OnLoop();
+        void CheckCollision();
         void OnRender(MainRender	&theRenderer);
         void OnCleanup();
         ~GameLevel1();
     protected:
 
     private:
-        BounceSquare Test;
+        BounceSquare Test, Test2;
+        bool Colliding;
 		ScrollingBackGround background;
 		SpriteText AMessage;
 

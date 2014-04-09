@@ -20,8 +20,8 @@
 **********************************************************************************/
 
 #pragma once
-#include "BaseClasses/BaseUnit.h"
 #include "Define.h"
+#include "BaseClasses/BaseUnit.h"
 #include "Physics/Vector3.h"
 #include "Physics/orientedboundingbox2d.h"
 
@@ -39,15 +39,19 @@ class BounceSquare :
 
 		void OnLoop();
 
+        HHR_Physics::OrientedBoundingBox2D *GetCollisionObject();
+
 		void OnRender(MainRender	&theRenderer);
 
 		void OnCleanup();
 
 		void setSpeed(float xSpeed =0, float ySpeed=0);
 
+
+
 		~BounceSquare(void);
 	private:
-        float speedX, speedY, rotation;
+        float speedX, speedY;
         HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
 
 

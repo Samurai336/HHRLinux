@@ -26,9 +26,12 @@
 #include "BoundingBox.h"
 #include "Sphere.h"
 #include "OrientedBoundingBox.h"
+#include "orientedboundingbox2d.h"
 
 namespace HHR_Physics
 {
+
+    class OrientedBoundingBox2D;
 
     class Collider
     {
@@ -38,9 +41,12 @@ namespace HHR_Physics
             static bool Check(const Sphere &A, const Sphere &B);
             static bool Check(const BoundingBox &BB, const Sphere &SP);
             static bool Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B) ;
+            static bool Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B) ;
 
 
         private:
+            static bool Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B) ;
+
     };
 
 

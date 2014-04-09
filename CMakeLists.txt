@@ -102,7 +102,7 @@ else ()
         ${physics_files}
 	)
 
-        set(CMAKE_CXX_FLAGS "-Wno-write-strings")
+        set(CMAKE_CXX_FLAGS "-g -Wno-write-strings")
 
 
 

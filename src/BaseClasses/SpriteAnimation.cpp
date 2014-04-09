@@ -170,6 +170,8 @@ void SpriteAnimation::OnRender(MainRender	&theRenderer)
     theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect);
 }
 
+
+
 void SpriteAnimation::OnCleanup()
 {
 

@@ -24,10 +24,10 @@
 
 BounceSquare::BounceSquare(void)
 {
-	BaseUnit();
+    BaseUnit();
 
 
-    speedX	= speedY = rotation = 1.0f;
+    speedX	= speedY = rotation = 0.0f;
 
 
 }
@@ -62,16 +62,26 @@ void BounceSquare::OnLoop()
 		speedY *= -1;
 	}
 
+    rotation += 1.0f;
+
     Position.x += speedX;
     Position.y += speedY;
 
-    orientedCollisionBox.moveTo(Position);
+    orientedCollisionBox.moveTo(Position,rotation);
 }
+
+HHR_Physics::OrientedBoundingBox2D *BounceSquare::GetCollisionObject()
+{
+
+    return &orientedCollisionBox;
+}
+
+
 
 void BounceSquare::OnRender(MainRender	&theRenderer)
 {
-	BaseUnit::OnRender(theRenderer);
-    orientedCollisionBox.OnRender(theRenderer);
+    BaseUnit::OnRender(theRenderer);
+
 }
 
 void BounceSquare::OnCleanup()
