@@ -135,8 +135,8 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
     Test.OnRender(theRenderer);
     Test2.OnRender(theRenderer);
 #ifdef PHYSICS_DEBUG
-    Test.GetCollisionObject()->OnRender(theRenderer, Colliding);
-    Test2.GetCollisionObject()->OnRender(theRenderer, Colliding);
+    Test.GetCollisionObject().OnRender(theRenderer, Colliding);
+    Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
 #endif
 
     AMessage.OnRender(theRenderer);

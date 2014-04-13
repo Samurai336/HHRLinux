@@ -16,6 +16,7 @@ namespace HHR_Physics
         Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), 1.0f);
         width = w;
         height = h;
+        Positon= center;
 
         X *= w/2;
         Y *= h/2;
@@ -47,7 +48,24 @@ namespace HHR_Physics
         corner[2] = ((center) + X+Y)+Translation;
         corner[3] = ((center) - X+Y)+Translation;
 
+        Positon= center;
+
         computeAxes();
+    }
+
+    Vector3 OrientedBoundingBox2D::GetPositon() const
+    {
+        return Positon;
+    }
+
+    real OrientedBoundingBox2D::GetWidth() const
+    {
+        return width;
+    }
+
+    real OrientedBoundingBox2D::GetHeight() const
+    {
+        return height;
     }
 
     /*
@@ -73,14 +91,18 @@ namespace HHR_Physics
     {
 
 #ifdef PHYSICS_DEBUG
+
         SDL_Color Player1Color;
+        SDL_Color CollidingColor = {255,255,0,255};
+        SDL_Color NotCollidingColor = {255,0,0,255};
+
         if(isColliding)
         {
-            Player1Color = {255,255,0,255};
+            Player1Color = CollidingColor;
         }
         else
         {
-            Player1Color = {255,0,0,255};
+            Player1Color = NotCollidingColor;
         }
 
         theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[1].x, (int)corner[1].y, Player1Color);

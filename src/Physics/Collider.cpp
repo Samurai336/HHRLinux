@@ -93,6 +93,20 @@ namespace HHR_Physics
 
     }
 
+    bool Collider::Check(const OrientedBoundingBox2D *OBB2D, const BoundingBox *BB)
+    {
+        real distence =  real_sqrt( ((BB->position.x - OBB2D->GetPositon().x )*(BB->position.x - OBB2D->GetPositon().x )) + ((BB->position.y - OBB2D->GetPositon().y)*(BB->position.y - OBB2D->GetPositon().y)));
+
+        if(distence > BB->extension.x || distence > BB->extension.y || distence > OBB2D->GetWidth()|| distence > OBB2D->GetHeight())
+        {
+            return false;
+        }
+
+        OrientedBoundingBox2D tempBB(BB->position, BB->extension.x,BB->extension.y, 0.0f);
+
+        return Oriented2DBBCheck(*(OBB2D),(tempBB)) && Oriented2DBBCheck((tempBB),*(OBB2D)) ;
+    }
+
     bool Collider::Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)
     {
         for(int a = 0; a<2; ++a)

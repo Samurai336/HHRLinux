@@ -24,19 +24,24 @@ namespace HHR_Physics
 
             void moveTo(const Vector3 &center,real angle);
 
+            Vector3 GetPositon() const;
+            real GetWidth() const;
+            real GetHeight() const;
+
             void OnRender(MainRender	&theRenderer, bool isColliding = false);
             
        private:
             Vector3 corner[4]; 
-            Vector3 axis[2]; 
-            
+            Vector3 axis[2];             
             real    origin[2]; 
+
+            Vector3 Positon;
             
 
 
             void computeAxes();
 
-            float width,height;
+            real width,height;
     };
 
 }

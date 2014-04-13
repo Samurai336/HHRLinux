@@ -36,7 +36,11 @@ bool BounceSquare::Load(char* File)
 {
     bool loadStatus = BaseUnit::Load(File);
 
-    orientedCollisionBox.SetUpBox(Position, width,height, rotation);
+    //orientedCollisionBox.SetUpBox(Position, width,height, rotation);
+
+    HHR_Physics::Vector3 extenshion(width/2,height/2,1.0f);
+    BBCollisionObject.SetUpBB(Position, extenshion);
+
 
     return loadStatus;
 
@@ -72,13 +76,14 @@ void BounceSquare::OnLoop()
     Position.x += speedX;
     Position.y += speedY;
 
-    orientedCollisionBox.moveTo(Position,rotation);
+    //orientedCollisionBox.moveTo(Position,rotation);
+    BBCollisionObject.setPostion(Position);
 }
 
-HHR_Physics::OrientedBoundingBox2D *BounceSquare::GetCollisionObject()
+HHR_Physics::BoundingBox BounceSquare::GetCollisionObject()
 {
 
-    return &orientedCollisionBox;
+    return BBCollisionObject;
 }
 
 
@@ -86,6 +91,8 @@ HHR_Physics::OrientedBoundingBox2D *BounceSquare::GetCollisionObject()
 void BounceSquare::OnRender(MainRender	&theRenderer)
 {
     BaseUnit::OnRender(theRenderer);
+
+    //BBCollisionObject.OnRender(theRenderer,false);
 
 }
 

@@ -26,7 +26,13 @@
 namespace HHR_Physics
 {
 
-    real BoundingBox::Mininmum(const XYZ i) const
+void BoundingBox::SetUpBB(Vector3 &Pos, Vector3 &Ext)
+{
+    position = Pos;
+    extension = Ext;
+}
+
+real BoundingBox::Mininmum(const XYZ i) const
     {
         switch(i)
         {
@@ -63,6 +69,41 @@ namespace HHR_Physics
                 return 0;
                 break;
         }
+    }
+
+    void BoundingBox::setPostion(Vector3 &NewPositon)
+    {
+        position = NewPositon;
+
+        position.x += extension.x;
+        position.y += extension.y;
+    }
+
+    void BoundingBox::OnRender(MainRender &theRenderer, bool isColliding)
+    {
+#ifdef PHYSICS_DEBUG
+        SDL_Color Player1Color;
+        SDL_Color CollidingColor = {255,255,0,255};
+        SDL_Color NotCollidingColor = {255,0,0,255};
+
+        if(isColliding)
+        {
+            Player1Color = CollidingColor;
+        }
+        else
+        {
+            Player1Color = NotCollidingColor;
+        }
+
+        theRenderer.DrawLine(Mininmum(X),Mininmum(Y),Mininmum(X),Maximum(Y), Player1Color); // uper right to down
+
+        theRenderer.DrawLine(Mininmum(X),Mininmum(Y),Maximum(X),Mininmum(Y), Player1Color); //upper right to left
+
+        theRenderer.DrawLine(Maximum(X),Mininmum(Y),Maximum(X), Maximum(Y), Player1Color);
+
+        theRenderer.DrawLine(Mininmum(X),Maximum(Y),Maximum(X), Maximum(Y), Player1Color);
+
+#endif
     }
 
     BoundingBox::~BoundingBox()

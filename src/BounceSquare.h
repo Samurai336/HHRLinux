@@ -39,7 +39,7 @@ class BounceSquare :
 
 		void OnLoop();
 
-        HHR_Physics::OrientedBoundingBox2D *GetCollisionObject();
+        HHR_Physics::BoundingBox GetCollisionObject();
 
 		void OnRender(MainRender	&theRenderer);
 
@@ -55,6 +55,8 @@ class BounceSquare :
 	private:
         float speedX, speedY, roataitonSpeed;
         HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
+        HHR_Physics::BoundingBox BBCollisionObject;
+
 
 
 
