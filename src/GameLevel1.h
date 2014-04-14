@@ -26,6 +26,7 @@
 #include "BaseClasses/Level.h"
 #include "Renderer/MainRender.h"
 #include "BounceSquare.h"
+#include "rotatingbouncesquare.h"
 #include "BaseClasses/SpriteAnimation.h"
 #include "BaseClasses/ScrollingBackGround.h"
 #include "BaseClasses/SpriteText.h"
@@ -48,7 +49,8 @@ class GameLevel1 : public Level
     protected:
 
     private:
-        BounceSquare Test, Test2;
+        BounceSquare Test;
+        RotatingBounceSquare Test2;
         bool Colliding;
 		ScrollingBackGround background;
 		SpriteText AMessage;

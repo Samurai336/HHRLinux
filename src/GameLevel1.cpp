@@ -49,7 +49,7 @@ bool GameLevel1::LoadLevel()
     }
     Test.setSpeed(1,0);
 
-    Test.setRotationSpeed(2.2);
+    //Test.setRotationSpeed(2.2);
 
     Test.SetPosition(WWIDTH-50, (WHEIGHT)/2);
 
@@ -115,7 +115,8 @@ void GameLevel1::OnLoop()
 void GameLevel1::CheckCollision()
 {
 
-    if(HHR_Physics::Collider::Check(Test.GetCollisionObject(), Test2.GetCollisionObject()))
+
+    if(HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject()))
     {
         Colliding = true;
     }
@@ -123,6 +124,7 @@ void GameLevel1::CheckCollision()
     {
         Colliding = false;
     }
+
 
 }
 

@@ -47,15 +47,16 @@ class BounceSquare :
 
 		void setSpeed(float xSpeed =0, float ySpeed=0);
 
-        void setRotationSpeed(float newSpeed);
-
-
-
 		~BounceSquare(void);
+
+    protected:
+        virtual void UpdateCollisionObj();
+
+
 	private:
-        float speedX, speedY, roataitonSpeed;
-        HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
+        float speedX, speedY;
         HHR_Physics::BoundingBox BBCollisionObject;
+
 
 
 

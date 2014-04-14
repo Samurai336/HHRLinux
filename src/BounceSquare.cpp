@@ -27,7 +27,7 @@ BounceSquare::BounceSquare(void)
     BaseUnit();
 
 
-    speedX	= speedY = roataitonSpeed = 0.0f;
+    speedX	= speedY = 0.0f;
 
 
 }
@@ -52,10 +52,6 @@ void BounceSquare::setSpeed(float xSpeed, float ySpeed)
     speedY = ySpeed;
 }
 
-void BounceSquare::setRotationSpeed(float newSpeed)
-{
-    roataitonSpeed = newSpeed;
-}
 
 
 void BounceSquare::OnLoop()
@@ -71,14 +67,24 @@ void BounceSquare::OnLoop()
 		speedY *= -1;
 	}
 
-    rotation += roataitonSpeed;
+
 
     Position.x += speedX;
     Position.y += speedY;
 
-    //orientedCollisionBox.moveTo(Position,rotation);
+
+    UpdateCollisionObj();
+
+    //
+
+}
+
+
+void BounceSquare::UpdateCollisionObj()
+{
     BBCollisionObject.setPostion(Position);
 }
+
 
 HHR_Physics::BoundingBox BounceSquare::GetCollisionObject()
 {

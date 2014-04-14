@@ -178,7 +178,12 @@ namespace HHR_Physics
 
         return Vector3(x,y,z);
 
-    }
+     }
+
+     real Vector3::Distence(const Vector3 &vec1, const Vector3 &vec2)
+     {
+         return real_sqrt( ((vec1.x - vec2.x )*(vec1.x - vec2.x )) + ((vec1.y - vec2.y)*(vec1.y - vec2.y))+((vec1.z - vec2.z)*(vec1.z - vec2.z)));
+     }
 
     void Vector3::MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c)
     {

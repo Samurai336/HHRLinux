@@ -6,7 +6,7 @@ namespace HHR_Physics
 
     OrientedBoundingBox2D::OrientedBoundingBox2D(const Vector3& center, const real w, const real h, real angle)
     {
-
+        SetUpBox(center,w,h,angle);
 
     }
 

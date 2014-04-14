@@ -104,6 +104,8 @@ namespace HHR_Physics
 
             Vector3 operator=(const Vector3 &vec)  ;
 
+            static real Distence(const Vector3 &vec1, const Vector3 &vec2);
+
             ~Vector3();
 
 
