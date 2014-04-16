@@ -16,8 +16,6 @@ bool RotatingBounceSquare::Load(char *File)
 
       orientedCollisionBox.SetUpBox(Position, width,height, rotation);
 
-      circleCOllision.SetSphere(Position, width/2);
-
       return loadStatus;
 }
 
@@ -27,7 +25,6 @@ void RotatingBounceSquare::OnLoop()
     rotation += rotationSpeed;
     BounceSquare::OnLoop();
 
-    circleCOllision.MoveTo(Position);
 
 }
 

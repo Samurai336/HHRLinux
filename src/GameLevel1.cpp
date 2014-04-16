@@ -59,7 +59,7 @@ bool GameLevel1::LoadLevel()
     }
     Test2.setSpeed(-1,0);
 
-    Test2.setRotationSpeed(12.5);
+    Test2.setRotationSpeed(1.0);
 
     Test2.SetPosition(50, (WHEIGHT)/2);
 
@@ -116,7 +116,8 @@ void GameLevel1::CheckCollision()
 {
 
 
-    if(HHR_Physics::Collider::Check(Test.GetCollisionObject(),Test2.circleCOllision))
+
+    if(HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject()))
     {
         Colliding = true;
     }
@@ -124,6 +125,8 @@ void GameLevel1::CheckCollision()
     {
         Colliding = false;
     }
+
+
 
 
 }
@@ -138,10 +141,11 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
     Test2.OnRender(theRenderer);
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
-    //Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
-    Test2.circleCOllision.OnRender(theRenderer,Colliding);
+    Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
+
 #endif
 
+    HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject());
     AMessage.OnRender(theRenderer);
 
 }

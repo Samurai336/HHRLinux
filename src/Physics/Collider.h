@@ -28,6 +28,8 @@
 #include "OrientedBoundingBox.h"
 #include "orientedboundingbox2d.h"
 
+
+
 namespace HHR_Physics
 {
 
@@ -43,6 +45,7 @@ namespace HHR_Physics
             static bool Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B) ;
             static bool Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B) ;
             static bool Check(const OrientedBoundingBox2D &OBB2D, const BoundingBox &BB) ;
+            static bool Check(const OrientedBoundingBox2D &OBB2D, const Sphere &SP) ;
 
 
         private:

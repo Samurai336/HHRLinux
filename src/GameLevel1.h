@@ -30,6 +30,7 @@
 #include "BaseClasses/SpriteAnimation.h"
 #include "BaseClasses/ScrollingBackGround.h"
 #include "BaseClasses/SpriteText.h"
+#include "BounceCircle.h"
 
 
 
@@ -49,7 +50,7 @@ class GameLevel1 : public Level
     protected:
 
     private:
-        BounceSquare Test;
+        BounceCircle Test;
         RotatingBounceSquare Test2;
         bool Colliding;
 		ScrollingBackGround background;

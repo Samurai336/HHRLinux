@@ -18,7 +18,7 @@ class RotatingBounceSquare : public BounceSquare
 
         void setRotationSpeed(float newSpeed);
 
-        HHR_Physics::Sphere circleCOllision;
+
 
     protected:
         virtual void UpdateCollisionObj();

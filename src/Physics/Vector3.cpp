@@ -185,6 +185,11 @@ namespace HHR_Physics
          return real_sqrt( ((vec1.x - vec2.x )*(vec1.x - vec2.x )) + ((vec1.y - vec2.y)*(vec1.y - vec2.y))+((vec1.z - vec2.z)*(vec1.z - vec2.z)));
      }
 
+     real Vector3::SquareDistence(const Vector3 &vec1, const Vector3 &vec2)
+     {
+         return  ((vec1.x - vec2.x )*(vec1.x - vec2.x )) + ((vec1.y - vec2.y)*(vec1.y - vec2.y))+((vec1.z - vec2.z)*(vec1.z - vec2.z));
+     }
+
     void Vector3::MakeOthonormalBasis(Vector3 *a, Vector3 *b, Vector3 *c)
     {
         a->Normalize();

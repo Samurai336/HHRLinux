@@ -29,6 +29,8 @@ namespace HHR_Physics
             real GetHeight() const;
 
             void OnRender(MainRender	&theRenderer, bool isColliding = false);
+
+            Vector3 ClosestPoint(const Vector3 &point) const;
             
        private:
             Vector3 corner[4]; 

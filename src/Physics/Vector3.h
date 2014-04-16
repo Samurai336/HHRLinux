@@ -104,9 +104,15 @@ namespace HHR_Physics
 
             Vector3 operator=(const Vector3 &vec)  ;
 
+            ~Vector3();
+
+        public:
+
             static real Distence(const Vector3 &vec1, const Vector3 &vec2);
 
-            ~Vector3();
+            static real SquareDistence(const Vector3 &vec1, const Vector3 &vec2);
+
+
 
 
     };

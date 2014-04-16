@@ -20,7 +20,7 @@
 **********************************************************************************/
 
 #include "Collider.h"
-
+#include "../MainApp.h"
 
 namespace HHR_Physics
 {
@@ -55,6 +55,7 @@ namespace HHR_Physics
 
     bool Collider::Check(const BoundingBox &BB,  const Sphere &SP)
     {
+
         real dmin = 0.0;
 
         if(SP.position.x < BB.Mininmum(X))
@@ -65,7 +66,6 @@ namespace HHR_Physics
         {
             dmin += ((SP.position.x - BB.Mininmum(X))*(SP.position.x - BB.Maximum(X))) ;
         }
-
 
         if(SP.position.x < BB.Mininmum(X))
         {
@@ -97,30 +97,6 @@ namespace HHR_Physics
 
           return dmin <= (SP.radious*SP.radious);
 
-        /*
-        real s,d = 0;
-        real *CollisionAsArray = SP.position.GetXYZAsArray();
-
-        for(int i=0; i < 3; ++i)
-        {
-
-            if(CollisionAsArray[i] < BB.Mininmum(XYZ(i)))
-            {
-                s = CollisionAsArray[i] - BB.Mininmum(XYZ(i));
-                d += s*s ;
-            }
-            else if(CollisionAsArray[i] < BB.Mininmum(XYZ(i)))
-            {
-
-                s = CollisionAsArray[i] - BB.Maximum(XYZ(i));
-                d += s*s ;
-
-            }
-        }
-
-        return (d <= SP.radious);
-        */
-
     }
 
     bool Collider::Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B)
@@ -132,23 +108,69 @@ namespace HHR_Physics
 
     bool Collider::Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)
     {
+        real distence =  Vector3::Distence(A.GetPositon(), B.GetPositon()) / 2.0f ;
 
-           return Oriented2DBBCheck(A,B) && Oriented2DBBCheck(B,A);
+        if(distence > (B.GetWidth()) || distence > (B.GetHeight()) || distence > A.GetWidth()|| distence > A.GetHeight())
+        {
+            return false;
+        }
+
+        return Oriented2DBBCheck(A,B) && Oriented2DBBCheck(B,A);
 
     }
 
     bool Collider::Check(const OrientedBoundingBox2D &OBB2D, const BoundingBox &BB)
     {
-        real distence =  Vector3::Distence(OBB2D.GetPositon(), BB.position);
 
-        if(distence > (BB.extension.x*2) || distence > (BB.extension.y*2) || distence > OBB2D.GetWidth()|| distence > OBB2D.GetHeight())
+        real distence =  Vector3::Distence(OBB2D.GetPositon(), BB.position) / 2.0f;
+
+        if(distence > (BB.extension.x*4) || distence > (BB.extension.y*4) || distence > OBB2D.GetWidth()*2|| distence > OBB2D.GetHeight()*2)
         {
             return false;
         }
 
+
         OrientedBoundingBox2D tempBB(BB.position, BB.extension.x*2,BB.extension.y*2, 0.0f);
 
         return Oriented2DBBCheck((OBB2D),(tempBB)) && Oriented2DBBCheck((tempBB),(OBB2D)) ;
+    }
+
+
+    bool Collider::Check(const OrientedBoundingBox2D &OBB2D, const Sphere &SP)
+    {
+        Vector3 pt = OBB2D.ClosestPoint(SP.position);
+
+        Vector3 v = pt - SP.position;
+
+        //real distance = Vector3::Distence(SP.position, pt) ;
+
+        //return distance <= SP.radious;
+
+
+        real debugdot = v.DotProduct(v);
+        real radiousCalc = SP.radious*SP.radious;
+
+        printf("DotProd Of V: %f\n", debugdot);
+        printf("Radious Squared: %f\n", radiousCalc);
+
+        SDL_Color NotCollidingColor = {0,0,255,255};
+
+
+        MainApp::Instance()->GetMainRenderTarget()->DrawCircle(pt.x,pt.y,2,NotCollidingColor);
+
+        if(debugdot <= radiousCalc)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        //return real_sqrt(debugdot) <= (SP.radious*2);
+
+
+
     }
 
     bool Collider::Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)

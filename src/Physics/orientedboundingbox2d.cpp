@@ -87,6 +87,55 @@ namespace HHR_Physics
         }
     }
 
+    Vector3 OrientedBoundingBox2D::ClosestPoint(const Vector3 &point) const
+    {
+        Vector3 retPoint;
+
+        Vector3 d = point - Positon;
+
+        retPoint = Positon;
+
+        for (int i = 0; i < 2; ++i)
+        {
+            float dist = d.DotProduct(axis[i]);
+
+            if(i == 0)
+            {
+                if(dist >  width)
+                {
+                    dist = width;
+                }
+
+
+                if(dist >  -width)
+                {
+                    dist = -width;
+                }
+            }
+            else
+            {
+                if(dist >  height)
+                {
+                    dist = height;
+                }
+
+
+                if(dist >  -height)
+                {
+                    dist = -height;
+                }
+            }
+
+            Vector3 val = axis[i];
+            val *= dist;
+
+            retPoint +=  val; //(axis[i] * dist );
+        }
+
+        return retPoint;
+
+    }
+
     void OrientedBoundingBox2D::OnRender(MainRender &theRenderer, bool isColliding)
     {
 
@@ -112,6 +161,8 @@ namespace HHR_Physics
 #endif
 
     }
+
+
 
 
 
