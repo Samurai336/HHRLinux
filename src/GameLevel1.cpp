@@ -116,7 +116,7 @@ void GameLevel1::CheckCollision()
 {
 
 
-    if(HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject()))
+    if(HHR_Physics::Collider::Check(Test.GetCollisionObject(),Test2.circleCOllision))
     {
         Colliding = true;
     }
@@ -138,7 +138,8 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
     Test2.OnRender(theRenderer);
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
-    Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
+    //Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
+    Test2.circleCOllision.OnRender(theRenderer,Colliding);
 #endif
 
     AMessage.OnRender(theRenderer);

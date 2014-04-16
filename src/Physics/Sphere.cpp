@@ -24,8 +24,40 @@
 namespace HHR_Physics
 {
 
+void Sphere::SetSphere(Vector3 &pos, real rad)
+{
+    position = pos;
+    radious = rad;
+}
 
-    Sphere::~Sphere()
+void Sphere::MoveTo(const Vector3 &center)
+{
+    Vector3 Translation(center.x + (radious),center.y + (radious) ,center.z);
+
+    position= Translation;
+}
+
+void Sphere::OnRender(MainRender &theRenderer, bool isColliding)
+{
+#ifdef PHYSICS_DEBUG
+        SDL_Color Player1Color;
+        SDL_Color CollidingColor = {255,255,0,255};
+        SDL_Color NotCollidingColor = {255,0,0,255};
+
+        if(isColliding)
+        {
+            Player1Color = CollidingColor;
+        }
+        else
+        {
+            Player1Color = NotCollidingColor;
+        }
+    theRenderer.DrawCircle(position.x,position.y, radious, Player1Color);
+
+#endif
+}
+
+Sphere::~Sphere()
     {
         //dtor
     }

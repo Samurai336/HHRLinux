@@ -55,6 +55,49 @@ namespace HHR_Physics
 
     bool Collider::Check(const BoundingBox &BB,  const Sphere &SP)
     {
+        real dmin = 0.0;
+
+        if(SP.position.x < BB.Mininmum(X))
+        {
+            dmin += ((SP.position.x - BB.Mininmum(X))*(SP.position.x - BB.Mininmum(X))) ;
+        }
+        else if (SP.position.x > BB.Mininmum(X))
+        {
+            dmin += ((SP.position.x - BB.Mininmum(X))*(SP.position.x - BB.Maximum(X))) ;
+        }
+
+
+        if(SP.position.x < BB.Mininmum(X))
+        {
+            dmin += ((SP.position.x - BB.Mininmum(X))*(SP.position.x - BB.Mininmum(X))) ;
+        }
+        else if (SP.position.x > BB.Mininmum(X))
+        {
+            dmin += ((SP.position.x - BB.Mininmum(X))*(SP.position.x - BB.Maximum(X))) ;
+        }
+
+        if(SP.position.y < BB.Mininmum(Y))
+        {
+            dmin += ((SP.position.y - BB.Mininmum(Y))*(SP.position.y - BB.Mininmum(Y))) ;
+        }
+        else if (SP.position.y > BB.Mininmum(Y))
+        {
+            dmin += ((SP.position.y - BB.Mininmum(Y))*(SP.position.y - BB.Maximum(Y))) ;
+        }
+
+        if(SP.position.z < BB.Mininmum(Z))
+        {
+            dmin += ((SP.position.z - BB.Mininmum(Z))*(SP.position.z - BB.Mininmum(Z))) ;
+        }
+        else if (SP.position.z > BB.Mininmum(Z))
+        {
+            dmin += ((SP.position.z - BB.Mininmum(Z))*(SP.position.z - BB.Maximum(Z))) ;
+        }
+
+
+          return dmin <= (SP.radious*SP.radious);
+
+        /*
         real s,d = 0;
         real *CollisionAsArray = SP.position.GetXYZAsArray();
 
@@ -76,6 +119,7 @@ namespace HHR_Physics
         }
 
         return (d <= SP.radious);
+        */
 
     }
 

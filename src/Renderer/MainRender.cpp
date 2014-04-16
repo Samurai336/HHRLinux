@@ -148,6 +148,57 @@ bool MainRender::DrawLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor
 
 }
 
+bool MainRender::DrawCircle(float X, float Y, float radious,SDL_Color &RenderColor)
+{
+
+     SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+
+
+
+    float error = (float) - radious;
+    float x = radious - 0.5f;
+    float y = 0.5f;
+    float cx = X - 0.5f;
+    float cy = Y - 0.5f;
+
+    while (x >= y)
+    {
+        SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy+y));
+        SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy+x));
+
+        if(x != 0)
+        {
+            SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy+y));
+            SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy-x));
+        }
+
+        if(y != 0)
+        {
+            SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy-y));
+            SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy+x));
+        }
+
+        if (x != 0 && y != 0)
+        {
+            SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy-y));
+            SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy-x));
+        }
+
+        error += y;
+        y++;
+        error += y;
+
+        if(error >= 0)
+        {
+            --x;
+            error -= x;
+            error -= x;
+        }
+    }
+
+    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+}
+
 
 
 void MainRender::CreateDisplayRect()

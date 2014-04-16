@@ -3,6 +3,7 @@
 
 
 #include "BounceSquare.h"
+#include "Physics/Sphere.h"
 
 class RotatingBounceSquare : public BounceSquare
 {
@@ -17,12 +18,15 @@ class RotatingBounceSquare : public BounceSquare
 
         void setRotationSpeed(float newSpeed);
 
+        HHR_Physics::Sphere circleCOllision;
+
     protected:
         virtual void UpdateCollisionObj();
 
 
     private:
         HHR_Physics::OrientedBoundingBox2D orientedCollisionBox;
+
         float rotationSpeed;
 };
 

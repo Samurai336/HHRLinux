@@ -24,6 +24,7 @@
 
 #include "Vector3.h"
 #include "collisionobject.h"
+#include "../Renderer/MainRender.h"
 
 
 namespace HHR_Physics
@@ -35,8 +36,16 @@ namespace HHR_Physics
             real radious;
 
         public:
+            Sphere(){}
             Sphere(Vector3 &pos, real rad):
                 position(pos), radious(rad){}
+
+
+            void SetSphere(Vector3 &pos, real rad);
+
+            void MoveTo(const Vector3 &center);
+
+            void OnRender(MainRender	&theRenderer, bool isColliding = false);
 
             ~Sphere();
         protected:
