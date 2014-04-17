@@ -12,8 +12,8 @@ namespace HHR_Physics
 
     void OrientedBoundingBox2D::SetUpBox(const Vector3& center, const real w, const real h, real angle)
     {
-        Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), 1.0f);
-        Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), 1.0f);
+        Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), center.z);
+        Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), center.z);
         width = w;
         height = h;
         Positon= center;
@@ -21,7 +21,7 @@ namespace HHR_Physics
         X *= w/2;
         Y *= h/2;
 
-        Vector3 Translation(w/2,h/2,0.0f);
+        Vector3 Translation(w/2,h/2,center.z);
 
         corner[0] = ((center) - X-Y)+Translation;
         corner[1] = ((center) + X-Y)+Translation;
@@ -34,14 +34,17 @@ namespace HHR_Physics
     void OrientedBoundingBox2D::moveTo(const Vector3 &center,real angle)
     {
 
-        Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), 1.0f);
-        Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), 1.0f);
+        Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), center.z);
+        Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), center.z);
 
 
         X *= width/2;
         Y *= height/2;
 
-        Vector3 Translation(width/2,height/2,0.0f);
+        extends[0] = width/2;
+        extends[1] = height/2;
+
+        Vector3 Translation(width/2,height/2,center.z);
 
         corner[0] = ((center) - X-Y)+Translation;
         corner[1] = ((center) + X-Y)+Translation;
@@ -89,7 +92,7 @@ namespace HHR_Physics
 
     Vector3 OrientedBoundingBox2D::ClosestPoint(const Vector3 &point) const
     {
-        Vector3 retPoint;
+        Vector3 retPoint ;
 
         Vector3 d = point - Positon;
 
@@ -97,43 +100,22 @@ namespace HHR_Physics
 
         for (int i = 0; i < 2; ++i)
         {
-            float dist = d.DotProduct(axis[i]);
+            real dist = d.DotProduct(axis[i]);
 
-            if(i == 0)
+            if(dist > (extends[i]))
             {
-                if(dist >  width)
-                {
-                    dist = width;
-                }
-
-
-                if(dist >  -width)
-                {
-                    dist = -width;
-                }
-            }
-            else
-            {
-                if(dist >  height)
-                {
-                    dist = height;
-                }
-
-
-                if(dist >  -height)
-                {
-                    dist = -height;
-                }
+                dist = (extends[i]);
             }
 
-            Vector3 val = axis[i];
-            val *= dist;
+            if(dist < -(extends[i]))
+            {
+                dist = -(extends[i]);
+            }
 
-            retPoint +=  val; //(axis[i] * dist );
+            retPoint += (axis[i]*dist);
         }
 
-        return retPoint;
-
+        return retPoint ;
     }
 
     void OrientedBoundingBox2D::OnRender(MainRender &theRenderer, bool isColliding)

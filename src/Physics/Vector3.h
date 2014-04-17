@@ -24,6 +24,7 @@
 #define VECTOR3_H
 
 #include "precision.h"
+#include "../Define.h"
 
 
 namespace HHR_Physics
@@ -86,7 +87,7 @@ namespace HHR_Physics
 
             void operator*=(const real value);
 
-            Vector3 operator*(const real value);
+            Vector3 operator*(const real value) const;
 
             Vector3 operator/(const real value);
 
@@ -103,6 +104,8 @@ namespace HHR_Physics
             real operator*(const Vector3 &vec) const ;
 
             Vector3 operator=(const Vector3 &vec)  ;
+
+            char* GetVectorChar() const;
 
             ~Vector3();
 

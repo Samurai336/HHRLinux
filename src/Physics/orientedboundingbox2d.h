@@ -30,12 +30,13 @@ namespace HHR_Physics
 
             void OnRender(MainRender	&theRenderer, bool isColliding = false);
 
-            Vector3 ClosestPoint(const Vector3 &point) const;
+            Vector3 ClosestPoint(const Vector3 &point)const;
             
        private:
             Vector3 corner[4]; 
             Vector3 axis[2];             
             real    origin[2]; 
+            real    extends[2];
 
             Vector3 Positon;
             

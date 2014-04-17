@@ -65,7 +65,7 @@ namespace HHR_Physics
         z *= value;
     }
 
-    Vector3 Vector3::operator*(const real value)
+    Vector3 Vector3::operator*(const real value) const
     {
 
         return Vector3(x*value, y*value, z*value);
@@ -179,6 +179,20 @@ namespace HHR_Physics
         return Vector3(x,y,z);
 
      }
+
+     char *Vector3::GetVectorChar() const
+     {
+#ifdef PHYSICS_DEBUG
+         //printf("(%f, %f, %f)\n", x,y,z);
+
+         char str2[1000];
+         sprintf(str2,"(%f, %f, %f)",x,y,z);
+
+         return str2;
+#endif
+     }
+
+
 
      real Vector3::Distence(const Vector3 &vec1, const Vector3 &vec2)
      {

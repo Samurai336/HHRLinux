@@ -142,21 +142,14 @@ namespace HHR_Physics
 
         Vector3 v = pt - SP.position;
 
-        //real distance = Vector3::Distence(SP.position, pt) ;
-
-        //return distance <= SP.radious;
-
-
+#ifdef PHYSICS_DEBUG
         real debugdot = v.DotProduct(v);
         real radiousCalc = SP.radious*SP.radious;
 
-        printf("DotProd Of V: %f\n", debugdot);
-        printf("Radious Squared: %f\n", radiousCalc);
-
         SDL_Color NotCollidingColor = {0,0,255,255};
 
-
         MainApp::Instance()->GetMainRenderTarget()->DrawCircle(pt.x,pt.y,2,NotCollidingColor);
+#endif
 
         if(debugdot <= radiousCalc)
         {
@@ -166,10 +159,6 @@ namespace HHR_Physics
         {
             return false;
         }
-
-        //return real_sqrt(debugdot) <= (SP.radious*2);
-
-
 
     }
 
