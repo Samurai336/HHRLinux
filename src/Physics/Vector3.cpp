@@ -149,6 +149,27 @@ namespace HHR_Physics
 
     }
 
+    real Vector3::operator[](unsigned int index) const
+    {
+        switch (index)
+        {
+            case 0:
+                return x;
+                break;
+            case 1:
+                return y;
+                break;
+            case 2:
+                return z;
+                break;
+            default:
+                throw std::out_of_range ("This is a 3D vector! Only Values 0-2!");
+                return 0.0f;
+                break;
+        }
+
+    }
+
     Vector3 Vector3::VectorProduct(const Vector3 &vec) const
     {
         return Vector3(y*vec.z - z * vec.y,

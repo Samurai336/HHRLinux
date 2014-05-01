@@ -42,6 +42,8 @@ namespace HHR_Physics
 
             void SetUpBB(Vector3 &Pos, Vector3 &Ext);
 
+            void SetSize(Vector3 &newSize);
+
             real Mininmum(const XYZ i) const;
 
             real Maximum(const XYZ i) const;

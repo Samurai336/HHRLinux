@@ -53,6 +53,8 @@ namespace HHR_Physics
 
         Positon= center;
 
+        Angle= angle;
+
         computeAxes();
     }
 
@@ -92,30 +94,37 @@ namespace HHR_Physics
 
     Vector3 OrientedBoundingBox2D::ClosestPoint(const Vector3 &point) const
     {
-        Vector3 retPoint ;
+        Vector3 Translation(width/2,height/2,0);
 
-        Vector3 d = point - Positon;
+        Vector3 d = point-(Positon + Translation);
 
-        retPoint = Positon;
+        Vector3 q = (Positon + Translation);
 
-        for (int i = 0; i < 2; ++i)
+        Vector3 localAxis[2];
+
+        localAxis[0] =  Vector3( real_cos(DEGREES_TO_RADIANS(Angle)), real_sin(DEGREES_TO_RADIANS(Angle)), Positon.z);
+        localAxis[1] = Vector3(-real_sin(DEGREES_TO_RADIANS(Angle)), real_cos(DEGREES_TO_RADIANS(Angle)), Positon.z);
+
+
+        for (int i = 0; i < 2; i++)
         {
-            real dist = d.DotProduct(axis[i]);
+            float distance = d.DotProduct(localAxis[i] );
 
-            if(dist > (extends[i]))
+            if (distance >  extends[i])
             {
-                dist = (extends[i]);
+                distance = extends[i];
             }
-
-            if(dist < -(extends[i]))
+            if (distance < -extends[i] )
             {
-                dist = -(extends[i]);
+                distance = -extends[i];
             }
-
-            retPoint += (axis[i]*dist);
+            // Step that distance along the axis to get world coordinate
+            q += (localAxis[i] * distance);
         }
 
-        return retPoint ;
+
+
+        return q ;
     }
 
     void OrientedBoundingBox2D::OnRender(MainRender &theRenderer, bool isColliding)

@@ -31,22 +31,34 @@ namespace HHR_Physics
 {
     class OrientedBoundingBox : public BoundingBox
     {
-        public:
+        friend class Collider;
 
-            Vector3 Orientation;
+    public:
+        OrientedBoundingBox(){}
 
 
-        public:
-            OrientedBoundingBox(){}
-            OrientedBoundingBox(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent):
-            BoundingBox(Pos,Ext), Orientation(Orent) {}
-            Vector3 GetXAxis();
-            Vector3 GetYAxis();
-            Vector3 GetZAxis();
+            OrientedBoundingBox(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent);
+
+            void SetUpOBB(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent);
+
+            Vector3 GetOrientation() const;
+
+            void setPostion(Vector3 &NewPositon, Vector3 &newOrientation);
+
+            void OnRender(MainRender	&theRenderer, bool isColliding = false);
+
 
             ~OrientedBoundingBox(){}
-        protected:
+
         private:
+            void CalculateXAxis();
+            void CalculateYAxis();
+            void CalculateZAxis();
+            void UpDateAxis();
+
+        protected:
+            Vector3 Orientation;
+            Vector3 u[3];
     };
 }
 #endif // ORIENTEDBOUNDINGBOX_H

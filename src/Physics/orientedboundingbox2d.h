@@ -37,6 +37,7 @@ namespace HHR_Physics
             Vector3 axis[2];             
             real    origin[2]; 
             real    extends[2];
+            real    Angle;
 
             Vector3 Positon;
             

@@ -26,6 +26,7 @@
 #define PRECISION_H_INCLUDED
 
 #include <math.h>
+#include <float.h>
 
 namespace HHR_Physics
 {
@@ -34,6 +35,11 @@ namespace HHR_Physics
 
 
     typedef float real;
+    #define REAL_EPSILON FLT_EPSILON;
+
+
+
+    typedef real Matrix33[3][3];
 
 
     //create a function pointer to our

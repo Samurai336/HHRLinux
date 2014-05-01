@@ -101,6 +101,118 @@ namespace HHR_Physics
 
     bool Collider::Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B)
     {
+       real ra, rb;
+
+       Matrix33 R, AbsR;
+
+
+       for(int i= 0; i<3; ++i)
+       {
+            for(int j= 0; j<3; ++j)
+            {
+                R[i][j] = (A.u[i] * B.u[j]);
+            }
+       }
+
+       Vector3 t = B.position - A.position;
+
+       t = Vector3((t * A.u[0]),(t * A.u[1]),(t * A.u[2]));
+
+       for(int i= 0; i<3; ++i)
+       {
+            for(int j= 0; j<3; ++j)
+            {
+                AbsR[i][j] = real_abs(R[i][j]) + REAL_EPSILON;
+            }
+       }
+
+       for (int i = 0; i < 3; i++)
+       {
+           ra = A.extension[i];
+           rb = B.extension[0] * AbsR[i][0] + B.extension[1] * AbsR[i][1] + B.extension[2]* AbsR[i][2];
+
+           if(real_abs(t[i]) > ra + rb)
+           {
+               return false;
+           }
+       }
+
+       for (int i = 0; i < 3; i++)
+       {
+           ra = A.extension[0] * AbsR[0][i] +  A.extension[1] * AbsR[1][i] +  A.extension[2] * AbsR[2][i]  ;
+           rb = B.extension[i];
+
+           if(real_abs(t[0]*R[0][i]+t[1]*R[1][i]+t[2]*R[2][i]) > ra + rb)
+           {
+               return false;
+           }
+       }
+
+
+       ra = A.extension[1] * AbsR[2][0] + A.extension[2] * AbsR[1][0];
+       rb = B.extension[1] * AbsR[0][2] + B.extension[2] * AbsR[0][1];
+       if(real_abs(t[2] * R[1][0] - t[1] * R[2][0]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[1] * AbsR[2][1] + A.extension[2] * AbsR[1][1];
+       rb = B.extension[0] * AbsR[0][2] + B.extension[2] * AbsR[0][0];
+       if(real_abs(t[2] * R[1][1] - t[1] * R[2][1]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[1] * AbsR[2][2] + A.extension[2] * AbsR[1][2];
+       rb = B.extension[0] * AbsR[0][1] + B.extension[1] * AbsR[0][0];
+       if(real_abs(t[2] * R[1][2] - t[1] * R[2][2]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[0] * AbsR[2][0] + A.extension[2] * AbsR[0][0];
+       rb = B.extension[1] * AbsR[1][2] + B.extension[2] * AbsR[1][1];
+       if (real_abs(t[0] * R[2][0] - t[2] * R[0][0]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[0] * AbsR[2][1] + A.extension[2] * AbsR[0][1];
+       rb = B.extension[0] * AbsR[1][2] + B.extension[2] * AbsR[1][0];
+       if(real_abs(t[0] * R[2][1] - t[2] * R[0][1]) > ra + rb)
+       {
+           return false;
+       }
+
+
+       ra = A.extension[0] * AbsR[2][2] + A.extension[2] * AbsR[0][2];
+       rb = B.extension[0] * AbsR[1][1] + B.extension[1] * AbsR[1][0];
+       if(real_abs(t[0] * R[2][2] - t[2] * R[0][2]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[0] * AbsR[1][0] + A.extension[1] * AbsR[0][0];
+       rb = B.extension[1] * AbsR[2][2] + B.extension[2] * AbsR[2][1];
+       if (real_abs(t[1] * R[0][0] - t[0] * R[1][0]) > ra + rb)
+       {
+           return false;
+       }
+
+       ra = A.extension[0] * AbsR[1][1] + A.extension[1] * AbsR[0][1];
+       rb = B.extension[0] * AbsR[2][2] + B.extension[2] * AbsR[2][0];
+       if(real_abs(t[1] * R[0][1] - t[0] * R[1][1]) > ra + rb)
+       {
+           return false;
+       }
+
+
+       ra = A.extension[0] * AbsR[1][2] + A.extension[1] * AbsR[0][2];
+       rb = B.extension[0] * AbsR[2][1] + B.extension[1] * AbsR[2][0];
+       if(real_abs(t[1] * R[0][2] - t[0] * R[1][2]) > ra + rb)
+       {
+           return false;
+       }
 
        return true;
 
@@ -138,28 +250,13 @@ namespace HHR_Physics
 
     bool Collider::Check(const OrientedBoundingBox2D &OBB2D, const Sphere &SP)
     {
+
         Vector3 pt = OBB2D.ClosestPoint(SP.position);
 
         Vector3 v = pt - SP.position;
 
-#ifdef PHYSICS_DEBUG
-        real debugdot = v.DotProduct(v);
-        real radiousCalc = SP.radious*SP.radious;
 
-        SDL_Color NotCollidingColor = {0,0,255,255};
-
-        MainApp::Instance()->GetMainRenderTarget()->DrawCircle(pt.x,pt.y,2,NotCollidingColor);
-#endif
-
-        if(debugdot <= radiousCalc)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return v.DotProduct(v) <= SP.radious*SP.radious;
     }
 
     bool Collider::Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)

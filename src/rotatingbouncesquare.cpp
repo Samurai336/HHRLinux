@@ -14,7 +14,10 @@ bool RotatingBounceSquare::Load(char *File)
 {
       bool loadStatus = BaseUnit::Load(File);
 
-      orientedCollisionBox.SetUpBox(Position, width,height, rotation);
+
+      HHR_Physics::Vector3 extenshion(width,height,10.0f);
+      //HHR_Physics::Vector3 vRotation(0.0f, 0.0f, rotation);
+      orientedCollisionBox.SetUpBox(Position, width, height,  rotation);
 
       return loadStatus;
 }
@@ -35,6 +38,7 @@ HHR_Physics::OrientedBoundingBox2D RotatingBounceSquare::GetCollisionObject()
 
 void RotatingBounceSquare::UpdateCollisionObj()
 {
+    //HHR_Physics::Vector3 vRotation(0.0f ,0.0, rotation);
     orientedCollisionBox.moveTo(Position,rotation);
 }
 

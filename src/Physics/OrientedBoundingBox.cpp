@@ -27,39 +27,145 @@ namespace HHR_Physics
 {
 
 
-
-    Vector3 OrientedBoundingBox::GetXAxis()
+    OrientedBoundingBox::OrientedBoundingBox(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent):
+    BoundingBox(Pos,Ext), Orientation(Orent)
     {
-
-        real cosineTheta = real_cos(Orientation.x);
-        real sineTheta   = real_sin(Orientation.x);
-
-        return Vector3(this->position.x,
-                      (this->position.y * cosineTheta)+(this->position.z * (-1 *sineTheta)),
-                      (this->position.y * sineTheta)+(this->position.z * cosineTheta));
 
     }
-    Vector3 OrientedBoundingBox::GetYAxis()
+
+    void OrientedBoundingBox::SetUpOBB(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent)
     {
+        SetUpBB(Pos,Ext);
 
-        real cosineTheta = real_cos(Orientation.y);
-        real sineTheta   = real_sin(Orientation.y);
-
-        return Vector3((this->position.x*cosineTheta) + (this->position.z * sineTheta),
-                       this->position.y,
-                       (this->position.x *(-1*sineTheta) + (this->position.z * cosineTheta)));
+        Orientation = Orent;
 
     }
-    Vector3 OrientedBoundingBox::GetZAxis()
+
+    Vector3 OrientedBoundingBox::GetOrientation() const
+    {
+        return Orientation;
+    }
+
+    void OrientedBoundingBox::setPostion(Vector3 &NewPositon, Vector3 &newOrientation)
+    {
+        BoundingBox::setPostion(NewPositon);
+
+        Orientation = newOrientation;
+
+        UpDateAxis();
+    }
+
+    void OrientedBoundingBox::OnRender(MainRender &theRenderer, bool isColliding)
+    {
+#ifdef PHYSICS_DEBUG
+        Vector3 corner[4];
+
+        //Vector3 vX( real_cos(DEGREES_TO_RADIANS(Orientation.z)), real_sin(DEGREES_TO_RADIANS(Orientation.z)), position.z);
+        //Vector3 vY(-real_sin(DEGREES_TO_RADIANS(Orientation.z)), real_cos(DEGREES_TO_RADIANS(Orientation.z)), position.z);
+
+
+
+
+
+        Vector3 vZ = u[2]; // * extension.x;
+        Vector3 vX = u[0]; //* extension.y;
+        Vector3 vY = u[1]; //* extension.y;
+
+
+        corner[0] = ((position) + vZ - vY);
+        corner[1] = ((position) - vZ - vY);
+        corner[2] = ((position) - vZ + vY);
+        corner[3] = ((position) + vZ + vY);
+
+        //Vector3 Translation(halfWidth,halfHeight,position.z);
+
+
+        /*
+
+        corner[0] = vZ;
+
+         corner[0] += position;
+
+       // corner[0].y = vX.y;
+        corner[1] = vZ;
+        corner[1] += position;
+        //corner[1].y = vX.y;
+
+        corner[1].x -= (extension.x*2);
+        */
+
+
+
+
+
+                //(extension + vX-vY);//+Translation;
+        //corner[2] = (extension + vX+vY);//+Translation;
+        //corner[3] = (extension - vX+vY);//+Translation;
+
+
+        SDL_Color Player1Color;
+        SDL_Color CollidingColor = {255,255,0,255};
+        SDL_Color NotCollidingColor = {255,0,0,255};
+
+        if(isColliding)
+        {
+            Player1Color = CollidingColor;
+        }
+        else
+        {
+            Player1Color = NotCollidingColor;
+        }
+
+        theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[1].x, (int)corner[1].y, Player1Color);
+        theRenderer.DrawLine((int)corner[0].x, (int)corner[0].y, (int)corner[3].x, (int)corner[3].y, Player1Color);
+        theRenderer.DrawLine((int)corner[1].x, (int)corner[1].y, (int)corner[2].x, (int)corner[2].y, Player1Color);
+        theRenderer.DrawLine((int)corner[2].x, (int)corner[2].y, (int)corner[3].x, (int)corner[3].y, Player1Color);
+
+
+#endif
+
+    }
+
+    void OrientedBoundingBox::CalculateXAxis()
     {
 
-        real cosineTheta = real_cos(Orientation.z);
-        real sineTheta   = real_sin(Orientation.z);
+        real cosineTheta = real_cos( DEGREES_TO_RADIANS(Orientation.z));
+        real sineTheta   = real_sin(DEGREES_TO_RADIANS(Orientation.z));
 
-        return Vector3((this->position.x * cosineTheta) + (this->position.y *(-1*sineTheta)),
-                       (this->position.x * sineTheta) + (this->position.y*cosineTheta),
-                        this->position.z);
+        u[0]= Vector3(this->extension.x,
+                      (this->extension.y * cosineTheta)+(this->extension.z * (-1 *sineTheta)),
+                      (this->extension.y * sineTheta)+(this->extension.z * cosineTheta));
 
+
+    }
+    void OrientedBoundingBox::CalculateYAxis()
+    {
+
+        real cosineTheta = real_cos(DEGREES_TO_RADIANS(Orientation.z));
+        real sineTheta   = real_sin(DEGREES_TO_RADIANS(Orientation.z));
+
+        u[1] = Vector3((this->extension.x*cosineTheta) + (this->extension.z * sineTheta),
+                       this->extension.y,
+                       (this->extension.x *(-1*sineTheta) + (this->extension.z * cosineTheta)));
+
+    }
+    void OrientedBoundingBox::CalculateZAxis()
+    {
+
+        real cosineTheta = real_cos(DEGREES_TO_RADIANS(Orientation.z));
+        real sineTheta   = real_sin(DEGREES_TO_RADIANS(Orientation.z));
+
+        u[2] =  Vector3((this->extension.x * cosineTheta) + (this->extension.y *(-1*sineTheta)),
+                       (this->extension.x * sineTheta) + (this->extension.y*cosineTheta),
+                        this->extension.z);
+
+    }
+
+    void OrientedBoundingBox::UpDateAxis()
+    {
+        CalculateXAxis();
+        CalculateYAxis();
+        CalculateZAxis();
     }
 
 }

@@ -32,6 +32,11 @@ void BoundingBox::SetUpBB(Vector3 &Pos, Vector3 &Ext)
     extension = Ext;
 }
 
+void BoundingBox::SetSize(Vector3 &newSize)
+{
+    extension = (newSize/2);
+}
+
 real BoundingBox::Mininmum(const XYZ i) const
     {
         switch(i)

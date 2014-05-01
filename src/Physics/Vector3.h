@@ -23,6 +23,8 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
+
+#include <stdexcept>
 #include "precision.h"
 #include "../Define.h"
 
@@ -102,6 +104,8 @@ namespace HHR_Physics
             Vector3 operator-(const Vector3 &v) const;
 
             real operator*(const Vector3 &vec) const ;
+
+            real operator[](unsigned int index) const;
 
             Vector3 operator=(const Vector3 &vec)  ;
 
