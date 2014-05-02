@@ -79,8 +79,17 @@ void BaseUnit::OnCleanup()
     unitTexture = NULL;
 }
 
-void BaseUnit::SetPosition(float MoveX, float MoveY)
+void BaseUnit::SetPosition(const float MoveX, const float MoveY)
 {
     Position.x = MoveX - (width/2);
     Position.y = MoveY - (height/2);
+}
+
+void BaseUnit::SetPosition(const HHR_Physics::Vector3 &newPosition)
+{
+    Position = newPosition;
+    Position.x -= (width/2);
+    Position.y -= (height/2);
+
+
 }

@@ -52,7 +52,9 @@ class BaseUnit
 
             virtual HHR_Physics::CollisionObject* GetCollisionObject() const {return NULL;};
 
-			void  SetPosition(float MoveX, float MoveY);
+            void  SetPosition(const float MoveX, const float MoveY);
+
+            void  SetPosition(const HHR_Physics::Vector3 &newPosition);
 
             void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
 

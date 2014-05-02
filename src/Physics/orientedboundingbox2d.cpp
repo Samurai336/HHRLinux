@@ -18,6 +18,9 @@ namespace HHR_Physics
         height = h;
         Positon= center;
 
+        localAxis[0] = X;
+        localAxis[1] = Y;
+
         X *= w/2;
         Y *= h/2;
 
@@ -37,6 +40,8 @@ namespace HHR_Physics
         Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), center.z);
         Vector3 Y(-real_sin(DEGREES_TO_RADIANS(angle)), real_cos(DEGREES_TO_RADIANS(angle)), center.z);
 
+        localAxis[0] = X;
+        localAxis[1] = Y;
 
         X *= width/2;
         Y *= height/2;
@@ -52,8 +57,6 @@ namespace HHR_Physics
         corner[3] = ((center) - X+Y)+Translation;
 
         Positon= center;
-
-        Angle= angle;
 
         computeAxes();
     }
@@ -72,13 +75,6 @@ namespace HHR_Physics
     {
         return height;
     }
-
-    /*
-    bool OrientedBoundingBox2D::overlaps(const OrientedBoundingBox2D &other) const
-    {       
-        return Collider::Check(*this, other); //overlaps1Way(other) && other.overlaps1Way(*this);  //
-    }
-    */
 
     void OrientedBoundingBox2D::computeAxes()
     {
@@ -99,11 +95,6 @@ namespace HHR_Physics
         Vector3 d = point-(Positon + Translation);
 
         Vector3 q = (Positon + Translation);
-
-        Vector3 localAxis[2];
-
-        localAxis[0] =  Vector3( real_cos(DEGREES_TO_RADIANS(Angle)), real_sin(DEGREES_TO_RADIANS(Angle)), Positon.z);
-        localAxis[1] = Vector3(-real_sin(DEGREES_TO_RADIANS(Angle)), real_cos(DEGREES_TO_RADIANS(Angle)), Positon.z);
 
 
         for (int i = 0; i < 2; i++)

@@ -6,7 +6,6 @@
 #include "Vector3.h"
 #include "Collider.h"
 #include "collisionobject.h"
-#include "../Renderer/MainRender.h"
 
 
 namespace HHR_Physics
@@ -34,10 +33,11 @@ namespace HHR_Physics
             
        private:
             Vector3 corner[4]; 
-            Vector3 axis[2];             
+            Vector3 axis[2];
+            Vector3 localAxis[2];
             real    origin[2]; 
             real    extends[2];
-            real    Angle;
+
 
             Vector3 Positon;
             

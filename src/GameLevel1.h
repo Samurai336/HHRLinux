@@ -31,6 +31,8 @@
 #include "BaseClasses/ScrollingBackGround.h"
 #include "BaseClasses/SpriteText.h"
 #include "BounceCircle.h"
+#include "Particles/Particle.h"
+
 
 
 
@@ -52,6 +54,7 @@ class GameLevel1 : public Level
     private:
         BounceCircle Test;
         RotatingBounceSquare Test2;
+        HHR_Particles::Particle aParticle;
         bool Colliding;
 		ScrollingBackGround background;
 		SpriteText AMessage;

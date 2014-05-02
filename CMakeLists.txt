@@ -62,6 +62,8 @@ file(GLOB baseClasses_files src/BaseClasses/*.h src/BaseClasses/*.cpp)
 
 file(GLOB physics_files src/Physics/*.h src/Physics/*.cpp)
 
+file(GLOB particle_files src/Particles/*.h src/Particles/*.cpp)
+
 
 
 SOURCE_GROUP(Renderer FILES ${renderer_files})
@@ -71,6 +73,8 @@ SOURCE_GROUP(Game FILES ${game_files})
 SOURCE_GROUP(BaseClasses FILES ${baseClasses_files})
 
 SOURCE_GROUP(Physics FILES ${physics_files})
+
+SOURCE_GROUP(Particles FILES ${particle_files})
 
 
 
@@ -87,6 +91,7 @@ if(WIN32)
         ${baseClasses_files}
         ${renderer_files}
         ${physics_files}
+        ${particle_files}
 	)
 
         if(CMAKE_BUILD_TYPE MATCHES DEBUG)
@@ -100,6 +105,7 @@ else ()
         ${baseClasses_files}
         ${renderer_files}
         ${physics_files}
+        ${particle_files}
 	)
 
         set(CMAKE_CXX_FLAGS "-g -Wno-write-strings")
