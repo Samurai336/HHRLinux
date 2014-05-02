@@ -66,6 +66,7 @@ void BaseUnit::OnLoop()
 
 void BaseUnit::OnRender(MainRender	&theRenderer)
 {
+
     theRenderer.Draw(unitTexture, Position.x, Position.y, rotation);
 }
 

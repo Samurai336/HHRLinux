@@ -7,12 +7,12 @@ namespace HHR_Particles
     {
     }
 
-    Particle::Particle(SDL_Texture *ParticleTexture, Vector3 positon, Vector3 velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl)
+    Particle::Particle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl)
     {
         SetParticle(ParticleTexture,positon,velocity,angle,AngularVelocity,color,size,ttl);
     }
 
-    void Particle::SetParticle(SDL_Texture *ParticleTexture, Vector3 positon, Vector3 velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl)
+    void Particle::SetParticle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl)
     {
         unitTexture = ParticleTexture;
         Position = positon;
@@ -36,11 +36,13 @@ namespace HHR_Particles
         Position += Velocity;
         rotation += AngularVelocity;
         Alpha -= AlphaChange;
+
+        SDL_SetTextureAlphaMod(unitTexture, Alpha);
     }
 
     void Particle::OnRender(MainRender &theRenderer)
     {
-        SDL_SetTextureAlphaMod(unitTexture, Alpha);
+
 
         BaseUnit::OnRender(theRenderer);
     }

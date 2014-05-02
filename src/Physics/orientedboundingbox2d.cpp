@@ -76,6 +76,8 @@ namespace HHR_Physics
         return height;
     }
 
+
+
     void OrientedBoundingBox2D::computeAxes()
     {
         axis[0] = corner[1] - corner[0];

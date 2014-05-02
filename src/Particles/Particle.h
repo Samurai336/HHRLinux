@@ -9,11 +9,13 @@ namespace HHR_Particles
 
     class Particle:public BaseUnit
     {
+        friend class ParticleEngine;
+
         public:
             Particle(void);
             // public Particle(Texture2D texture, Vector2 position, Vector2 velocity, float angle, float angularVelocity, Color color, float size, int ttl, GraphicsDeviceManager graphics)
-            Particle(SDL_Texture* ParticleTexture, Vector3 positon, Vector3 velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
-            void SetParticle(SDL_Texture* ParticleTexture, Vector3 positon, Vector3 velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
+            Particle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
+            void SetParticle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
 
             virtual void OnLoop();
 

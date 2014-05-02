@@ -35,7 +35,7 @@ class MainRender
 
 	public:
 
-		SDL_Texture* LoadTexture(char* File);
+        SDL_Texture* LoadTexture(const char* File);
 		SDL_Texture* CreateTextureFromSurface(SDL_Surface*);
 
 

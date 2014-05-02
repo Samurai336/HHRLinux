@@ -234,7 +234,7 @@ void MainRender::Clean()
 }
 
 
-SDL_Texture* MainRender::LoadTexture(char* File)
+SDL_Texture* MainRender::LoadTexture(const char* File)
 {
 	return IMG_LoadTexture(Renderer, File);
 }
