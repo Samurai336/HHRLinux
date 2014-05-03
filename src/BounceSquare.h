@@ -51,9 +51,6 @@ class BounceSquare :
 
     protected:
         virtual void UpdateCollisionObj();
-
-
-	private:
         float speedX, speedY;
         HHR_Physics::BoundingBox BBCollisionObject;
 

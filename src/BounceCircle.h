@@ -2,6 +2,7 @@
 #define BOUNCECIRCLE_H
 
 #include "BounceSquare.h"
+#include "Particles/CannonSmokeParticleSystem.h"
 
 class BounceCircle : public BounceSquare
 {
@@ -11,6 +12,10 @@ class BounceCircle : public BounceSquare
         bool Load(char* File);
 
         void OnLoop();
+
+        void OnRender(MainRender &theRenderer);
+
+        void OnCleanup();
 
         HHR_Physics::Sphere GetCollisionObject();
 
@@ -22,6 +27,7 @@ class BounceCircle : public BounceSquare
 
     private:
         HHR_Physics::Sphere CollisionSphere;
+        HHR_Particles::CannonSmokeParticleSystem Smoke;
 
         float rotationSpeed;
 

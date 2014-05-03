@@ -47,8 +47,6 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 	}
 	else
     {
-
-
 #ifdef DEBUG_MODE
         SDL_RendererInfo currentRenderInformation;
         SDL_GetRendererInfo(Renderer, &currentRenderInformation);
@@ -58,6 +56,9 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
     }
 
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");  // make the scaled rendering look smoothe
+    SDL_RenderSetLogicalSize(Renderer,WWIDTH,WHEIGHT );
+    SDL_SetRenderDrawBlendMode(Renderer, SDL_BLENDMODE_BLEND);
 
 	return true;
 }

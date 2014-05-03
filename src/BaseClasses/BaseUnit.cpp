@@ -50,6 +50,9 @@ bool BaseUnit::Load(char* File)
 {
 	 if((unitTexture = MainApp::Instance()->GetMainRenderTarget()->LoadTexture(File)) == NULL)
      {
+#ifdef DEBUG_MODE
+                 printf("IMG_Load Error: Unit Asset(%s): %s\n",File, IMG_GetError());
+#endif
          return true;
      }
 

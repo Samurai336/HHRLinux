@@ -1,4 +1,5 @@
 #include "BounceCircle.h"
+#include "MainApp.h"
 
 BounceCircle::BounceCircle()
 {
@@ -14,13 +15,44 @@ bool BounceCircle::Load(char *File)
 
      CollisionSphere.SetSphere(Position,width/2);
 
+     const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
+
+     if(!loadStatus)
+     {
+         loadStatus = Smoke.SetUpEngine(ParticleAsset,1,Position,10, 500 );
+     }
+
      return loadStatus;
 }
 
 void BounceCircle::OnLoop()
 {
     rotation += rotationSpeed;
+
+    if(speedX < 0)
+    {
+        Smoke.StartCannonSmoke(HHR_Particles::Right, Position, HHR_Physics::Vector3(speedX, speedY, 0.0f));
+    }
+    else
+    {
+        Smoke.StartCannonSmoke(HHR_Particles::Left, Position, HHR_Physics::Vector3(speedX, speedY, 0.0f));
+    }
+
+    Smoke.OnLoop();
+
     BounceSquare::OnLoop();
+}
+
+void BounceCircle::OnRender(MainRender &theRenderer)
+{
+
+    BounceSquare::OnRender(theRenderer);
+    Smoke.OnRender(theRenderer);
+}
+
+void BounceCircle::OnCleanup()
+{
+    Smoke.OnCleanup();
 }
 
 HHR_Physics::Sphere BounceCircle::GetCollisionObject()

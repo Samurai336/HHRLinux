@@ -15,12 +15,17 @@ namespace HHR_Particles
             Particle(void);
             // public Particle(Texture2D texture, Vector2 position, Vector2 velocity, float angle, float angularVelocity, Color color, float size, int ttl, GraphicsDeviceManager graphics)
             Particle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
-            void SetParticle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
+            void SetParticle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);          
 
+            int GetCurrentLifeDuration();
 
-            void ParticleReset(Vector3 &newPosition);
+            void SetPositon(const Vector3 &newPositon);
+
+            void SetVelocity(const Vector3 &newVelcity);
 
             virtual void OnLoop();
+
+            virtual void ParticleReset();
 
             virtual void OnRender(MainRender &theRenderer);
 
@@ -32,7 +37,7 @@ namespace HHR_Particles
             real AngularVelocity;
             SDL_Color LColor;
             real Size;
-            unsigned int duration;
+            int duration;
             unsigned int totalDuration;
             real orginalY;
             unsigned int AlphaChange;

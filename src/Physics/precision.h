@@ -26,7 +26,9 @@
 #define PRECISION_H_INCLUDED
 
 #include <math.h>
+#include <time.h>
 #include <float.h>
+#include <stdlib.h>
 
 namespace HHR_Physics
 {
@@ -36,8 +38,6 @@ namespace HHR_Physics
 
     typedef float real;
     #define REAL_EPSILON FLT_EPSILON;
-
-
 
     typedef real Matrix33[3][3];
 
@@ -56,6 +56,13 @@ namespace HHR_Physics
     typedef real (*p_sinf) (real);
     static p_sinf real_sin= &sinf;
 
+    inline real RandomReal(real a, real b) \
+    {
+        real random = ((real) rand()) / (real) RAND_MAX;
+        real diff = b - a;
+        real r = random * diff;
+        return a + r;
+    }
 
 
 

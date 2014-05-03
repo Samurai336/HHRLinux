@@ -32,11 +32,25 @@ namespace HHR_Particles
         SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height);
     }
 
-    void Particle::ParticleReset(Vector3 &newPosition)
+    void Particle::ParticleReset()
     {
-         Position = newPosition;
          duration = totalDuration;
          Alpha = 256;
+    }
+
+    int Particle::GetCurrentLifeDuration()
+    {
+        return duration;
+    }
+
+    void Particle::SetPositon(const Vector3 &newPositon)
+    {
+        Position = newPositon;
+    }
+
+    void Particle::SetVelocity(const Vector3 &newVelcity)
+    {
+        Velocity = newVelcity;
     }
 
     void Particle::OnLoop()

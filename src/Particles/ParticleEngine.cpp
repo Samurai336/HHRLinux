@@ -1,6 +1,9 @@
 #include "ParticleEngine.h"
 
 
+#include "../MainApp.h"
+
+
 
 namespace HHR_Particles
 {
@@ -10,27 +13,35 @@ namespace HHR_Particles
         ActiveEmmitting =false;
     }
 
-    ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location)
+    ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap )
     {
         srand (time(NULL));
-        SetUpEngine(texturesFiles,numTextures,location);
+        SetUpEngine(texturesFiles,numTextures,location, ParticleCap);
     }
 
-    bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location)
+    bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap )
     {
         emetterLocation = location;
+
+        totalParticleCap = ParticleCap;
 
         textures = new SDL_Texture* [numTextures];
 
         for(unsigned int i = 0; i < numTextures; ++i)
         {
-             if((textures[i] =  MainApp::Instance()->GetMainRenderTarget()->LoadTexture(texturesFiles[i])) == NULL);
+
+             if((textures[i]= MainApp::Instance()->GetMainRenderTarget()->LoadTexture(texturesFiles[i])) == NULL)
              {
+#ifdef DEBUG_MODE
+                 printf("IMG_Load Error: Particle Asset(%s): %s\n",texturesFiles[i], IMG_GetError());
+#endif
                  return true;
              }
         }
         Active = false;
         ActiveEmmitting =false;
+        textureCount = numTextures;
+
 
         return false;
     }
@@ -61,7 +72,7 @@ namespace HHR_Particles
                     ++totalDead;
                     if(Active == true)
                     {
-                        (*itor)->ParticleReset(emetterLocation);
+                       ResetParticle((*itor));
                     }
                 }
             }
@@ -73,6 +84,12 @@ namespace HHR_Particles
         }
 
     }
+
+    void ParticleEngine::ResetParticle(Particle *particleToUpdate)
+    {
+        particleToUpdate->Position = emetterLocation;
+    }
+
 
     void ParticleEngine::OnRender(MainRender &theRenderer)
     {
@@ -90,12 +107,15 @@ namespace HHR_Particles
     void ParticleEngine::OnCleanup()
     {
         particles.remove_if(deleteAll);
-        for(unsigned int i = 0; i < numTextures; ++i)
+        for(unsigned int i = 0; i < textureCount; ++i)
         {
             SDL_DestroyTexture(textures[i]);
         }
 
-        delete [] textures ;
+        //Is this a memory leak?
+        //Barfs when I leave it in.
+        //delete [] textures ;
+
 
     }
 
@@ -126,7 +146,7 @@ namespace HHR_Particles
     {
         SDL_Color particleColor= {rand()%255+1,rand()%255+1,rand()%255+1};
 
-        return (new Particle (textures[rand()%(numTextures-1)],
+        return (new Particle (textures[rand()%(textureCount)],
                               emetterLocation,
                               Vector3(1.0f * (float)(rand()*2.0f-1.0f),1.0f * (float)(rand()*2.0f-1.0f),0.0f),
                               0.0f,
