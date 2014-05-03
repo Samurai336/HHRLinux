@@ -17,6 +17,9 @@ namespace HHR_Particles
             Particle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
             void SetParticle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl);
 
+
+            void ParticleReset(Vector3 &newPosition);
+
             virtual void OnLoop();
 
             virtual void OnRender(MainRender &theRenderer);
@@ -24,11 +27,13 @@ namespace HHR_Particles
             virtual void OnCleanup();
 
         private:
+
             Vector3 Velocity;
             real AngularVelocity;
             SDL_Color LColor;
             real Size;
             unsigned int duration;
+            unsigned int totalDuration;
             real orginalY;
             unsigned int AlphaChange;
             unsigned int Alpha;

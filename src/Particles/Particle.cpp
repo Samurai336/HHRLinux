@@ -5,6 +5,7 @@ namespace HHR_Particles
 {
     Particle::Particle()
     {
+
     }
 
     Particle::Particle(SDL_Texture* ParticleTexture, const Vector3 &positon, const Vector3 &velocity, real angle, real AngularVelocity, SDL_Color color, real size, int ttl)
@@ -21,13 +22,21 @@ namespace HHR_Particles
         AngularVelocity = AngularVelocity;
         LColor = color;
         Size = size;
-        duration = ttl;
+        duration = totalDuration = ttl;
         orginalY = positon.y;
         AlphaChange = 256/ttl;
         Alpha = 256;
 
 
+
         SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height);
+    }
+
+    void Particle::ParticleReset(Vector3 &newPosition)
+    {
+         Position = newPosition;
+         duration = totalDuration;
+         Alpha = 256;
     }
 
     void Particle::OnLoop()

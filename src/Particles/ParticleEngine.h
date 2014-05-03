@@ -20,15 +20,20 @@ namespace HHR_Particles
             void OnLoop();
             void OnRender(MainRender &theRenderer);
             void OnCleanup();
+            bool GetActiveStatus() const;
+            void SetActive(const bool activeStatus);
+
             ~ParticleEngine();
 
 
 
         private:
+            bool Active;
+            bool ActiveEmmitting;
             Particle* GenerateNewParticle();
             Vector3 emetterLocation;
             unsigned int numTextures;
-            int totalParticles;
+            int totalParticleCap;
             std::list <Particle*> particles;
             SDL_Texture** textures;
             static bool deleteAll( Particle * theElement ) { delete theElement; return true; }

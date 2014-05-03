@@ -6,6 +6,8 @@ namespace HHR_Particles
 {
     ParticleEngine::ParticleEngine()
     {
+        Active = false;
+        ActiveEmmitting =false;
     }
 
     ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location)
@@ -27,40 +29,61 @@ namespace HHR_Particles
                  return true;
              }
         }
+        Active = false;
+        ActiveEmmitting =false;
 
         return false;
     }
 
     void ParticleEngine::OnLoop()
     {
-        int total = 10;
-        for(int i =0; i < total; i++)
+        if(ActiveEmmitting)
         {
-            particles.push_back(GenerateNewParticle());
-        }
 
-        std::list<Particle*>::iterator itor = particles.begin();
+            unsigned int totalDead = 0;
 
-        for(; itor != particles.end(); ++itor)
-        {
-            (*itor)->OnLoop();
-
-            if((*itor)->duration <= 0)
+            if(particles.size() < totalParticleCap)
             {
-                particles.remove((*itor));
-                delete (*itor);
-                itor--;
+                int total = 10;
+                for(int i =0; i < total; i++)
+                {
+                    particles.push_back(GenerateNewParticle());
+                }
+            }
+
+            std::list<Particle*>::iterator itor = particles.begin();
+            for(; itor != particles.end(); ++itor)
+            {
+                (*itor)->OnLoop();
+
+                if((*itor)->duration <= 0)
+                {
+                    ++totalDead;
+                    if(Active == true)
+                    {
+                        (*itor)->ParticleReset(emetterLocation);
+                    }
+                }
+            }
+
+            if(particles.size() == totalDead)
+            {
+                ActiveEmmitting = false ;
             }
         }
+
     }
 
     void ParticleEngine::OnRender(MainRender &theRenderer)
     {
-        std::list<Particle*>::iterator itor = particles.begin();
-
-        for(; itor != particles.end(); ++itor)
+        if(ActiveEmmitting)
         {
-            (*itor)->OnRender(theRenderer);
+            std::list<Particle*>::iterator itor = particles.begin();
+
+            for(; itor != particles.end(); ++itor)
+            {
+                (*itor)->OnRender(theRenderer);
+            }
         }
     }
 
@@ -76,6 +99,24 @@ namespace HHR_Particles
 
     }
 
+    bool ParticleEngine::GetActiveStatus() const
+    {
+        return Active;
+    }
+
+    void ParticleEngine::SetActive(const bool activeStatus)
+    {
+        if(activeStatus ==true)
+        {
+            ActiveEmmitting = Active = activeStatus;
+
+        }
+        else
+        {
+            Active = false;
+        }
+    }
+
     ParticleEngine::~ParticleEngine()
     {
         OnCleanup();
@@ -83,8 +124,6 @@ namespace HHR_Particles
 
     Particle *ParticleEngine::GenerateNewParticle()
     {
-        //return NULL;
-
         SDL_Color particleColor= {rand()%255+1,rand()%255+1,rand()%255+1};
 
         return (new Particle (textures[rand()%(numTextures-1)],
