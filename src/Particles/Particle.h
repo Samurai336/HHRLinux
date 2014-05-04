@@ -35,13 +35,12 @@ namespace HHR_Particles
 
             Vector3 Velocity;
             real AngularVelocity;
-            SDL_Color LColor;
-            real Size;
+            SDL_Color LColor;            
             int duration;
             unsigned int totalDuration;
             real orginalY;
-            unsigned int AlphaChange;
-            unsigned int Alpha;
+            int AlphaChange;
+            int Alpha;
 
 
 

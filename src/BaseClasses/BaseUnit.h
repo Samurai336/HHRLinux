@@ -76,6 +76,8 @@ class BaseUnit
 
 			double rotation;
 
+            float Size;
+
 			int renderOrder;
 
 

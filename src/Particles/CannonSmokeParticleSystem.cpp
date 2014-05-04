@@ -24,6 +24,7 @@ namespace HHR_Particles
         }
 
         durationCountDown =  duration = SetDuration;
+        //emmitionBurstCount = 10;
 
         return false;
     }
@@ -114,7 +115,7 @@ namespace HHR_Particles
                               0.0f,
                               RandomReal(1.0f,2.0f),
                               particleColor,
-                              RandomReal(0.0f,1.0f),
+                              RandomReal(0.25f,0.5f),
                               (rand()%40+1)
                               ));
 

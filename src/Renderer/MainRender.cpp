@@ -63,7 +63,7 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 	return true;
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation)
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation, float scale )
 {
 	if(theTexture == NULL)
 	{
@@ -80,6 +80,9 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation)
 	//tank preformance?
 	SDL_QueryTexture(theTexture, NULL,NULL, &DestR.w, &DestR.h);
 
+    DestR.w *= scale;
+    DestR.h *= scale;
+
 
 	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
@@ -88,7 +91,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation)
 
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation)
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation, float scale )
 {
 	if(theTexture == NULL)
 	{
@@ -100,8 +103,8 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 
 	DestR.x = X;
 	DestR.y = Y;
-	DestR.w = W;
-	DestR.h = H;
+    DestR.w = W * scale;
+    DestR.h = H * scale;
 
 	SDL_Rect SrcR;
 
@@ -117,7 +120,7 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation)
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation, float scale)
 {
 
     if(theTexture == NULL)
@@ -130,8 +133,8 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 
 	DestR.x = X;
 	DestR.y = Y;
-	DestR.w = Src_Rect.w;
-	DestR.h = Src_Rect.h;
+    DestR.w = Src_Rect.w * scale;
+    DestR.h = Src_Rect.h * scale;
 
 
     SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);

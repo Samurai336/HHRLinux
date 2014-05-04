@@ -24,18 +24,19 @@ namespace HHR_Particles
         Size = size;
         duration = totalDuration = ttl;
         orginalY = positon.y;
-        AlphaChange = 256/ttl;
-        Alpha = 256;
-
-
+        AlphaChange = 255/ttl;
+        Alpha = 255;
 
         SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height);
+
+        Position.x -= (width/2);
+        Position.y -= (height/2);
     }
 
     void Particle::ParticleReset()
     {
          duration = totalDuration;
-         Alpha = 256;
+         Alpha = 255;
     }
 
     int Particle::GetCurrentLifeDuration()
@@ -46,6 +47,8 @@ namespace HHR_Particles
     void Particle::SetPositon(const Vector3 &newPositon)
     {
         Position = newPositon;
+        Position.x -= (width/2);
+        Position.y -= (height/2);
     }
 
     void Particle::SetVelocity(const Vector3 &newVelcity)
@@ -60,13 +63,16 @@ namespace HHR_Particles
         rotation += AngularVelocity;
         Alpha -= AlphaChange;
 
-
+        if(Alpha <0)
+        {
+            Alpha = 0;
+        }
     }
 
     void Particle::OnRender(MainRender &theRenderer)
     {
 
-        SDL_SetTextureAlphaMod(unitTexture, Alpha);
+        SDL_SetTextureAlphaMod(unitTexture, Alpha);        
         BaseUnit::OnRender(theRenderer);
     }
 
