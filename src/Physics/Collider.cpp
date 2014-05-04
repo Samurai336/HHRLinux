@@ -99,6 +99,11 @@ namespace HHR_Physics
 
     }
 
+    bool Collider::Check(const Sphere &SP, const BoundingBox &BB)
+    {
+        return Check(BB,SP);
+    }
+
     bool Collider::Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B)
     {
        real ra, rb;
@@ -247,6 +252,11 @@ namespace HHR_Physics
         return Oriented2DBBCheck((OBB2D),(tempBB)) && Oriented2DBBCheck((tempBB),(OBB2D)) ;
     }
 
+    bool Collider::Check(const BoundingBox &BB, const OrientedBoundingBox2D &OBB2D)
+    {
+        return Check(OBB2D,BB);
+    }
+
 
     bool Collider::Check(const OrientedBoundingBox2D &OBB2D, const Sphere &SP)
     {
@@ -257,6 +267,11 @@ namespace HHR_Physics
 
 
         return v.DotProduct(v) <= SP.radious*SP.radious;
+    }
+
+    bool Collider::Check(const Sphere &SP, const OrientedBoundingBox2D &OBB2D)
+    {
+        return Check(OBB2D, SP);
     }
 
     bool Collider::Oriented2DBBCheck(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B)

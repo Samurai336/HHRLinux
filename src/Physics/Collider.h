@@ -40,12 +40,18 @@ namespace HHR_Physics
         public:
             Collider();
             static bool Check(const BoundingBox &A, const BoundingBox &B) ;
-            static bool Check(const Sphere &A, const Sphere &B);
-            static bool Check(const BoundingBox &BB, const Sphere &SP);
+            static bool Check(const Sphere &A, const Sphere &B);            
             static bool Check(const OrientedBoundingBox &A, const OrientedBoundingBox &B) ;
             static bool Check(const OrientedBoundingBox2D &A, const OrientedBoundingBox2D &B) ;
+
             static bool Check(const OrientedBoundingBox2D &OBB2D, const BoundingBox &BB) ;
+            static bool Check(const BoundingBox &BB,const OrientedBoundingBox2D &OBB2D) ;
+
+            static bool Check(const BoundingBox &BB, const Sphere &SP);
+            static bool Check(const Sphere &SP, const BoundingBox &BB);
+
             static bool Check(const OrientedBoundingBox2D &OBB2D, const Sphere &SP) ;
+            static bool Check(const Sphere &SP, const OrientedBoundingBox2D &OBB2D) ;
 
 
         private:
