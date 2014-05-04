@@ -60,13 +60,13 @@ namespace HHR_Particles
         rotation += AngularVelocity;
         Alpha -= AlphaChange;
 
-        SDL_SetTextureAlphaMod(unitTexture, Alpha);
+
     }
 
     void Particle::OnRender(MainRender &theRenderer)
     {
 
-
+        SDL_SetTextureAlphaMod(unitTexture, Alpha);
         BaseUnit::OnRender(theRenderer);
     }
 
