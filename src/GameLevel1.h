@@ -55,6 +55,7 @@ class GameLevel1 : public Level
         BounceCircle Test;
         RotatingBounceSquare Test2;        
         bool Colliding;
+        SpriteAnimation Henry;
 		ScrollingBackGround background;
 		SpriteText AMessage;
 

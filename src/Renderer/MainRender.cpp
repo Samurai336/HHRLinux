@@ -110,8 +110,8 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 
     DestR.w =  W * scale;
     DestR.h =  H * scale;
-    DestR.x = (X-(((W*scale)-W)/2));
-    DestR.y = (Y-(((H*scale)-H)/2)) ;
+    DestR.x = X+((W * scale)/2);
+    DestR.y = Y+((H * scale)/2);
 
 	SDL_Rect SrcR;
 
@@ -141,12 +141,11 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 
 	SDL_Rect DestR;
 
-    DestR.x = X;
-    DestR.y = Y;
+
     DestR.w = Src_Rect.w * scale;
     DestR.h = Src_Rect.h * scale;
-    DestR.x = (X-(((W*scale)-W)/2));
-    DestR.y = (Y-(((H*scale)-H)/2)) ;
+    DestR.x = X+((Src_Rect.w * scale)/2);
+    DestR.y = Y+((Src_Rect.h * scale)/2);
 
 
 

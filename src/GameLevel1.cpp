@@ -89,6 +89,18 @@ bool GameLevel1::LoadLevel()
 
 
 
+    if(Henry.CreateAnimatedSprite("Assets/HenryHudsonHead2.png",4,4, 2500, true))
+    {
+        return false;
+    }
+
+    Henry.SetPosition((WWIDTH/2), (WHEIGHT/2) );
+
+    Henry.SetScale(0.5f);
+
+
+
+
 
 
     return true;
@@ -106,6 +118,7 @@ void GameLevel1::OnLoop()
     Test2.OnLoop();
     CheckCollision();
 	background.UpDate();
+    Henry.OnLoop();
 
 
 
@@ -132,6 +145,8 @@ void GameLevel1::OnRender(MainRender	&theRenderer)
    
     Test.OnRender(theRenderer);
     Test2.OnRender(theRenderer);
+    Henry.OnRender(theRenderer);
+
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
     Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
