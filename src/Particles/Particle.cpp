@@ -21,7 +21,7 @@ namespace HHR_Particles
         rotation = angle;
         AngularVelocity = AngularVelocity;
         LColor = color;
-        Size = size;
+        Scale = size;
         duration = totalDuration = ttl;
         orginalY = positon.y;
         AlphaChange = 255/ttl;
@@ -29,8 +29,8 @@ namespace HHR_Particles
 
         SDL_QueryTexture(unitTexture, NULL, NULL, &width, &height);
 
-        Position.x -= (width/2);
-        Position.y -= (height/2);
+        Position.x += (width/2);
+        Position.y += (height/2);
     }
 
     void Particle::ParticleReset()

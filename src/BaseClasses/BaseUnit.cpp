@@ -36,7 +36,7 @@ BaseUnit::BaseUnit(void)
 	renderOrder = 1;
 	width = 0;
 	height =0;
-    Size = 1.0f;
+    Scale = 1.0f;
 
 }
 
@@ -71,7 +71,7 @@ void BaseUnit::OnLoop()
 void BaseUnit::OnRender(MainRender	&theRenderer)
 {
 
-    theRenderer.Draw(unitTexture, Position.x, Position.y, rotation, Size);
+    theRenderer.Draw(unitTexture, Position.x, Position.y, rotation, Scale);
     //theRenderer.Draw(unitTexture, Position.x, Position.y,Position.x, Position.y,width,height, rotation, Size);
 }
 
@@ -96,6 +96,14 @@ void BaseUnit::SetPosition(const HHR_Physics::Vector3 &newPosition)
     Position = newPosition;
     Position.x -= (width/2);
     Position.y -= (height/2);
+}
 
+void BaseUnit::SetScale(const float newScale)
+{
+    Scale = newScale;
+}
 
+float BaseUnit::GetScale()
+{
+    return Scale;
 }

@@ -11,19 +11,19 @@ namespace HHR_Particles
     {
         Active = false;
         ActiveEmmitting =false;
+        CapHit= false;
     }
 
-    ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap )
+    ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate)
     {
         srand (time(NULL));
-        SetUpEngine(texturesFiles,numTextures,location, ParticleCap);
+        SetUpEngine(texturesFiles,numTextures,location, EmittionVolume, EmitionRate);
     }
 
-    bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap )
+    bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate )
     {
         emetterLocation = location;
 
-        totalParticleCap = ParticleCap;
 
         textures = new SDL_Texture* [numTextures];
 
@@ -41,6 +41,9 @@ namespace HHR_Particles
         Active = false;
         ActiveEmmitting =false;
         textureCount = numTextures;
+        emmitionVolume= EmittionVolume;
+        Rate= EmitionRate;
+        CapHit= false;
 
 
         return false;
@@ -48,17 +51,20 @@ namespace HHR_Particles
 
     void ParticleEngine::OnLoop()
     {
-        if(ActiveEmmitting)
+        if(ActiveEmmitting || Active)
         {
 
             unsigned int totalDead = 0;
 
-            if(particles.size() < totalParticleCap)
+            if(!CapHit)
             {
-                int total = 10;
-                for(int i =0; i < total; i++)
+                if(SDL_GetTicks() > (LastUpDate + Rate))
                 {
-                    particles.push_back(GenerateNewParticle());
+                    LastUpDate = SDL_GetTicks();
+                    for(int i =0; i < emmitionVolume; i++)
+                    {
+                        particles.push_back(GenerateNewParticle());
+                    }
                 }
             }
 
@@ -72,6 +78,7 @@ namespace HHR_Particles
                     ++totalDead;
                     if(Active == true)
                     {
+                       CapHit= true;
                        ResetParticle((*itor));
                     }
                 }
@@ -93,7 +100,7 @@ namespace HHR_Particles
 
     void ParticleEngine::OnRender(MainRender &theRenderer)
     {
-        if(ActiveEmmitting)
+        if(ActiveEmmitting || Active)
         {
             std::list<Particle*>::iterator itor = particles.begin();
 
@@ -116,6 +123,12 @@ namespace HHR_Particles
         //Barfs when I leave it in.
         //delete [] textures ;
 
+
+    }
+
+    void ParticleEngine::SetRate(Uint32 newEmmitionRate)
+    {
+        Rate = newEmmitionRate;
 
     }
 

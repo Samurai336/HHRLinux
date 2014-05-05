@@ -3,6 +3,7 @@
 
 #include "BounceSquare.h"
 #include "Particles/CannonSmokeParticleSystem.h"
+#include "Particles/ChimneySmoke.h"
 
 class BounceCircle : public BounceSquare
 {

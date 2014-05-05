@@ -7,6 +7,7 @@ BounceCircle::BounceCircle()
 
     rotation = 0.0f;
     rotationSpeed = 0.0f;
+    Scale = 0.5f;
 }
 
 bool BounceCircle::Load(char *File)
@@ -19,8 +20,10 @@ bool BounceCircle::Load(char *File)
 
      if(!loadStatus)
      {
-         loadStatus = Smoke.SetUpEngine(ParticleAsset,1,Position,10, 500 );
+         loadStatus = Smoke.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 100, 500);
      }
+
+     Smoke.SetActive(true);
 
      return loadStatus;
 }
@@ -28,6 +31,9 @@ bool BounceCircle::Load(char *File)
 void BounceCircle::OnLoop()
 {
     rotation += rotationSpeed;
+#ifdef DEBUG_MODE
+    printf("Circle location: %f, %f\n", Position.x,Position.y);
+#endif
 
     if(speedX < 0)
     {
@@ -37,6 +43,9 @@ void BounceCircle::OnLoop()
     {
         Smoke.StartCannonSmoke(HHR_Particles::Left, Position, HHR_Physics::Vector3(speedX, speedY, 0.0f));
     }
+
+
+    //Smoke.SetPositon(Position);
 
     Smoke.OnLoop();
 

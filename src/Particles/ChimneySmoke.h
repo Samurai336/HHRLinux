@@ -12,7 +12,8 @@ namespace HHR_Particles
     {
         public:
             ChimneySmoke();
-            ChimneySmoke(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int ParticleCap  );
+            ChimneySmoke(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate  );
+            virtual void OnLoop();
             virtual void ResetParticle(Particle* particleToUpdate);
             void SetPositon(const Vector3 &newEmitterPosition);
             ~ChimneySmoke();

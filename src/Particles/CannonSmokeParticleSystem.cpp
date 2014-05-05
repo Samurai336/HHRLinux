@@ -9,16 +9,16 @@ namespace HHR_Particles
     {
 
     }
-    CannonSmokeParticleSystem::CannonSmokeParticleSystem(const char *texturesFiles[], unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap, int SetDuration)
+    CannonSmokeParticleSystem::CannonSmokeParticleSystem(const char *texturesFiles[], unsigned int numTextures, const Vector3 &location,  unsigned int EmittionVolume, unsigned int EmitionRate , int SetDuration)
     {
-        SetUpEngine(texturesFiles,numTextures,location,ParticleCap, SetDuration);
+        SetUpEngine(texturesFiles,numTextures,location, EmittionVolume, EmitionRate,SetDuration);
     }
 
-    bool CannonSmokeParticleSystem::SetUpEngine(const char *texturesFiles[], unsigned int numTextures, const Vector3 &location, unsigned int ParticleCap, int SetDuration)
+    bool CannonSmokeParticleSystem::SetUpEngine(const char *texturesFiles[], unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate , int SetDuration)
     {
         srand (time(NULL));
 
-        if(ParticleEngine::SetUpEngine(texturesFiles,numTextures,location,ParticleCap) == true)
+        if(ParticleEngine::SetUpEngine(texturesFiles,numTextures,location,EmittionVolume, EmitionRate) == true)
         {
             return true;
         }
@@ -37,6 +37,10 @@ namespace HHR_Particles
 
     void CannonSmokeParticleSystem::StartCannonSmoke(const HorizontalDirection newDirection, const Vector3 &newPosition, const Vector3 &currentEmitterSpeed)
     {
+
+#ifdef DEBUG_MODE
+        printf("Emitter location: %f, %f\n", emetterLocation.x,emetterLocation.y);
+#endif
         emitterSpeed = currentEmitterSpeed;
         emetterLocation = newPosition;
         smokeDirection = newDirection;

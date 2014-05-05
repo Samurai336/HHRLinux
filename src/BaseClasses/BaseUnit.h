@@ -56,6 +56,10 @@ class BaseUnit
 
             void  SetPosition(const HHR_Physics::Vector3 &newPosition);
 
+            void  SetScale(const float newScale);
+
+            float GetScale();
+
             void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
 
 			int GetWidth(){return width;}
@@ -76,7 +80,7 @@ class BaseUnit
 
 			double rotation;
 
-            float Size;
+            float Scale;
 
 			int renderOrder;
 

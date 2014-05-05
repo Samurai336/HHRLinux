@@ -72,17 +72,24 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation, fl
 
 	SDL_Rect DestR;
 
-	DestR.x = X;
-	DestR.y = Y;
+    DestR.x = X ;
+    DestR.y = Y;
 
 
 	//should render at default size however will it then
 	//tank preformance?
 	SDL_QueryTexture(theTexture, NULL,NULL, &DestR.w, &DestR.h);
 
+    SDL_Rect offSetDiff;
+
+    offSetDiff.x =  (DestR.w * scale) - DestR.w;
+    offSetDiff.y =  (DestR.h * scale) - DestR.h;
+
     DestR.w *= scale;
     DestR.h *= scale;
 
+    DestR.x -= (offSetDiff.x/2);
+    DestR.y -= (offSetDiff.y/2);
 
 	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
@@ -101,10 +108,10 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int
 
 	SDL_Rect DestR;
 
-	DestR.x = X;
-	DestR.y = Y;
-    DestR.w = W * scale;
-    DestR.h = H * scale;
+    DestR.w =  W * scale;
+    DestR.h =  H * scale;
+    DestR.x = (X-(((W*scale)-W)/2));
+    DestR.y = (Y-(((H*scale)-H)/2)) ;
 
 	SDL_Rect SrcR;
 
@@ -129,12 +136,18 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 	}
 
 
+    int W,H;
+    SDL_QueryTexture(theTexture, NULL,NULL, &W, &H);
+
 	SDL_Rect DestR;
 
-	DestR.x = X;
-	DestR.y = Y;
+    DestR.x = X;
+    DestR.y = Y;
     DestR.w = Src_Rect.w * scale;
     DestR.h = Src_Rect.h * scale;
+    DestR.x = (X-(((W*scale)-W)/2));
+    DestR.y = (Y-(((H*scale)-H)/2)) ;
+
 
 
     SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);

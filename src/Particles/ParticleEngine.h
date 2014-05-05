@@ -19,12 +19,13 @@ namespace HHR_Particles
         public:
             ParticleEngine();
             //ParticleEngine(List<Texture2D> textures, Vector2 location, GraphicsDeviceManager graphics)
-            ParticleEngine(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int ParticleCap );
-            bool SetUpEngine(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int ParticleCap );
+            ParticleEngine(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate );
+            bool SetUpEngine(const char* texturesFiles[], unsigned int textureCount, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate);
             virtual void OnLoop();
             virtual void ResetParticle(Particle* particleToUpdate);
             virtual void OnRender(MainRender &theRenderer);
             virtual void OnCleanup();
+             void SetRate(Uint32);
             bool GetActiveStatus() const;
             void SetActive(const bool activeStatus);
 
@@ -35,6 +36,10 @@ namespace HHR_Particles
         protected:
             bool Active;
             bool ActiveEmmitting;
+            bool CapHit;
+            uint32_t LastUpDate;
+            uint32_t Rate;
+            int emmitionVolume;
             virtual Particle* GenerateNewParticle();
             Vector3 emetterLocation;
             unsigned int textureCount;
