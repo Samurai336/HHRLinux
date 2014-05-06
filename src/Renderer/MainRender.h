@@ -23,11 +23,47 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <queue>
+#include <vector>
+#include <functional>
 
 #include "../Define.h"
 
 #include "FrameRateController.h"
 
+struct RenderTextureInfo
+{
+    SDL_Texture* theTexture;
+    SDL_Rect Src_R;
+    SDL_Rect Dest_R;
+    double Rotation;
+    unsigned int RenderPriority;
+};
+
+struct RenderGeometryInfo
+{
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    float radious;
+    SDL_Color RenderColor;
+    unsigned int RenderPriority;
+    bool isLine;
+};
+
+
+class RenderTextureInfoCompare
+{
+public:
+    bool operator() (const RenderTextureInfo &A, const RenderTextureInfo &B) const;
+};
+
+class RenderGeometryInfoCompare
+{
+public:
+    bool operator() (const RenderGeometryInfo &A, const RenderGeometryInfo &B) const;
+};
 
 
 class MainRender
@@ -45,9 +81,9 @@ class MainRender
 
 		bool InitRenderer(SDL_Window*);
 
-        bool Draw(SDL_Texture* theTexture, int X, int Y, double rotation = 0.0, float scale = 1.0);
-        bool Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation = 0.0, float scale = 1.0);
-        bool Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation = 0.0 , float scale = 1.0);
+        bool Draw( SDL_Texture* theTexture, int X, int Y, double rotation = 0.0, float scale = 1.0, unsigned int RenderPriority = 15);
+        bool Draw( SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation = 0.0, float scale = 1.0, unsigned int RenderPriority = 15);
+        bool Draw( SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation = 0.0 , float scale = 1.0, unsigned int RenderPriority = 15);
         bool DrawLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor);
         bool DrawCircle(float X, float Y, float radious, SDL_Color &RenderColor);
 
@@ -65,12 +101,15 @@ class MainRender
 		//static SDL_Texture *OnLoad(char *filePath, SDL_Renderer *MainRenderer);
 
 
-	private:
-		SDL_Renderer*       Renderer;
+	private:        
+        bool RenderLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor);
+        bool RenderCircle(float X, float Y, float radious, SDL_Color &RenderColor);
 
-		 
-
-
-
+        std::priority_queue <RenderGeometryInfo,std::vector<RenderGeometryInfo>, RenderGeometryInfoCompare> GemoetryRenderQueue;
+        std::priority_queue <RenderTextureInfo,std::vector<RenderTextureInfo>, RenderTextureInfoCompare> TextureRenderQueue;
+        SDL_Renderer*       Renderer;
 };
+
+
+
 

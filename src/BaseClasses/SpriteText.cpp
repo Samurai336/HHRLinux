@@ -19,6 +19,10 @@ SpriteText::SpriteText() :theText(""), textSprite(NULL), fontFile(NULL)
 
     currentFontFile= "";
 
+    renderOrder = 500;
+
+    rotation = 0.0;
+
 
     //ctor
 }
@@ -135,7 +139,7 @@ void SpriteText::OnRender(MainRender &theRenderer)
         needsUpdate = false;
     }
 
-    theRenderer.Draw(textSprite, TextDisplayRect.x-(width/2), TextDisplayRect.y - (height/ 2 ));
+    theRenderer.Draw(textSprite, TextDisplayRect.x-(width/2), TextDisplayRect.y - (height/ 2 ),rotation, 1.0, renderOrder);
 
 }
 

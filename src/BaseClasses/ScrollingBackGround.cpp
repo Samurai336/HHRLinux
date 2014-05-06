@@ -183,7 +183,7 @@ void ScrollingBackGround::Render(MainRender	&theRenderer)
 	{
 		if(((BackGroundRects[i].x > -WWIDTH) && (BackGroundRects[i].x < WWIDTH)) && ((BackGroundRects[i].y > -WHEIGHT)&&(BackGroundRects[i].y < WHEIGHT)) )
 		{
-			theRenderer.Draw(BackGroundTextures[i],BackGroundRects[i].x,BackGroundRects[i].y);
+            theRenderer.Draw(BackGroundTextures[i],BackGroundRects[i].x,BackGroundRects[i].y);
 		}
 	}
 }

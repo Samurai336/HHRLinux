@@ -23,6 +23,7 @@ class SpriteText
         void setColor(SDL_Color);
         bool setFont(char* fontPath);
         void setFontSize(unsigned int);
+        void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; }
         virtual void OnCleanup();
 
         virtual ~SpriteText();
@@ -38,6 +39,9 @@ class SpriteText
         std::string currentFontFile;
         unsigned int textFontSize;
         std::string  theText;
+        int renderOrder;
+        double rotation;
+
 
 
     private:

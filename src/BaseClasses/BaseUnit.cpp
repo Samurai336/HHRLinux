@@ -71,7 +71,7 @@ void BaseUnit::OnLoop()
 void BaseUnit::OnRender(MainRender	&theRenderer)
 {
 
-    theRenderer.Draw(unitTexture, Position.x, Position.y, rotation, Scale);
+    theRenderer.Draw(unitTexture, Position.x, Position.y ,rotation, Scale, renderOrder);
     //theRenderer.Draw(unitTexture, Position.x, Position.y,Position.x, Position.y,width,height, rotation, Size);
 }
 

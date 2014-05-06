@@ -50,7 +50,7 @@ class BaseUnit
 
 			virtual void OnCleanup();
 
-            virtual HHR_Physics::CollisionObject* GetCollisionObject() const {return NULL;};
+            virtual HHR_Physics::CollisionObject* GetCollisionObject() const {return NULL;}
 
             void  SetPosition(const float MoveX, const float MoveY);
 
@@ -60,7 +60,7 @@ class BaseUnit
 
             float GetScale();
 
-            void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; };
+            void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; }
 
 			int GetWidth(){return width;}
 

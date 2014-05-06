@@ -167,7 +167,7 @@ void SpriteAnimation::SetPosition(float MoveX, float MoveY)
 
 void SpriteAnimation::OnRender(MainRender	&theRenderer)
 {
-    theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect,rotation,Scale);
+    theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect,rotation,Scale,renderOrder);
 }
 
 

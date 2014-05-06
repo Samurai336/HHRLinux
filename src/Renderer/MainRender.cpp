@@ -63,71 +63,100 @@ bool MainRender::InitRenderer(SDL_Window* windowToRenderTo)
 	return true;
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation, float scale )
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, double rotation, float scale, unsigned int RenderPriority )
 {
 	if(theTexture == NULL)
 	{
 		return false;
 	}
 
-	SDL_Rect DestR;
+    RenderTextureInfo itemForRender;
 
-    DestR.x = X ;
-    DestR.y = Y;
+    itemForRender.theTexture = theTexture;
+    itemForRender.Rotation = rotation;
+    itemForRender.RenderPriority = RenderPriority;
+
+    //SDL_Rect DestR;
+
+    itemForRender.Dest_R.x = X ;
+    itemForRender.Dest_R.y = Y;
 
 
 	//should render at default size however will it then
 	//tank preformance?
-	SDL_QueryTexture(theTexture, NULL,NULL, &DestR.w, &DestR.h);
+    SDL_QueryTexture(theTexture, NULL,NULL, &itemForRender.Dest_R.w, &itemForRender.Dest_R.h);
+
+    itemForRender.Src_R.x = itemForRender.Src_R.y = 0;
+    itemForRender.Src_R.h = itemForRender.Dest_R.h;
+    itemForRender.Src_R.w = itemForRender.Dest_R.w;
+
 
     SDL_Rect offSetDiff;
 
-    offSetDiff.x =  (DestR.w * scale) - DestR.w;
-    offSetDiff.y =  (DestR.h * scale) - DestR.h;
+    offSetDiff.x =  (itemForRender.Dest_R.w * scale) - itemForRender.Dest_R.w;
+    offSetDiff.y =  (itemForRender.Dest_R.h * scale) - itemForRender.Dest_R.h;
 
-    DestR.w *= scale;
-    DestR.h *= scale;
+    itemForRender.Dest_R.w *= scale;
+    itemForRender.Dest_R.h *= scale;
 
-    DestR.x -= (offSetDiff.x/2);
-    DestR.y -= (offSetDiff.y/2);
+    itemForRender.Dest_R.x -= (offSetDiff.x/2);
+    itemForRender.Dest_R.y -= (offSetDiff.y/2);
 
-	SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
+
+
+
+    TextureRenderQueue.push(itemForRender);
+
+
+
+   //itemForRender.Src_R;
+
+
+    //SDL_RenderCopyEx(this->Renderer, theTexture, NULL, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
 
 	return true;
 
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation, float scale )
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, int X2, int Y2, int W, int H, double rotation, float scale , unsigned int RenderPriority)
 {
 	if(theTexture == NULL)
 	{
 		return false;
 	}
 
+    RenderTextureInfo itemForRender;
 
-	SDL_Rect DestR;
+    itemForRender.theTexture = theTexture;
+    itemForRender.Rotation = rotation;
+    itemForRender.RenderPriority = RenderPriority;
 
-    DestR.w =  W * scale;
-    DestR.h =  H * scale;
-    DestR.x = X+((W * scale)/2);
-    DestR.y = Y+((H * scale)/2);
 
-	SDL_Rect SrcR;
+    //SDL_Rect DestR;
 
-	SrcR.x = X2;
-	SrcR.y = Y2;
-	SrcR.w = W;
-	SrcR.h = H;
+    itemForRender.Dest_R.w =  W * scale;
+    itemForRender.Dest_R.h =  H * scale;
+    itemForRender.Dest_R.x = X+((W * scale)/2);
+    itemForRender.Dest_R.y = Y+((H * scale)/2);
 
-	SDL_RenderCopyEx(this->Renderer, theTexture, &SrcR, &DestR, rotation, NULL, SDL_FLIP_NONE);
+    //SDL_Rect SrcR;
+
+    itemForRender.Src_R.x = X2;
+    itemForRender.Src_R.y = Y2;
+    itemForRender.Src_R.w = W;
+    itemForRender.Src_R.h = H;
+
+
+    TextureRenderQueue.push(itemForRender);
+    //SDL_RenderCopyEx(this->Renderer, theTexture, &SrcR, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
 
 	return true;
 
 }
 
-bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation, float scale)
+bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect, double rotation, float scale, unsigned int RenderPriority)
 {
 
     if(theTexture == NULL)
@@ -135,84 +164,60 @@ bool MainRender::Draw(SDL_Texture* theTexture, int X, int Y, SDL_Rect &Src_Rect,
 		return false;
 	}
 
+    RenderTextureInfo itemForRender;
+
+    itemForRender.theTexture = theTexture;
+    itemForRender.Rotation = rotation;
+    itemForRender.RenderPriority = RenderPriority;
+
+    itemForRender.Src_R = Src_Rect;
 
     int W,H;
     SDL_QueryTexture(theTexture, NULL,NULL, &W, &H);
 
-	SDL_Rect DestR;
+    //SDL_Rect DestR;
+
+    itemForRender.Dest_R.w = Src_Rect.w * scale;
+    itemForRender.Dest_R.h = Src_Rect.h * scale;
+    itemForRender.Dest_R.x = X+((Src_Rect.w * scale)/2);
+    itemForRender.Dest_R.y = Y+((Src_Rect.h * scale)/2);
+
+    TextureRenderQueue.push(itemForRender);
 
 
-    DestR.w = Src_Rect.w * scale;
-    DestR.h = Src_Rect.h * scale;
-    DestR.x = X+((Src_Rect.w * scale)/2);
-    DestR.y = Y+((Src_Rect.h * scale)/2);
 
-
-
-    SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);
+    //SDL_RenderCopyEx(this->Renderer, theTexture, &Src_Rect, &DestR, rotation, NULL, SDL_FLIP_NONE);
 
     return true;
 }
 
 bool MainRender::DrawLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor)
-{
-    SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+{    
+    RenderGeometryInfo newLineGeo;
+    newLineGeo.x1 = x1;
+    newLineGeo.y1 = y1;
+    newLineGeo.x2 = x2;
+    newLineGeo.y2 = y2;
+    newLineGeo.RenderPriority =  5;
+    newLineGeo.RenderColor = RenderColor;
+    newLineGeo.isLine = true;
 
-    SDL_RenderDrawLine(this->Renderer, x1, y1, x2, y2);
-
-    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+    GemoetryRenderQueue.push(newLineGeo);
 
 }
 
 bool MainRender::DrawCircle(float X, float Y, float radious,SDL_Color &RenderColor)
 {
 
-     SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+    RenderGeometryInfo newLineGeo;
+    newLineGeo.x1 = X;
+    newLineGeo.y1 = Y;
+    newLineGeo.radious= radious;
+    newLineGeo.RenderPriority =  5;
+    newLineGeo.RenderColor = RenderColor;
+    newLineGeo.isLine = false;
 
-
-
-    float error = (float) - radious;
-    float x = radious - 0.5f;
-    float y = 0.5f;
-    float cx = X - 0.5f;
-    float cy = Y - 0.5f;
-
-    while (x >= y)
-    {
-        SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy+y));
-        SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy+x));
-
-        if(x != 0)
-        {
-            SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy+y));
-            SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy-x));
-        }
-
-        if(y != 0)
-        {
-            SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy-y));
-            SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy+x));
-        }
-
-        if (x != 0 && y != 0)
-        {
-            SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy-y));
-            SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy-x));
-        }
-
-        error += y;
-        y++;
-        error += y;
-
-        if(error >= 0)
-        {
-            --x;
-            error -= x;
-            error -= x;
-        }
-    }
-
-    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+    GemoetryRenderQueue.push(newLineGeo);
 }
 
 
@@ -235,6 +240,30 @@ void MainRender::CreateDisplayRect()
 void MainRender::RenderDisplay()
 {
 
+    RenderTextureInfo renderObject;
+    while(!TextureRenderQueue.empty())
+    {
+        renderObject = TextureRenderQueue.top();
+
+        SDL_RenderCopyEx(this->Renderer, renderObject.theTexture, &renderObject.Src_R, &renderObject.Dest_R, renderObject.Rotation, NULL, SDL_FLIP_NONE);
+
+        TextureRenderQueue.pop();
+    }
+
+    RenderGeometryInfo renderGObject;
+    while(!GemoetryRenderQueue.empty())
+    {
+        renderGObject = GemoetryRenderQueue.top();
+        if(renderGObject.isLine)
+        {
+            RenderLine(renderGObject.x1,renderGObject.y1, renderGObject.x2, renderGObject.y2, renderGObject.RenderColor );
+        }
+        else
+        {
+            RenderCircle(renderGObject.x1,renderGObject.y1,renderGObject.radious,renderGObject.RenderColor);
+        }
+        GemoetryRenderQueue.pop();
+    }
 	//rendering can happen here
 	SDL_RenderPresent(Renderer);
     SDL_RenderClear(Renderer);
@@ -246,7 +275,68 @@ void MainRender::RenderDisplay()
 
 void MainRender::Clean()
 {
-	SDL_DestroyRenderer(this->Renderer);
+    SDL_DestroyRenderer(this->Renderer);
+}
+
+
+
+
+
+bool MainRender::RenderLine(int x1, int y1, int x2, int y2, SDL_Color &RenderColor)
+{
+    SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+
+    SDL_RenderDrawLine(this->Renderer, x1, y1, x2, y2);
+
+    SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+}
+
+bool MainRender::RenderCircle(float X, float Y, float radious, SDL_Color &RenderColor)
+{
+    SDL_SetRenderDrawColor(Renderer, RenderColor.r,RenderColor.g,RenderColor.b, RenderColor.a);
+
+   float error = (float) - radious;
+   float x = radious - 0.5f;
+   float y = 0.5f;
+   float cx = X - 0.5f;
+   float cy = Y - 0.5f;
+
+   while (x >= y)
+   {
+       SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy+y));
+       SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy+x));
+
+       if(x != 0)
+       {
+           SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy+y));
+           SDL_RenderDrawPoint(Renderer,(int)(cx + y ), (int) (cy-x));
+       }
+
+       if(y != 0)
+       {
+           SDL_RenderDrawPoint(Renderer,(int)(cx + x ), (int) (cy-y));
+           SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy+x));
+       }
+
+       if (x != 0 && y != 0)
+       {
+           SDL_RenderDrawPoint(Renderer,(int)(cx - x ), (int) (cy-y));
+           SDL_RenderDrawPoint(Renderer,(int)(cx - y ), (int) (cy-x));
+       }
+
+       error += y;
+       y++;
+       error += y;
+
+       if(error >= 0)
+       {
+           --x;
+           error -= x;
+           error -= x;
+       }
+   }
+
+   SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
 }
 
 
@@ -261,7 +351,13 @@ SDL_Texture* MainRender::CreateTextureFromSurface(SDL_Surface* surface)
 
 }
 
+bool RenderTextureInfoCompare::operator()(const RenderTextureInfo &A, const RenderTextureInfo &B) const
+{
+    return (A.RenderPriority>B.RenderPriority);
+}
 
 
-
-
+bool RenderGeometryInfoCompare::operator()(const RenderGeometryInfo &A, const RenderGeometryInfo &B) const
+{
+    return (A.RenderPriority<B.RenderPriority);
+}

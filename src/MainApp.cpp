@@ -117,7 +117,7 @@ bool MainApp::OnInit()
         return false;
     }
 
-	 CurrentLevel = new GameLevel1();
+     CurrentLevel = new GameTestLevel();
 
 	 if(CurrentLevel->LoadLevel() == false)
      {
