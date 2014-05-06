@@ -64,6 +64,8 @@ file(GLOB physics_files src/Physics/*.h src/Physics/*.cpp)
 
 file(GLOB particle_files src/Particles/*.h src/Particles/*.cpp)
 
+file(GLOB audio_files src/Audio/*.h src/Audio/*.cpp)
+
 
 
 SOURCE_GROUP(Renderer FILES ${renderer_files})
@@ -75,6 +77,8 @@ SOURCE_GROUP(BaseClasses FILES ${baseClasses_files})
 SOURCE_GROUP(Physics FILES ${physics_files})
 
 SOURCE_GROUP(Particles FILES ${particle_files})
+
+SOURCE_GROUP(Audio FILES ${audio_files})
 
 
 
@@ -92,6 +96,7 @@ if(WIN32)
         ${renderer_files}
         ${physics_files}
         ${particle_files}
+        ${audio_files}
 	)
 
         if(CMAKE_BUILD_TYPE MATCHES DEBUG)
@@ -106,6 +111,7 @@ else ()
         ${renderer_files}
         ${physics_files}
         ${particle_files}
+        ${audio_files}
 	)
 
         set(CMAKE_CXX_FLAGS "-g -Wno-write-strings")
@@ -138,6 +144,12 @@ if (Option_SDL_Dev)
 		message (FATAL_ERROR "SDL_ttf not found!")
 	endif (NOT SDL2TTF_FOUND)
 
+        find_package(SDL2_mixer)
+        if (NOT SDL2MIXER_FOUND)
+                message (FATAL_ERROR "SDL_mixer not found!")
+        endif (NOT SDL2MIXER_FOUND)
+
+
 	include_directories(
 		${SDL2_INCLUDE_DIR}
 		${INCLUDE_DIRECTORIES}
@@ -147,6 +159,7 @@ if (Option_SDL_Dev)
 		${SDL2MAIN_LIBRARY}
 		${SDL2IMAGE_LIBRARY}
 		${SDL2TTF_LIBRARY}
+                ${SDL2MIXER_LIBRARY}
 		${TARGET_LINK_LIBRARIES}
 		)
 

@@ -29,6 +29,7 @@
 
 
 
+
 class BounceSquare :
 	public BaseUnit
 {
@@ -53,6 +54,7 @@ class BounceSquare :
         virtual void UpdateCollisionObj();
         float speedX, speedY;
         HHR_Physics::BoundingBox BBCollisionObject;
+
 
 
 

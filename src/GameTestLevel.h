@@ -31,6 +31,7 @@
 #include "BaseClasses/ScrollingBackGround.h"
 #include "BaseClasses/SpriteText.h"
 #include "BounceCircle.h"
+#include "Audio/MusicSound.h"
 
 
 
@@ -58,6 +59,7 @@ class GameTestLevel : public Level
         SpriteAnimation Henry;
 		ScrollingBackGround background;
 		SpriteText AMessage;
+        MusicSound BackGroundMusic;
 
 };
 

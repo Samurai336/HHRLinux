@@ -102,6 +102,14 @@ bool GameTestLevel::LoadLevel()
     Henry.setRenderOrder(50);
 
 
+    if(BackGroundMusic.Load("Assets/Audio/music/spaceBkd.ogg"))
+    {
+        return false;
+    }
+
+    BackGroundMusic.Play();
+
+
 
 
 

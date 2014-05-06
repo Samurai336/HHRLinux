@@ -31,9 +31,7 @@ bool BounceCircle::Load(char *File)
 void BounceCircle::OnLoop()
 {
     rotation += rotationSpeed;
-#ifdef DEBUG_MODE
-    printf("Circle location: %f, %f\n", Position.x,Position.y);
-#endif
+
 
     if(speedX < 0)
     {

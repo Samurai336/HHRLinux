@@ -19,6 +19,8 @@ bool RotatingBounceSquare::Load(char *File)
       //HHR_Physics::Vector3 vRotation(0.0f, 0.0f, rotation);
       orientedCollisionBox.SetUpBox(Position, width, height,  rotation);
 
+
+
       return loadStatus;
 }
 

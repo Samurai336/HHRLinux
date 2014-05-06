@@ -117,6 +117,12 @@ bool MainApp::OnInit()
         return false;
     }
 
+    //initalize our audio interface
+     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) <0)
+     {
+         return false;
+     }
+
      CurrentLevel = new GameTestLevel();
 
 	 if(CurrentLevel->LoadLevel() == false)
@@ -247,6 +253,8 @@ void MainApp::OnCleanup()
 	delete CurrentLevel;
 
     TTF_Quit();
+
+    Mix_CloseAudio();
 
     SDL_Quit();
 }

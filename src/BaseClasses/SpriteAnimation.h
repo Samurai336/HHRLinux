@@ -26,6 +26,7 @@
 
 #include "BaseUnit.h"
 
+
 class SpriteAnimation: public BaseUnit
 {
     public:
@@ -54,7 +55,7 @@ class SpriteAnimation: public BaseUnit
         uint32_t Rate;
         unsigned int currrentRow;
         unsigned int currentColumn;
-        bool loop;
+        bool loop;        
         SDL_Rect Sprite_Rect;
 
 

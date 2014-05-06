@@ -38,9 +38,7 @@ namespace HHR_Particles
     void CannonSmokeParticleSystem::StartCannonSmoke(const HorizontalDirection newDirection, const Vector3 &newPosition, const Vector3 &currentEmitterSpeed)
     {
 
-#ifdef DEBUG_MODE
-        printf("Emitter location: %f, %f\n", emetterLocation.x,emetterLocation.y);
-#endif
+
         emitterSpeed = currentEmitterSpeed;
         emetterLocation = newPosition;
         smokeDirection = newDirection;

@@ -84,6 +84,8 @@ bool SpriteAnimation::CreateAnimatedSprite(char* File, unsigned int Columns, uns
         return loadStatus;
     }
 
+
+
     return loadStatus;
 
 
@@ -141,10 +143,13 @@ void SpriteAnimation::OnLoop()
             if(currentColumn >= numberOfColumns)
             {
                 currentColumn = 1;
+
             }
             else
             {
                 currentColumn++;
+
+
             }
         }
         else
@@ -152,6 +157,7 @@ void SpriteAnimation::OnLoop()
             if(currentColumn != numberOfColumns)
             {
                 currentColumn++;
+
             }
         }
     }
