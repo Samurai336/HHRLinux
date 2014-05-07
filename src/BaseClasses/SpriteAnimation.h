@@ -40,7 +40,8 @@ class SpriteAnimation: public BaseUnit
         void OnLoop();
 		void OnRender(MainRender	&theRenderer);
 		void OnCleanup();
-		void  SetPosition(float MoveX, float MoveY);
+        void  SetPosition(float MoveX, float MoveY);
+        void  SetPosition(const HHR_Physics::Vector3 newPosition);
 
 
         virtual ~SpriteAnimation();

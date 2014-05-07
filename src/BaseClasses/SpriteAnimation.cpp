@@ -171,6 +171,12 @@ void SpriteAnimation::SetPosition(float MoveX, float MoveY)
     Position.y  = MoveY - (Sprite_Rect.h/2);
 }
 
+void SpriteAnimation::SetPosition(const HHR_Physics::Vector3 newPosition)
+{
+    Position.x  = newPosition.x - (Sprite_Rect.w/2);
+    Position.y  = newPosition.y - (Sprite_Rect.h/2);
+}
+
 void SpriteAnimation::OnRender(MainRender	&theRenderer)
 {
     theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect,rotation,Scale,renderOrder);
