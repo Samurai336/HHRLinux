@@ -40,8 +40,10 @@ class SpriteAnimation: public BaseUnit
         void OnLoop();
 		void OnRender(MainRender	&theRenderer);
 		void OnCleanup();
-        void  SetPosition(float MoveX, float MoveY);
-        void  SetPosition(const HHR_Physics::Vector3 newPosition);
+        void StartAnimating();
+        void StopAnimating();
+        void SetPosition(float MoveX, float MoveY);
+        void SetPosition(const HHR_Physics::Vector3 newPosition);
 
 
         virtual ~SpriteAnimation();
@@ -57,6 +59,7 @@ class SpriteAnimation: public BaseUnit
         unsigned int currrentRow;
         unsigned int currentColumn;
         bool loop;        
+        bool AnimationPlaying;
         SDL_Rect Sprite_Rect;
 
 

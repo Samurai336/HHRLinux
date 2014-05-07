@@ -107,6 +107,16 @@ bool GameTestLevel::LoadLevel()
         return false;
     }
 
+    if(MainPlayer.SetUpHHRPlayer("Assets/Ship2.png",4,4,50,true))
+    {
+        return false;
+    }
+
+    MainPlayer.setRenderOrder(55);
+    MainPlayer.StartAnimating();
+    MainPlayer.SetPosition((WWIDTH/2), (WHEIGHT/2) );
+    MainPlayer.SetScale(0.45f);
+
     BackGroundMusic.Play();
 
 
@@ -121,6 +131,8 @@ void GameTestLevel::OnEvent(SDL_Event* Event)
 {
     Events::OnEvent(Event);
 
+    MainPlayer.OnEvent(Event);
+
 }
 void GameTestLevel::OnLoop()
 {
@@ -130,6 +142,7 @@ void GameTestLevel::OnLoop()
     CheckCollision();
 	background.UpDate();
     Henry.OnLoop();
+    MainPlayer.OnLoop();
 
 
 
@@ -157,6 +170,7 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
     Test.OnRender(theRenderer);
     Test2.OnRender(theRenderer);
     Henry.OnRender(theRenderer);
+    MainPlayer.OnRender(theRenderer);
 
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
@@ -172,6 +186,7 @@ void GameTestLevel::OnCleanup()
 	background.Cleanup();
     Test.OnCleanup();
     Test2.OnCleanup();
+    MainPlayer.OnCleanup();
     
     AMessage.OnCleanup();
 }

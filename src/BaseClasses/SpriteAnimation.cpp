@@ -40,6 +40,7 @@ SpriteAnimation::SpriteAnimation(void)
     currrentRow = 1;
     currentColumn = 1;
     loop = false;
+    AnimationPlaying= false;
 
 
     Sprite_Rect.x = Sprite_Rect.y = Sprite_Rect.h = Sprite_Rect.w = 0;
@@ -128,36 +129,39 @@ void SpriteAnimation::OnLoop()
 {
 
 
-
-    if(SDL_GetTicks() > (LastUpDate + Rate))
+    if(AnimationPlaying)
     {
-        LastUpDate = SDL_GetTicks();
-
-        Sprite_Rect.x = (currentColumn-1) * Sprite_Rect.w;
-        Sprite_Rect.y = (currrentRow-1) * Sprite_Rect.h;
-
-        printf("Sprite Update!\n");
-
-        if(loop)
+        if(SDL_GetTicks() > (LastUpDate + Rate))
         {
-            if(currentColumn >= numberOfColumns)
-            {
-                currentColumn = 1;
+            LastUpDate = SDL_GetTicks();
 
+            Sprite_Rect.x = (currentColumn-1) * Sprite_Rect.w;
+            Sprite_Rect.y = (currrentRow-1) * Sprite_Rect.h;
+
+            if(loop)
+            {
+                if(currentColumn >= numberOfColumns)
+                {
+                    currentColumn = 1;
+
+                }
+                else
+                {
+                    currentColumn++;
+
+
+                }
             }
             else
             {
-                currentColumn++;
-
-
-            }
-        }
-        else
-        {
-            if(currentColumn != numberOfColumns)
-            {
-                currentColumn++;
-
+                if(currentColumn != numberOfColumns)
+                {
+                    currentColumn++;
+                }
+                else
+                {
+                    AnimationPlaying = false;
+                }
             }
         }
     }
@@ -189,6 +193,16 @@ void SpriteAnimation::OnCleanup()
 
     BaseUnit::OnCleanup();
 
+}
+
+void SpriteAnimation::StartAnimating()
+{
+    AnimationPlaying = true;
+}
+
+void SpriteAnimation::StopAnimating()
+{
+    AnimationPlaying = false;
 }
 
 
