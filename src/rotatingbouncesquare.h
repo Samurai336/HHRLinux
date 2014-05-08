@@ -3,7 +3,7 @@
 
 
 #include "BounceSquare.h"
-#include "Physics/Sphere.h"
+#include "Physics/CollisionObjects.h"
 
 class RotatingBounceSquare : public BounceSquare
 {

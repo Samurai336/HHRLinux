@@ -33,6 +33,7 @@
 #include "BounceCircle.h"
 #include "Audio/MusicSound.h"
 #include "HHR_Player.h"
+#include "Physics/Collider.h"
 
 
 

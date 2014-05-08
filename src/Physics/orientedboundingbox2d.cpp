@@ -1,4 +1,4 @@
-#include "orientedboundingbox2d.h"
+#include "CollisionObjects.h"
 
 
 namespace HHR_Physics
