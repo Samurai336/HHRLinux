@@ -29,7 +29,7 @@
 #include <SDL2/SDL.h>
 #include "../Renderer/MainRender.h"
 #include "../Physics/Vector3.h"
-#include "../Physics/collisionobject.h"
+#include "../Physics/CollisionObjects.h"
 
 class MainRender;
 

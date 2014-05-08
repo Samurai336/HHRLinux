@@ -4,11 +4,7 @@
 
 namespace HHR_Physics
 {
-    class CollisionObject
-    {
-    public:
-        CollisionObject(void);
-    };
+
 }
 
 

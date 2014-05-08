@@ -20,7 +20,7 @@
 **********************************************************************************/
 
 
-#include "BoundingBox.h"
+#include "CollisionObjects.h"
 
 
 namespace HHR_Physics

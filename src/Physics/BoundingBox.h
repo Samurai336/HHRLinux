@@ -22,47 +22,8 @@
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
 
-#include "Vector3.h"
-#include "collisionobject.h"
-#include "../Renderer/MainRender.h"
-
-namespace HHR_Physics
-{
-
-
-    class BoundingBox: public CollisionObject
-    {
-
-        friend class Collider;
-
-        public:
-            BoundingBox(){}
-            BoundingBox(Vector3 Pos, Vector3 Ext):
-            position(Pos), extension(Ext) {}
-
-            void SetUpBB(Vector3 &Pos, Vector3 &Ext);
-
-            void SetSize(Vector3 &newSize);
-
-            real Mininmum(const XYZ i) const;
-
-            real Maximum(const XYZ i) const;
-
-            void setPostion(Vector3 &NewPositon);
-
-            void OnRender(MainRender	&theRenderer, bool isColliding = false);
 
 
 
-            ~BoundingBox();
-
-
-        protected:
-            Vector3 position;
-            Vector3 extension;
-        private:
-    };
-
-}
 
 #endif // BOUNDINGBOX_H

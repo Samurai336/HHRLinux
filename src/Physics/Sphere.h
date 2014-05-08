@@ -29,27 +29,6 @@
 
 namespace HHR_Physics
 {
-    class Sphere: public CollisionObject
-    {
-        public:
-            Vector3 position;
-            real radious;
 
-        public:
-            Sphere(){}
-            Sphere(Vector3 &pos, real rad):
-                position(pos), radious(rad){}
-
-
-            void SetSphere(Vector3 &pos, real rad);
-
-            void MoveTo(const Vector3 &center);
-
-            void OnRender(MainRender	&theRenderer, bool isColliding = false);
-
-            ~Sphere();
-        protected:
-        private:
-    };
 }
 #endif // SPHERE_H

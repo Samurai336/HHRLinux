@@ -19,7 +19,7 @@
 **  																			**
 **********************************************************************************/
 
-#include "Sphere.h"
+#include "CollisionObjects.h"
 
 namespace HHR_Physics
 {

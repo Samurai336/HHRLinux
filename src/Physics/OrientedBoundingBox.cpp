@@ -19,9 +19,9 @@
 **  																			**
 **********************************************************************************/
 
-#include "OrientedBoundingBox.h"
 
 
+#include "CollisionObjects.h"
 
 namespace HHR_Physics
 {

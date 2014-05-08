@@ -23,10 +23,14 @@
 #define COLLIDER_H
 
 
+/*
 #include "BoundingBox.h"
 #include "Sphere.h"
 #include "OrientedBoundingBox.h"
 #include "orientedboundingbox2d.h"
+*/
+
+#include "CollisionObjects.h"
 
 
 
