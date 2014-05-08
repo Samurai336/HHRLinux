@@ -4,6 +4,18 @@
 #include "HHRUnit.h"
 #include "BaseClasses/Events.h"
 
+
+struct ActiveKeys
+{
+   bool W;
+   bool A;
+   bool S;
+   bool D;
+   bool Left;
+   bool Right;
+
+};
+
 class HHR_Player: public HHRUnit, public Events
 {
     public:
@@ -26,8 +38,6 @@ class HHR_Player: public HHRUnit, public Events
         virtual void OnKeyDown(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
 
         virtual void OnKeyUp(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
-
-
 
         void AccumulatePoints(const unsigned int newPoints);
 
@@ -66,14 +76,8 @@ class HHR_Player: public HHRUnit, public Events
         int MaxRotation;
         int rotationRate;
         bool recivedInput;
-        struct ActiveKeys
-        {
-           bool W;
-           bool A;
-           bool S;
-           bool D;
-            
-        }KeysActive;
+        ActiveKeys KeysActive;
+
         
         HHR_Physics::Vector3 MaxVelocity;
 
