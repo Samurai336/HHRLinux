@@ -5,14 +5,14 @@
 #include "BaseClasses/Events.h"
 
 
-struct ActiveKeys
+struct Actions
 {
-   bool W;
-   bool A;
-   bool S;
-   bool D;
-   bool Left;
-   bool Right;
+   bool MoveForward;
+   bool MoveLeft;
+   bool MoveBack;
+   bool MoveRight;
+   bool FireLeft;
+   bool FireRight;
 
 };
 
@@ -76,7 +76,7 @@ class HHR_Player: public HHRUnit, public Events
         int MaxRotation;
         int rotationRate;
         bool recivedInput;
-        ActiveKeys KeysActive;
+        Actions KeysActive;
 
         
         HHR_Physics::Vector3 MaxVelocity;

@@ -58,20 +58,20 @@ void HHR_Player::OnKeyDown(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
     if(sym == SDLK_w)
     {
-        KeysActive.W = true;
+        KeysActive.MoveForward = true;
     }
     if(sym == SDLK_s)
     {
-        KeysActive.S = true;
+        KeysActive.MoveBack = true;
     }
 
     if(sym == SDLK_a)
     {
-        KeysActive.A =true;
+        KeysActive.MoveLeft =true;
     }
     if(sym == SDLK_d)
     {
-        KeysActive.D =true;
+        KeysActive.MoveRight =true;
     }
 
     recivedInput = true;
@@ -81,20 +81,20 @@ void HHR_Player::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
     if(sym == SDLK_w)
     {
-        KeysActive.W = false;
+        KeysActive.MoveForward = false;
     }
     if(sym == SDLK_s)
     {
-        KeysActive.S = false;
+        KeysActive.MoveBack = false;
     }
 
     if(sym == SDLK_a)
     {
-        KeysActive.A =false;
+        KeysActive.MoveLeft =false;
     }
     if(sym == SDLK_d)
     {
-        KeysActive.D =false;
+        KeysActive.MoveRight =false;
     }
 
     recivedInput = false;
@@ -167,7 +167,7 @@ HHR_Player::~HHR_Player()
 
 void HHR_Player::UpdateVelocityDecay()
 {
-    if(!KeysActive.A && !KeysActive.D)
+    if(!KeysActive.MoveLeft && !KeysActive.MoveRight)
     {
         if(Velocity.x > 0 )
         {
@@ -190,7 +190,7 @@ void HHR_Player::UpdateVelocityDecay()
         }
     }
 
-    if(!KeysActive.S && !KeysActive.W)
+    if(!KeysActive.MoveBack && !KeysActive.MoveForward)
     {
         if(Velocity.y > 0 )
         {
@@ -247,22 +247,22 @@ void HHR_Player::UpdateRotation(int Direction)
 
 void HHR_Player::HandleActiveKeys()
 {
-        if(KeysActive.W)
+        if(KeysActive.MoveForward)
         {
             Velocity.y -= AccerlerationRate;
         }
-        else if(KeysActive.S)
+        else if(KeysActive.MoveBack)
         {
             Velocity.y += AccerlerationRate;
         }
 
-        if(KeysActive.A)
+        if(KeysActive.MoveLeft)
         {
             Velocity.x -= 2;
             UpdateRotation(-rotationRate);
 
         }
-        else if(KeysActive.D)
+        else if(KeysActive.MoveRight)
         {
             Velocity.x += 2;
             UpdateRotation(rotationRate);

@@ -26,5 +26,7 @@ Thumbs.db
 *.autosave
 
 build/
-build\ 
+build\
+Build\
+Build/ 
 
