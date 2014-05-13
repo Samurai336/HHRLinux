@@ -65,14 +65,14 @@ int MainApp::OnExecute()
 
 		while (Running)
 		{
-		    if(!MainRenderTarget.FrameRateControl.TargetRateHit())
-			{
-				while (SDL_PollEvent(&Event))
-				{
-					OnEvent(&Event);
-				}
+            if(!MainRenderTarget.FrameRateControl.TargetRateHit())
+            {
+                while (SDL_PollEvent(&Event))
+                {
+                    OnEvent(&Event);
+                }
 
-				OnLoop();
+                OnLoop();
 
 				OnRender();
 			}
@@ -140,6 +140,8 @@ bool MainApp::OnInit()
      SDL_Color TextColor = {255,255,0};
      FrameCountDisplay.LoadSpriteText("Assets/Romanesque_Serif.ttf", "0", 25,(WWIDTH-200), (WHEIGHT/6),TextColor);
 
+     GameSpeedDisplay.LoadSpriteText("Assets/Romanesque_Serif.ttf", "0", 25,(WWIDTH-200), (WHEIGHT/6) + 50,TextColor);
+
      #endif // DEBUG_MODE
 
 
@@ -203,9 +205,11 @@ void MainApp::OnLoop()
 #ifdef DEBUG_MODE
 
     char buffer [256];
-    sprintf(buffer,"%d",  MainRenderTarget.FrameRateControl.GetFPS());
-
+    sprintf(buffer,"FPS: %d",  MainRenderTarget.FrameRateControl.GetFPS());
     FrameCountDisplay = buffer;
+
+    sprintf(buffer,"GameSpeed: %f", MainRenderTarget.FrameRateControl.GetGameSpeed());
+    GameSpeedDisplay = buffer;
 
 
 #endif // DEBUG_MODE
@@ -230,6 +234,7 @@ void MainApp::OnRender()
 
     #ifdef DEBUG_MODE
         FrameCountDisplay.OnRender(MainRenderTarget);
+        GameSpeedDisplay.OnRender(MainRenderTarget);
     #endif // DEBUG_MODE
 
 	MainRenderTarget.RenderDisplay();

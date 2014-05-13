@@ -68,10 +68,11 @@ class ScrollingBackGround :	public Environment
 		void ScrollRight();
 		SDL_Texture **BackGroundTextures;
 		SDL_Rect *BackGroundRects;
+        float currentGameSpeed;
 		unsigned int numberOfBackgrounds;
 		ScrollDirection Direction;
 		int maxSpeed;
-		int currentSpeed;
+        float currentSpeed;
 
 };
 

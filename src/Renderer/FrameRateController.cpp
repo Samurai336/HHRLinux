@@ -1,27 +1,13 @@
 #include "FrameRateController.h"
 
 
-FrameRateController::FrameRateController(void)
-{
 
-    TargetHertz = 65;
-	OldTime = 0;
-	LastTime = 0;
-
-	NumFrames =0 ;
-	Frames = 0 ;
-
-	maxHzHit = false;
-
-
-
-}
-
-FrameRateController::FrameRateController(unsigned int TargetHz)
+FrameRateController::FrameRateController(unsigned int TargetHz, unsigned int targetGameSpeed)
 {
 	TargetHertz = TargetHz;
 	OldTime = 0;
 	LastTime = 0;
+    TargetGameSpeed = targetGameSpeed;
 
 	NumFrames =0 ;
 	Frames = 0 ;
@@ -39,6 +25,8 @@ FrameRateController::~FrameRateController(void)
 void FrameRateController::OnLoop()
 {
     uint32_t currentTime = SDL_GetTicks();
+
+
     if( (currentTime-OldTime) > (1000/TargetHertz))
     {
         OldTime = SDL_GetTicks();
@@ -49,7 +37,7 @@ void FrameRateController::OnLoop()
     {
 
         maxHzHit = true;
-    }
+    }     
 
     if((currentTime - FPSTime) > 1000)
     {
@@ -57,6 +45,10 @@ void FrameRateController::OnLoop()
         NumFrames = Frames ;
         Frames = 0;
     }
+
+    gameSpeed = (float)TargetGameSpeed/(float)TargetHertz;
+
+
 
 
 	LastTime = SDL_GetTicks();
@@ -67,7 +59,17 @@ bool FrameRateController::TargetRateHit()
 {
 	OnLoop();
 
-	return maxHzHit;
+    return maxHzHit;
+}
+
+float FrameRateController::GetGameSpeed()
+{
+    return gameSpeed;
+}
+
+void FrameRateController::SetGameSpeed(unsigned int gameSpeed)
+{
+    TargetGameSpeed = gameSpeed;
 }
 
 int FrameRateController::GetFPS()

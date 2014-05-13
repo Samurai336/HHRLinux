@@ -1,4 +1,5 @@
 #include "HHRUnit.h"
+#include "MainApp.h"
 
 HHRUnit::HHRUnit()
 {
@@ -18,7 +19,7 @@ void HHRUnit::OnLoop()
 {
     if(Living)
     {
-        Position += Velocity;
+        Position += (Velocity*MainApp::Instance()->GetMainRenderTarget()->FrameRateControl.GetGameSpeed()) ;
         SpriteAnimation::OnLoop();
     }
 }

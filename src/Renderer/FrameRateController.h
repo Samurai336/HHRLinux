@@ -6,9 +6,8 @@
 
 class FrameRateController
 {
-	public:
-		FrameRateController(void);
-		FrameRateController(unsigned int TargetHz);
+	public:	
+        FrameRateController(unsigned int TargetHz = 64, unsigned int targetGameSpeed = 64);
 		virtual ~FrameRateController(void);
 
 		void    OnLoop();
@@ -19,7 +18,11 @@ class FrameRateController
 
 		void	SetTargetHz(unsigned int targetRate);
 
+        void	SetGameSpeed(unsigned int gameSpeed);
+
 		bool	TargetRateHit();
+
+        float   GetGameSpeed();
 
 		void Render();
 
@@ -27,8 +30,10 @@ class FrameRateController
 		uint32_t     OldTime;
 		uint32_t     LastTime;
 		uint32_t     FPSTime;
+        float        gameSpeed;
 
 		unsigned int 	TargetHertz;
+        unsigned int 	TargetGameSpeed;
 
 		int		NumFrames;
 		int     Frames;
@@ -40,3 +45,5 @@ class FrameRateController
 
 
 };
+
+

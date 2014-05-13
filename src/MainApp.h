@@ -101,6 +101,7 @@ class MainApp : public Events
 #ifdef DEBUG_MODE
 
         SpriteText      FrameCountDisplay;
+        SpriteText      GameSpeedDisplay;
 
 #endif
 

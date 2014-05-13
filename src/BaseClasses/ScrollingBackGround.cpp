@@ -95,6 +95,8 @@ bool ScrollingBackGround::LoadEnvirement(char* BaseBackGroundFile, char** Moving
 
 void ScrollingBackGround::UpDate()
 {
+    currentGameSpeed = MainApp::Instance()->GetMainRenderTarget()->FrameRateControl.GetGameSpeed();
+
 	switch (Direction)
 	{
 		case Up:
@@ -120,12 +122,12 @@ void ScrollingBackGround::ScrollUp()
 {
 	for(int i = 0 ; i< numberOfBackgrounds; ++i)
 	{
-		BackGroundRects[i].y -= currentSpeed;
+        BackGroundRects[i].y -= (int)(currentSpeed*currentGameSpeed);
 
 
 		if(BackGroundRects[i].y < -WHEIGHT)
 		{
-			BackGroundRects[i].y = ((numberOfBackgrounds-1) * BackGroundRects[i].h) - currentSpeed;
+            BackGroundRects[i].y = ((numberOfBackgrounds-1) * BackGroundRects[i].h) - (int)(currentSpeed*currentGameSpeed);
 		}
 	}
 
@@ -133,14 +135,16 @@ void ScrollingBackGround::ScrollUp()
 
 void ScrollingBackGround::ScrollDown()
 {
+
+
+
 	for(int i= 0 ; i< numberOfBackgrounds; ++i)
 	{
-		BackGroundRects[i].y += currentSpeed;
-
+        BackGroundRects[i].y +=  (int)(currentSpeed*currentGameSpeed);
 
 		if(BackGroundRects[i].y > WHEIGHT)
-		{
-			BackGroundRects[i].y = (((numberOfBackgrounds-1) * BackGroundRects[i].h) * -1) + currentSpeed;
+		{              
+            BackGroundRects[i].y = (int)(((numberOfBackgrounds-1) * BackGroundRects[i].h) * -1) + (currentSpeed * currentGameSpeed);
 		}
 	}
 }
@@ -150,12 +154,12 @@ void ScrollingBackGround::ScrollLeft()
 {
 	for(int i= 0 ; i< numberOfBackgrounds; ++i)
 	{
-		BackGroundRects[i].x -= currentSpeed;
+        BackGroundRects[i].x -= (int)(currentSpeed*currentGameSpeed);;
 
 
 		if(BackGroundRects[i].x < -WWIDTH)
 		{
-			BackGroundRects[i].x = ((numberOfBackgrounds-1) * BackGroundRects[i].w) - currentSpeed;
+            BackGroundRects[i].x = ((numberOfBackgrounds-1) * BackGroundRects[i].w) - (int)(currentSpeed*currentGameSpeed);;
 		}
 	}
 
@@ -166,12 +170,12 @@ void ScrollingBackGround::ScrollRight()
 {
 	for(int i = 0 ; i< numberOfBackgrounds; ++i)
 	{
-		BackGroundRects[i].x += currentSpeed;
+        BackGroundRects[i].x += (int)(currentSpeed*currentGameSpeed);;
 
 
 		if(BackGroundRects[i].x > WWIDTH)
 		{
-			BackGroundRects[i].x = (((numberOfBackgrounds-1) * BackGroundRects[i].w) * -1) + currentSpeed;
+            BackGroundRects[i].x = (((numberOfBackgrounds-1) * BackGroundRects[i].w) * -1) + (int)(currentSpeed*currentGameSpeed);;
 		}
 	}
 

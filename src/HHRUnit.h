@@ -28,6 +28,7 @@ class HHRUnit : public SpriteAnimation
 
     protected:
         unsigned int MaxHealth;
+
         int health;
         bool Living;
         HHR_Physics::Vector3 Velocity;
