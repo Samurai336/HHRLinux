@@ -107,3 +107,8 @@ float BaseUnit::GetScale()
 {
     return Scale;
 }
+
+HHR_Physics::Vector3 BaseUnit::GetPosition()
+{
+    return Position;
+}

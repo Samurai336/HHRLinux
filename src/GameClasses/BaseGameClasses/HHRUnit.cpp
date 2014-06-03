@@ -1,5 +1,5 @@
 #include "HHRUnit.h"
-#include "MainApp.h"
+#include "../../MainApp.h"
 
 HHRUnit::HHRUnit()
 {

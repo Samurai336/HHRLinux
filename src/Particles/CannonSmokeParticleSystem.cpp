@@ -118,7 +118,8 @@ namespace HHR_Particles
                               RandomReal(1.0f,2.0f),
                               particleColor,
                               RandomReal(0.25f,0.5f),
-                              (rand()%40+1)
+                              (rand()%40+1),
+                              45
                               ));
 
 

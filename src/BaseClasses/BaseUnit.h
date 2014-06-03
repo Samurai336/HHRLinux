@@ -66,9 +66,13 @@ class BaseUnit
 
 			int GetHeight(){return height;}
 
+            HHR_Physics::Vector3 GetPosition();
+
 			~BaseUnit(void);
 
-		protected:
+        protected:
+
+            virtual void UpdateCollisionObj(){}
 
 			SDL_Texture* unitTexture;
 

@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "BaseClasses/BaseInterface.h" 
-#include "BaseClasses/SpriteText.h" 
-#include "BaseClasses/SpriteAnimation.h"
+#include "../../BaseClasses/BaseInterface.h"
+#include "../../BaseClasses/SpriteText.h"
+#include "../../BaseClasses/SpriteAnimation.h"
 
 
 enum HealthStatus

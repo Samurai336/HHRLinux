@@ -59,7 +59,7 @@ bool GameTestLevel::LoadLevel()
     }
     Test2.setSpeed(-1,0);
 
-    Test2.setRotationSpeed(1.0);
+    //Test2.setRotationSpeed(1.0);
 
     Test2.SetPosition(50, (WHEIGHT)/2);
 
@@ -143,6 +143,8 @@ void GameTestLevel::OnLoop()
 	background.UpDate();
     Henry.OnLoop();
     MainPlayer.OnLoop();
+
+    //Test2.SetPosition(MainPlayer.GetAnimationCenter());
 
 
 

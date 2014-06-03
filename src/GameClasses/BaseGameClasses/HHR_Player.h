@@ -2,7 +2,7 @@
 #define HHR_PLAYER_H
 
 #include "HHRUnit.h"
-#include "BaseClasses/Events.h"
+#include "../../BaseClasses/Events.h"
 
 
 struct Actions
@@ -23,28 +23,12 @@ class HHR_Player: public HHRUnit, public Events
 
         HHR_Player(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned intMaxHealth = 100);
 
-        bool SetUpHHRPlayer(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop,
-                            const unsigned int MaxHealth = 100,
-                            const HHR_Physics::Vector3 &newMaxVelocity = HHR_Physics::Vector3(2.0f,2.0f,0.0f),
-                            const int newAcclerationRate=1,
-                            const int newVelocityDecay = 1,
-                            const int newRotationRate = 2,
-                            const int newMaxRotation  = 30);
-
-        virtual void OnLoop();
-
-        virtual void OnRender(MainRender &theRenderer);
-
-        virtual void OnKeyDown(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
-
-        virtual void OnKeyUp(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
 
         void AccumulatePoints(const unsigned int newPoints);
 
         unsigned int CurrentPointCount() const;
 
         void SetMaxVelocity(const HHR_Physics::Vector3 &newMaxVelocity);
-
         HHR_Physics::Vector3 GetMaxVelocity() const;
 
         void SetAccelerationRate(const int NewAcceleration);
@@ -63,14 +47,34 @@ class HHR_Player: public HHRUnit, public Events
 
         int GetRotationRate() const;
 
+    public:
+
+        virtual bool SetUpHHRPlayer(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop,
+                            const unsigned int MaxHealth = 100,
+                            const HHR_Physics::Vector3 &newMaxVelocity = HHR_Physics::Vector3(2.0f,2.0f,0.0f),
+                            const int newAcclerationRate=1,
+                            const int newVelocityDecay = 1,
+                            const int newRotationRate = 2,
+                            const int newMaxRotation  = 30);
+
+
+        virtual void OnLoop();
+
+        virtual void OnRender(MainRender &theRenderer);
+
+        virtual void OnKeyDown(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
+
+        virtual void OnKeyUp(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
+
         ~HHR_Player();
 
-   private:
+
         void UpdateVelocityDecay();
         void CheckCurrentVelocityCap();
         void UpdateRotation(int Direction);
         void HandleActiveKeys(); 
         unsigned int Points;
+    protected:
         int AccerlerationRate;
         int VelocityDecay;
         int MaxRotation;

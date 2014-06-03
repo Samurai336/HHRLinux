@@ -181,9 +181,11 @@ void SpriteAnimation::SetPosition(const HHR_Physics::Vector3 newPosition)
     Position.y  = newPosition.y - (Sprite_Rect.h/2);
 }
 
+
+
 void SpriteAnimation::OnRender(MainRender	&theRenderer)
 {
-    theRenderer.Draw(this->unitTexture, Position.x, Position.y, Sprite_Rect,rotation,Scale,renderOrder);
+    theRenderer.Draw(this->unitTexture, Position.x , Position.y , Sprite_Rect,rotation,Scale,renderOrder);
 }
 
 
@@ -211,3 +213,16 @@ SpriteAnimation::~SpriteAnimation()
 {
     //dtor
 }
+
+HHR_Physics::Vector3 SpriteAnimation::GetAnimationCenter()
+{
+    //X+((W * scale)/2);
+    //Y+((H * scale)/2);
+
+    AnimationCenter = Position;
+    AnimationCenter.x = (Position.x + ((Sprite_Rect.w * Scale)));
+    AnimationCenter.y = (Position.y + ((Sprite_Rect.h * Scale)));
+
+    return AnimationCenter;
+}
+

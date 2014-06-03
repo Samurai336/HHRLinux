@@ -32,8 +32,10 @@
 #include "BaseClasses/SpriteText.h"
 #include "BounceCircle.h"
 #include "Audio/MusicSound.h"
-#include "HHR_Player.h"
+#include "GameClasses/BaseGameClasses/HHR_Player.h"
 #include "Physics/Collider.h"
+#include "GameClasses/PlayableUnits/HenryHudson.h"
+
 
 
 
@@ -57,7 +59,7 @@ class GameTestLevel : public Level
     private:
         BounceCircle Test;
         RotatingBounceSquare Test2;
-        HHR_Player MainPlayer;
+        HenryHudson MainPlayer;
         bool Colliding;
         SpriteAnimation Henry;
 		ScrollingBackGround background;

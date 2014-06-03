@@ -66,6 +66,8 @@ file(GLOB particle_files src/Particles/*.h src/Particles/*.cpp)
 
 file(GLOB audio_files src/Audio/*.h src/Audio/*.cpp)
 
+file(GLOB_RECURSE game_classes src/GameClasses/*.cpp src/GameClasses/*.h)
+
 
 
 SOURCE_GROUP(Renderer FILES ${renderer_files})
@@ -79,6 +81,8 @@ SOURCE_GROUP(Physics FILES ${physics_files})
 SOURCE_GROUP(Particles FILES ${particle_files})
 
 SOURCE_GROUP(Audio FILES ${audio_files})
+
+SOURCE_GROUP(GameClasses FILES ${game_classes})
 
 
 
@@ -97,6 +101,7 @@ if(WIN32)
         ${physics_files}
         ${particle_files}
         ${audio_files}
+        ${game_classes}
 	)
 
         if(CMAKE_BUILD_TYPE MATCHES DEBUG)
@@ -112,6 +117,7 @@ else ()
         ${physics_files}
         ${particle_files}
         ${audio_files}
+        ${game_classes}
 	)
 
         set(CMAKE_CXX_FLAGS "-g -Wno-write-strings")

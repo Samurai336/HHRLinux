@@ -44,13 +44,18 @@ class SpriteAnimation: public BaseUnit
         void StopAnimating();
         void SetPosition(float MoveX, float MoveY);
         void SetPosition(const HHR_Physics::Vector3 newPosition);
+        HHR_Physics::Vector3 GetAnimationCenter();
+
 
 
         virtual ~SpriteAnimation();
 
     protected:
 
+
+
     private:
+        SDL_Rect Sprite_Rect;
         void CalculateSpriteSize();
         unsigned int numberOfColumns;
         unsigned int numberOfRows;
@@ -60,7 +65,8 @@ class SpriteAnimation: public BaseUnit
         unsigned int currentColumn;
         bool loop;        
         bool AnimationPlaying;
-        SDL_Rect Sprite_Rect;
+        HHR_Physics::Vector3 AnimationCenter;
+
 
 
 

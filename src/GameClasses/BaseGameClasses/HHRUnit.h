@@ -1,7 +1,7 @@
 #ifndef HHRUNIT_H
 #define HHRUNIT_H
 
-#include "BaseClasses/SpriteAnimation.h"
+#include "../../BaseClasses/SpriteAnimation.h"
 
 class HHRUnit : public SpriteAnimation
 {

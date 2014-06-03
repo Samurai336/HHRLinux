@@ -28,6 +28,7 @@ namespace HHR_Particles
              void SetRate(Uint32);
             bool GetActiveStatus() const;
             void SetActive(const bool activeStatus);
+            void setRenderOrder(int newRenderOrder) { renderOrder = newRenderOrder; }
 
             ~ParticleEngine();
 
@@ -37,6 +38,7 @@ namespace HHR_Particles
             bool Active;
             bool ActiveEmmitting;
             bool CapHit;
+            int renderOrder;
             uint32_t LastUpDate;
             uint32_t Rate;
             int emmitionVolume;

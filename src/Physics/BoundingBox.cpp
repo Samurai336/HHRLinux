@@ -80,8 +80,9 @@ real BoundingBox::Mininmum(const XYZ i) const
     {
         position = NewPositon;
 
-        position.x += extension.x;
-        position.y += extension.y;
+        //???
+        position.x += (extension.x*2.0f);
+        position.y += (extension.y*2.0f);
     }
 
     void BoundingBox::OnRender(MainRender &theRenderer, bool isColliding)

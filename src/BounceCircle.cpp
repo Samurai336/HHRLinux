@@ -25,6 +25,8 @@ bool BounceCircle::Load(char *File)
 
      Smoke.SetActive(true);
 
+
+
      return loadStatus;
 }
 

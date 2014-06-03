@@ -43,6 +43,8 @@ namespace HHR_Physics
         localAxis[0] = X;
         localAxis[1] = Y;
 
+        Positon= center;
+
         X *= width/2;
         Y *= height/2;
 
@@ -51,12 +53,12 @@ namespace HHR_Physics
 
         Vector3 Translation(width/2,height/2,center.z);
 
-        corner[0] = ((center) - X-Y)+Translation;
-        corner[1] = ((center) + X-Y)+Translation;
-        corner[2] = ((center) + X+Y)+Translation;
-        corner[3] = ((center) - X+Y)+Translation;
+        corner[3] = ((center) - X-Y)+Translation;
+        corner[2] = ((center) + X-Y)+Translation;
+        corner[1] = ((center) + X+Y)+Translation;
+        corner[0] = ((center) - X+Y)+Translation;
 
-        Positon= center;
+
 
         computeAxes();
     }
