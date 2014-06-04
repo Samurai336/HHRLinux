@@ -7,8 +7,12 @@ HenryHudson::HenryHudson():HHR_Player()
 
     const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
 
-    SmokeLeft.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 75, 5);
-    SmokeRight.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 75, 5);
+    SmokeLeft.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
+    SmokeRight.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
+     CannonFire.FireLeft = false;
+     CannonFire.FireRight = false;
+
+
 
 }
 

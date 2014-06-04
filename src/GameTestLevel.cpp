@@ -137,7 +137,7 @@ void GameTestLevel::OnEvent(SDL_Event* Event)
 void GameTestLevel::OnLoop()
 {
    
-    Test.OnLoop();
+    //Test.OnLoop();
     Test2.OnLoop();
     CheckCollision();
 	background.UpDate();
@@ -172,7 +172,7 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
 
     background.Render(theRenderer);
    
-    Test.OnRender(theRenderer);
+    //Test.OnRender(theRenderer);
     Test2.OnRender(theRenderer);
     Henry.OnRender(theRenderer);
     MainPlayer.OnRender(theRenderer);

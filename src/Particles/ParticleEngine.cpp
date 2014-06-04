@@ -15,7 +15,7 @@ namespace HHR_Particles
     }
 
     ParticleEngine::ParticleEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate)
-    {
+    {        
         srand (time(NULL));
         SetUpEngine(texturesFiles,numTextures,location, EmittionVolume, EmitionRate);
     }
@@ -23,7 +23,6 @@ namespace HHR_Particles
     bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate )
     {
         emetterLocation = location;
-
 
         textures = new SDL_Texture* [numTextures];
 

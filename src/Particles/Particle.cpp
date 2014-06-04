@@ -24,8 +24,8 @@ namespace HHR_Particles
         Scale = size;
         duration = totalDuration = ttl;
         orginalY = positon.y;
-        AlphaChange = 255/ttl;
-        Alpha = 255;
+        AlphaChange = 254/ttl;
+        Alpha = 254;
 
         renderOrder = setRenderOrder;
 
@@ -38,7 +38,7 @@ namespace HHR_Particles
     void Particle::ParticleReset()
     {
          duration = totalDuration;
-         Alpha = 255;
+         Alpha = 254;
     }
 
     int Particle::GetCurrentLifeDuration()

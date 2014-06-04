@@ -23,7 +23,8 @@ namespace HHR_Particles
             return true;
         }
 
-        durationCountDown =  duration = SetDuration;
+        duration = SetDuration;
+        durationCountDown = 0;
         //emmitionBurstCount = 10;
 
         return false;
@@ -68,11 +69,11 @@ namespace HHR_Particles
         Vector3 particleVelocity;
         if(smokeDirection == Left)
         {
-            particleVelocity = Vector3((-5.0f + emitterSpeed.x), (RandomReal(1.0f,2.0f) + (emitterSpeed.y/2.0f)),0.0f);
+            particleVelocity = Vector3((-5.0f - emitterSpeed.x), (RandomReal(1.0f,1.5f) + (emitterSpeed.y/2.0f)),0.0f);
         }
         else if (smokeDirection == Right)
         {
-            particleVelocity = Vector3((5.0f + emitterSpeed.x), (RandomReal(1.0f,2.0f) + (emitterSpeed.y/2.0f)),0.0f);
+            particleVelocity = Vector3((5.0f + emitterSpeed.x), (RandomReal(1.0f,1.5f) + (emitterSpeed.y/2.0f)),0.0f);
         }
 
         particleToUpdate->SetPosition(emetterLocation);

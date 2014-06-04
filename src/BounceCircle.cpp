@@ -23,7 +23,7 @@ bool BounceCircle::Load(char *File)
          loadStatus = Smoke.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 100, 500);
      }
 
-     Smoke.SetActive(true);
+     //Smoke.SetActive(true);
 
 
 
