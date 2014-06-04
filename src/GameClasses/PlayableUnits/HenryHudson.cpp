@@ -2,7 +2,13 @@
 
 HenryHudson::HenryHudson():HHR_Player()
 {
+    FireRestTime = 500;
+    CoolDownLeft = CoolDownRight = 0;
 
+    const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
+
+    SmokeLeft.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 75, 5);
+    SmokeRight.SetUpEngine(ParticleAsset,1,HHR_Physics::Vector3(0.0f,0.0f,1.0f),10, 75, 5);
 
 }
 
@@ -10,8 +16,18 @@ HenryHudson::HenryHudson(char *File, unsigned int Columns, unsigned int Rows, un
     HHR_Player(File,Columns,Rows,rate,Loop,MaxHealth)
 
 {
+    HenryHudson();
 
+}
 
+void HenryHudson::SetCoolDownTime(uint32_t newCoolTime)
+{
+    FireRestTime = newCoolTime;
+}
+
+uint32_t HenryHudson::GetCoolDownTime()
+{
+    return FireRestTime;
 }
 
 bool HenryHudson::SetUpHHRPlayer(char *File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth, const HHR_Physics::Vector3 &newMaxVelocity, const int newAcclerationRate, const int newVelocityDecay, const int newRotationRate, const int newMaxRotation)
@@ -24,7 +40,8 @@ bool HenryHudson::SetUpHHRPlayer(char *File, unsigned int Columns, unsigned int 
 
      //HitBox.SetSize(size);
      //HitBox.setPostion(Position);
-       HitBox.SetUpBox(Position,18,39,rotation);
+     HitBox.SetUpBox(Position,18,39,rotation);
+
 
     return false;
 }
@@ -32,16 +49,20 @@ bool HenryHudson::SetUpHHRPlayer(char *File, unsigned int Columns, unsigned int 
 
 
 void HenryHudson::OnLoop()
-{
+{    
+    SmokeRight.OnLoop();
+    SmokeLeft.OnLoop();
     UpdateCollisionObj();
-    Smoke.OnLoop();
+    UpdateCannons();
 
     HHR_Player::OnLoop();
 }
 
 void HenryHudson::OnRender(MainRender &theRenderer)
 {
-    Smoke.OnRender(theRenderer);
+    //Smoke.OnRender(theRenderer);
+    SmokeRight.OnRender(theRenderer);
+    SmokeLeft.OnRender(theRenderer);
 
 #ifdef PHYSICS_DEBUG
     HitBox.OnRender(theRenderer);
@@ -52,20 +73,38 @@ void HenryHudson::OnRender(MainRender &theRenderer)
 
 void HenryHudson::OnKeyDown(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
+    if(sym == SDLK_LEFT)
+    {
+        CannonFire.FireLeft = true;
+    }
+
+    if(sym == SDLK_RIGHT)
+    {
+        CannonFire.FireRight = true;
+    }
 
     HHR_Player::OnKeyDown(sym,mod,unicode);
 }
 
 void HenryHudson::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
+    if(sym == SDLK_LEFT)
+    {
+        CannonFire.FireLeft = false;
+    }
+
+    if(sym == SDLK_RIGHT)
+    {
+        CannonFire.FireRight = false;
+    }
 
     HHR_Player::OnKeyUp(sym,mod,unicode);
 }
 
 void HenryHudson::OnCleanup()
-{
-
-    Smoke.OnCleanup();
+{    
+    SmokeRight.OnCleanup();
+    SmokeLeft.OnCleanup();
 
     HHR_Player::OnCleanup();
 }
@@ -74,6 +113,32 @@ void HenryHudson::OnCleanup()
 HHR_Physics::OrientedBoundingBox2D HenryHudson::GetCollisionObject()
 {
     return HitBox;
+}
+
+void HenryHudson::UpdateCannons()
+{
+    uint32_t ticks = SDL_GetTicks();
+
+    if(CannonFire.FireLeft == true)
+    {
+        if(CoolDownLeft< ticks)
+        {
+            CoolDownLeft = (SDL_GetTicks() + FireRestTime);
+            SmokeLeft.StartCannonSmoke(HHR_Particles::Left, GetAnimationCenter(),Velocity);
+
+        }
+    }
+
+    if(CannonFire.FireRight == true)
+    {
+        if(CoolDownRight< ticks)
+        {
+            CoolDownRight = (SDL_GetTicks() + FireRestTime);
+            SmokeRight.StartCannonSmoke(HHR_Particles::Right, GetAnimationCenter(),Velocity);
+
+        }
+    }
+
 }
 
 //This should be optimized

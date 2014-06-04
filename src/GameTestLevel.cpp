@@ -117,7 +117,7 @@ bool GameTestLevel::LoadLevel()
     MainPlayer.SetPosition((WWIDTH/2), (WHEIGHT/2) );
     MainPlayer.SetScale(0.45f);
 
-    BackGroundMusic.Play();
+    //BackGroundMusic.Play();
 
 
 
@@ -153,7 +153,10 @@ void GameTestLevel::OnLoop()
 
 void GameTestLevel::CheckCollision()
 {
-    if(HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject()))
+    if(HHR_Physics::Collider::Check(Test2.GetCollisionObject(),Test.GetCollisionObject()) ||
+       HHR_Physics::Collider::Check(MainPlayer.GetCollisionObject(),Test.GetCollisionObject()) ||
+       HHR_Physics::Collider::Check(Test2.GetCollisionObject(),MainPlayer.GetCollisionObject())
+      )
     {
         Colliding = true;
     }
@@ -176,7 +179,7 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
 
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
-    Test2.GetCollisionObject().OnRender(theRenderer, Colliding);
+    Test2.GetCollisionObject().OnRender(theRenderer, Colliding);    
 #endif
 
 
