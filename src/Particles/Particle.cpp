@@ -39,6 +39,10 @@ namespace HHR_Particles
     {
          duration = totalDuration;
          Alpha = 254;
+
+#ifdef DEBUG_MODE
+            printf("ParticlePostion X:%f, Y:%f\n", Position.x, Position.y);
+#endif
     }
 
     int Particle::GetCurrentLifeDuration()

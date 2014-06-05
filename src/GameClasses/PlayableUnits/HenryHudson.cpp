@@ -2,7 +2,7 @@
 
 HenryHudson::HenryHudson():HHR_Player()
 {
-    FireRestTime = 500;
+    FireRestTime = 1000;
     CoolDownLeft = CoolDownRight = 0;
 
     const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
@@ -127,8 +127,12 @@ void HenryHudson::UpdateCannons()
     {
         if(CoolDownLeft< ticks)
         {
+#ifdef DEBUG_MODE
+            printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
+#endif
             CoolDownLeft = (SDL_GetTicks() + FireRestTime);
             SmokeLeft.StartCannonSmoke(HHR_Particles::Left, GetAnimationCenter(),Velocity);
+
 
         }
     }
@@ -137,6 +141,9 @@ void HenryHudson::UpdateCannons()
     {
         if(CoolDownRight< ticks)
         {
+#ifdef DEBUG_MODE
+            printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
+#endif
             CoolDownRight = (SDL_GetTicks() + FireRestTime);
             SmokeRight.StartCannonSmoke(HHR_Particles::Right, GetAnimationCenter(),Velocity);
 

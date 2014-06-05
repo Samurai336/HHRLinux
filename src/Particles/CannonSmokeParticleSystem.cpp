@@ -112,16 +112,23 @@ namespace HHR_Particles
 
         int RandomTextureIndex = rand() % (textureCount);
 
-        return (new Particle (textures[RandomTextureIndex],
-                              emetterLocation,
-                              particleVelocity,//Vector3(1.0f * (float)(rand()*2.0f-1.0f),1.0f * (float)(rand()*2.0f-1.0f),0.0f),
-                              0.0f,
-                              RandomReal(1.0f,2.0f),
-                              particleColor,
-                              RandomReal(0.25f,0.5f),
-                              (rand()%40+1),
-                              45
-                              ));
+#ifdef DEBUG_MODE
+        printf("EmitterLocation X:%f, Y:%f\n", emetterLocation.x, emetterLocation.y);
+#endif
+        Particle *returnParticle = new Particle (textures[RandomTextureIndex],
+                                                 emetterLocation,
+                                                 particleVelocity,//Vector3(1.0f * (float)(rand()*2.0f-1.0f),1.0f * (float)(rand()*2.0f-1.0f),0.0f),
+                                                 0.0f,
+                                                 RandomReal(1.0f,2.0f),
+                                                 particleColor,
+                                                 RandomReal(0.25f,0.5f),
+                                                 (rand()%40+1),
+                                                 45
+                                                 );
+
+        ResetParticle(returnParticle);
+
+        return (returnParticle);
 
 
     }

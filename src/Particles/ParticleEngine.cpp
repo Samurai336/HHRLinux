@@ -22,6 +22,7 @@ namespace HHR_Particles
 
     bool ParticleEngine::SetUpEngine(const char *texturesFiles[], const unsigned int numTextures, const Vector3 &location, unsigned int EmittionVolume, unsigned int EmitionRate )
     {
+        srand (time(NULL));
         emetterLocation = location;
 
         textures = new SDL_Texture* [numTextures];
@@ -62,6 +63,7 @@ namespace HHR_Particles
                     LastUpDate = SDL_GetTicks();
                     for(int i =0; i < emmitionVolume; i++)
                     {
+
                         particles.push_back(GenerateNewParticle());
                     }
                 }
@@ -158,15 +160,15 @@ namespace HHR_Particles
     {
         SDL_Color particleColor= {rand()%255+1,rand()%255+1,rand()%255+1};
 
-        return (new Particle (textures[rand()%(textureCount)],
-                              emetterLocation,
-                              Vector3(1.0f * (float)(rand()*2.0f-1.0f),1.0f * (float)(rand()*2.0f-1.0f),0.0f),
-                              0.0f,
-                              (1.0f * (float)(rand()*2-1)),
-                              particleColor,
-                              rand(),
-                              (unsigned int)(rand()%40+1)
-                              ));
+          return (new Particle (textures[rand()%(textureCount)],
+                  emetterLocation,
+                  Vector3(1.0f * (float)(rand()*2.0f-1.0f),1.0f * (float)(rand()*2.0f-1.0f),0.0f),
+                  0.0f,
+                  (1.0f * (float)(rand()*2-1)),
+                  particleColor,
+                  rand(),
+                  (unsigned int)(rand()%40+1)
+                  ));
     }
 
 }
