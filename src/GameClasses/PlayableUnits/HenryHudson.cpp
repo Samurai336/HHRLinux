@@ -5,14 +5,6 @@ HenryHudson::HenryHudson():HHR_Player()
     FireRestTime = 1000;
     CoolDownLeft = CoolDownRight = 0;
 
-    const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
-
-    SmokeLeft.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
-    SmokeRight.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
-     CannonFire.FireLeft = false;
-     CannonFire.FireRight = false;
-
-
 
 }
 
@@ -41,10 +33,24 @@ bool HenryHudson::SetUpHHRPlayer(char *File, unsigned int Columns, unsigned int 
          return true;
      }
 
+     const char *ParticleAsset[] ={"Assets/cannonSmoke.png"} ;
+
+     SmokeLeft.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
+     SmokeRight.SetUpEngine(ParticleAsset,1,GetAnimationCenter(),10, 15, 5);
+      CannonFire.FireLeft = false;
+      CannonFire.FireRight = false;
+
+
+
+
+
 
      //HitBox.SetSize(size);
      //HitBox.setPostion(Position);
      HitBox.SetUpBox(Position,18,39,rotation);
+
+
+     cannonSfx.Load("Assets/Audio/sfx/33380__DJ_Chronos__Boom.wav");
 
 
     return false;
@@ -130,6 +136,7 @@ void HenryHudson::UpdateCannons()
 #ifdef DEBUG_MODE
             printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
 #endif
+            cannonSfx.Play();
             CoolDownLeft = (SDL_GetTicks() + FireRestTime);
             SmokeLeft.StartCannonSmoke(HHR_Particles::Left, GetAnimationCenter(),Velocity);
 
@@ -144,6 +151,7 @@ void HenryHudson::UpdateCannons()
 #ifdef DEBUG_MODE
             printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
 #endif
+            cannonSfx.Play();
             CoolDownRight = (SDL_GetTicks() + FireRestTime);
             SmokeRight.StartCannonSmoke(HHR_Particles::Right, GetAnimationCenter(),Velocity);
 

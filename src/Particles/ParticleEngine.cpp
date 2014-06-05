@@ -56,15 +56,18 @@ namespace HHR_Particles
 
             unsigned int totalDead = 0;
 
-            if(!CapHit)
+            if( Active)
             {
-                if(SDL_GetTicks() > (LastUpDate + Rate))
+                if(!CapHit)
                 {
-                    LastUpDate = SDL_GetTicks();
-                    for(int i =0; i < emmitionVolume; i++)
+                    if(SDL_GetTicks() > (LastUpDate + Rate))
                     {
+                        LastUpDate = SDL_GetTicks();
+                        for(int i =0; i < emmitionVolume; i++)
+                        {
 
-                        particles.push_back(GenerateNewParticle());
+                            particles.push_back(GenerateNewParticle());
+                        }
                     }
                 }
             }

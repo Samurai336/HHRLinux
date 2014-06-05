@@ -115,9 +115,9 @@ bool GameTestLevel::LoadLevel()
     MainPlayer.setRenderOrder(55);
     MainPlayer.StartAnimating();
     MainPlayer.SetPosition((WWIDTH/2), (WHEIGHT/2) );
-    MainPlayer.SetScale(0.45f);
+    MainPlayer.SetScale(0.5f);
 
-    //BackGroundMusic.Play();
+    BackGroundMusic.Play();
 
 
 

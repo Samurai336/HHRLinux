@@ -5,6 +5,7 @@
 #include "../BaseGameClasses/HHR_Player.h"
 #include "../../Particles/CannonSmokeParticleSystem.h"
 #include "../../Physics/CollisionObjects.h"
+#include "../../Audio/BaseSound.h"
 
 struct HenryActions
 {
@@ -24,6 +25,8 @@ class HenryHudson : public HHR_Player
 
 
     public:
+
+
         virtual bool SetUpHHRPlayer(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop,
                             const unsigned int MaxHealth = 100,
                             const HHR_Physics::Vector3 &newMaxVelocity = HHR_Physics::Vector3(2.0f,2.0f,0.0f),
@@ -57,6 +60,8 @@ class HenryHudson : public HHR_Player
          HHR_Physics::Vector3 BoxOffest;
          uint32_t FireRestTime, CoolDownLeft, CoolDownRight;
          HenryActions CannonFire;
+         BaseSound  cannonSfx;
+
 
 
 
