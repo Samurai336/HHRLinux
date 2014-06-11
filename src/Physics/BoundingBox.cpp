@@ -76,18 +76,30 @@ real BoundingBox::Mininmum(const XYZ i) const
         }
     }
 
+    real BoundingBox::GetWidth() const
+    {
+
+        return this->extension.x;
+    }
+
+    real BoundingBox::GetHeight() const
+    {
+        return this->extension.y;
+    }
+
     void BoundingBox::setPostion(Vector3 &NewPositon)
     {
         position = NewPositon;
-
-        //???
-        position.x += (extension.x*2.0f);
-        position.y += (extension.y*2.0f);
     }
 
     void BoundingBox::OnRender(MainRender &theRenderer, bool isColliding)
     {
+
+
+
 #ifdef PHYSICS_DEBUG
+
+
         SDL_Color Player1Color;
         SDL_Color CollidingColor = {255,255,0,255};
         SDL_Color NotCollidingColor = {255,0,0,255};
@@ -118,3 +130,4 @@ real BoundingBox::Mininmum(const XYZ i) const
     }
 
 }
+

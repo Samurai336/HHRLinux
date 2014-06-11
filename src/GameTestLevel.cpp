@@ -117,12 +117,15 @@ bool GameTestLevel::LoadLevel()
     MainPlayer.SetPosition((WWIDTH/2), (WHEIGHT/2) );
     MainPlayer.SetScale(0.5f);
 
+
+
+    anEnemy.SetUpHHREnemy("Assets/Boat2.png",6,1,50,true);
+    anEnemy.SetPosition((100), (WHEIGHT/2) );
+
+    anEnemy.setRenderOrder(50);
+
     BackGroundMusic.Play();
-
-
-
-
-
+    anEnemy.SetScale(0.5f);
 
     return true;
 }
@@ -143,6 +146,7 @@ void GameTestLevel::OnLoop()
 	background.UpDate();
     Henry.OnLoop();
     MainPlayer.OnLoop();
+    anEnemy.OnLoop();
 
     //Test2.SetPosition(MainPlayer.GetAnimationCenter());
 
@@ -176,6 +180,7 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
     Test2.OnRender(theRenderer);
     Henry.OnRender(theRenderer);
     MainPlayer.OnRender(theRenderer);
+    anEnemy.OnRender(theRenderer);
 
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
@@ -192,6 +197,7 @@ void GameTestLevel::OnCleanup()
     Test.OnCleanup();
     Test2.OnCleanup();
     MainPlayer.OnCleanup();
+    anEnemy.OnCleanup();
     
     AMessage.OnCleanup();
 }

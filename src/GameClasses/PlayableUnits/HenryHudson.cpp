@@ -134,7 +134,7 @@ void HenryHudson::UpdateCannons()
         if(CoolDownLeft< ticks)
         {
 #ifdef DEBUG_MODE
-            printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
+            //printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
 #endif
             cannonSfx.Play();
             CoolDownLeft = (SDL_GetTicks() + FireRestTime);
@@ -149,7 +149,7 @@ void HenryHudson::UpdateCannons()
         if(CoolDownRight< ticks)
         {
 #ifdef DEBUG_MODE
-            printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
+            //printf("HenryLocation X:%f, Y:%f\n", GetAnimationCenter().x, GetAnimationCenter().y);
 #endif
             cannonSfx.Play();
             CoolDownRight = (SDL_GetTicks() + FireRestTime);

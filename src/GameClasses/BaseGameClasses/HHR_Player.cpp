@@ -15,6 +15,7 @@ bool HHR_Player::SetUpHHRPlayer(char *File, unsigned int Columns, unsigned int R
     HHRUnit(File,Columns,Rows,rate,Loop,MaxHealth);
     HHR_Player();
 
+
     if(CreateAnimatedSprite(File, Columns, Rows,rate,Loop))
     {
         return true;

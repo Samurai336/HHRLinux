@@ -32,6 +32,10 @@ namespace HHR_Physics
 
             real Maximum(const XYZ i) const;
 
+            real GetWidth()  const;
+
+            real GetHeight() const;
+
             void setPostion(Vector3 &NewPositon);
 
             void OnRender(MainRender	&theRenderer, bool isColliding = false);

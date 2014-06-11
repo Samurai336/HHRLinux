@@ -35,6 +35,7 @@
 #include "GameClasses/BaseGameClasses/HHR_Player.h"
 #include "Physics/Collider.h"
 #include "GameClasses/PlayableUnits/HenryHudson.h"
+#include "GameClasses/AIUnits/HHREnemy.h"
 
 
 
@@ -65,6 +66,7 @@ class GameTestLevel : public Level
 		ScrollingBackGround background;
 		SpriteText AMessage;
         MusicSound BackGroundMusic;
+        HHREnemy anEnemy;
 
 };
 
