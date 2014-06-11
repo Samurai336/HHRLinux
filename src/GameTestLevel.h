@@ -53,6 +53,7 @@ class GameTestLevel : public Level
         void OnLoop();
         void CheckCollision();
         void OnRender(MainRender	&theRenderer);
+        void OnKeyUp(SDL_Keycode  sym,  SDL_Keymod mod, Uint16 unicode);
         void OnCleanup();
         ~GameTestLevel();
     protected:

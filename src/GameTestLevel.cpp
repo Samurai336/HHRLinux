@@ -119,7 +119,7 @@ bool GameTestLevel::LoadLevel()
 
 
 
-    anEnemy.SetUpHHREnemy("Assets/Boat2.png",6,1,50,true);
+    anEnemy.SetUpHHREnemy("Assets/Boat2.png",6,1,35,false);
     anEnemy.SetPosition((100), (WHEIGHT/2) );
 
     anEnemy.setRenderOrder(50);
@@ -189,6 +189,20 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
 
 
     AMessage.OnRender(theRenderer);
+
+}
+
+void GameTestLevel::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
+{
+    if(sym == SDLK_p)
+    {
+        anEnemy.ModifyHealth(-101);
+    }
+
+    if(sym == SDLK_q)
+    {
+        anEnemy.Reset();
+    }
 
 }
 void GameTestLevel::OnCleanup()

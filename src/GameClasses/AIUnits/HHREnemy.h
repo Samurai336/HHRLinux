@@ -23,7 +23,7 @@ class HHREnemy : public HHRUnit
         ~HHREnemy();
 
      private:
-
+        bool RunDeathSequence;
         HHR_Physics::Vector3 BoxOffest;
         HHR_Physics::BoundingBox CollisionBox;
 

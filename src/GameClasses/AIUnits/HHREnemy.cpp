@@ -9,14 +9,13 @@ HHREnemy::HHREnemy():HHRUnit()
 
     HHR_Physics::Vector3 size(30.0f,45.0f,0.0f);
     CollisionBox.SetSize( size);
+
+    RunDeathSequence= false;
 }
 
 HHREnemy::HHREnemy(char *File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth)
 {
-
     SetUpHHREnemy(File,Columns,Rows,rate,Loop,MaxHealth);
-
-
 
 }
 
@@ -38,10 +37,29 @@ bool HHREnemy::SetUpHHREnemy(char *File, unsigned int Columns, unsigned int Rows
 
 void HHREnemy::OnLoop()
 {
+    if(health<=0)
+    {
+        if(Living)
+        {
+            if(RunDeathSequence == false)
+            {
+                RunDeathSequence = true;
+                StartAnimating();
+            }
+            else if(AnimationIsPlaying() == false)
+            {
+                RunDeathSequence = false;
+                Kill();
+            }
+
+        }
+    }
+    else
+    {
+        UpdateCollisionObj();
+    }
 
     HHRUnit::OnLoop();
-
-    UpdateCollisionObj();
 
 }
 
@@ -52,6 +70,7 @@ void HHREnemy::Kill()
 
 void HHREnemy::Reset()
 {
+    SetColumnPosition(1);
 
     HHRUnit::Reset();
 

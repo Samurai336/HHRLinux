@@ -214,6 +214,19 @@ SpriteAnimation::~SpriteAnimation()
     //dtor
 }
 
+void SpriteAnimation::SetColumnPosition(unsigned int Position)
+{
+    currentColumn = Position;
+    Sprite_Rect.x = (currentColumn-1) * Sprite_Rect.w;
+}
+
+void SpriteAnimation::SetRowPosition(unsigned int Position)
+{
+    currrentRow = Position;
+    Sprite_Rect.y = (currrentRow-1) * Sprite_Rect.h;
+
+}
+
 HHR_Physics::Vector3 SpriteAnimation::GetAnimationCenter()
 {
     //X+((W * scale)/2);
@@ -224,5 +237,10 @@ HHR_Physics::Vector3 SpriteAnimation::GetAnimationCenter()
     AnimationCenter.y = (Position.y + ((Sprite_Rect.h * Scale)));
 
     return AnimationCenter;
+}
+
+bool SpriteAnimation::AnimationIsPlaying() const
+{
+    return AnimationPlaying;
 }
 

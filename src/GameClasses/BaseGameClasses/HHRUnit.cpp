@@ -3,7 +3,7 @@
 
 HHRUnit::HHRUnit()
 {
-    health = 100;
+    health = MaxHealth = 100;
     Living = true;
 }
 
@@ -51,7 +51,7 @@ void HHRUnit::ModifyHealth(const int ChangeHealthBy)
 {
     health += ChangeHealthBy;
 
-    if(MaxHealth < health)
+    if(health > (int)MaxHealth)
     {
         health = MaxHealth;
     }
@@ -65,6 +65,7 @@ void HHRUnit::Kill()
 
 void HHRUnit::Reset()
 {
+
     health = MaxHealth;
     Living = true;
 }
