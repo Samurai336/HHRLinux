@@ -36,6 +36,7 @@
 #include "Physics/Collider.h"
 #include "GameClasses/PlayableUnits/HenryHudson.h"
 #include "GameClasses/AIUnits/HHREnemy.h"
+#include "GameClasses/AIUnits/HHRShootingEnemy.h"
 
 
 
@@ -68,6 +69,7 @@ class GameTestLevel : public Level
 		SpriteText AMessage;
         MusicSound BackGroundMusic;
         HHREnemy anEnemy;
+        HHRShootingEnemy aShootingEnemy;
 
 };
 

@@ -92,7 +92,7 @@ bool GameTestLevel::LoadLevel()
         return false;
     }
 
-    Henry.SetPosition((WWIDTH/2), (WHEIGHT/2) );
+    Henry.SetPosition((WWIDTH/4), (WHEIGHT/4) );
 
     Henry.SetScale(0.5f);
 
@@ -124,8 +124,18 @@ bool GameTestLevel::LoadLevel()
 
     anEnemy.setRenderOrder(50);
 
-    BackGroundMusic.Play();
     anEnemy.SetScale(0.5f);
+
+    BackGroundMusic.Play();
+
+
+    aShootingEnemy.SetHHRShootingEnemy("Assets/electricShip2.png",3,3,50,true);
+    aShootingEnemy.SetPosition((300), 200 );
+
+    aShootingEnemy.StartAnimating();
+
+    aShootingEnemy.setRenderOrder(50);
+
 
     return true;
 }
@@ -147,6 +157,7 @@ void GameTestLevel::OnLoop()
     Henry.OnLoop();
     MainPlayer.OnLoop();
     anEnemy.OnLoop();
+    aShootingEnemy.OnLoop();
 
     //Test2.SetPosition(MainPlayer.GetAnimationCenter());
 
@@ -181,6 +192,7 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
     Henry.OnRender(theRenderer);
     MainPlayer.OnRender(theRenderer);
     anEnemy.OnRender(theRenderer);
+    aShootingEnemy.OnRender(theRenderer);
 
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);
@@ -196,12 +208,12 @@ void GameTestLevel::OnKeyUp(SDL_Keycode sym, SDL_Keymod mod, Uint16 unicode)
 {
     if(sym == SDLK_p)
     {
-        anEnemy.ModifyHealth(-101);
+        aShootingEnemy.ModifyHealth(-15);
     }
 
     if(sym == SDLK_q)
     {
-        anEnemy.Reset();
+        aShootingEnemy.Reset();
     }
 
 }
@@ -212,6 +224,7 @@ void GameTestLevel::OnCleanup()
     Test2.OnCleanup();
     MainPlayer.OnCleanup();
     anEnemy.OnCleanup();
+    aShootingEnemy.OnCleanup();
     
     AMessage.OnCleanup();
 }

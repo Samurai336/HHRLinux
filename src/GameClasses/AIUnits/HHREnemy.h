@@ -2,6 +2,7 @@
 #define HHRENEMY_H
 
 #include "../BaseGameClasses/HHRUnit.h"
+#include "../../Audio/BaseSound.h"
 
 class HHREnemy : public HHRUnit
 {
@@ -20,12 +21,16 @@ class HHREnemy : public HHRUnit
 
         virtual HHR_Physics::BoundingBox GetCollisionObject() ;
 
+        virtual void OnCleanup();
+
         ~HHREnemy();
 
-     private:
+     protected:
         bool RunDeathSequence;
         HHR_Physics::Vector3 BoxOffest;
         HHR_Physics::BoundingBox CollisionBox;
+        BaseSound  explodeSfx;
+
 
         virtual void UpdateCollisionObj();
 

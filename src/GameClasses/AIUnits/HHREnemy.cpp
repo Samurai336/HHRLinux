@@ -32,6 +32,8 @@ bool HHREnemy::SetUpHHREnemy(char *File, unsigned int Columns, unsigned int Rows
         return true;
     }
 
+    explodeSfx.Load("Assets/Audio/sfx/51427_smcameron_synthetic_bomb.wav");
+
     return false;
 }
 
@@ -44,6 +46,7 @@ void HHREnemy::OnLoop()
             if(RunDeathSequence == false)
             {
                 RunDeathSequence = true;
+                explodeSfx.Play();
                 StartAnimating();
             }
             else if(AnimationIsPlaying() == false)
@@ -90,6 +93,11 @@ void HHREnemy::OnRender(MainRender &theRenderer)
 HHR_Physics::BoundingBox HHREnemy::GetCollisionObject()
 {
     return CollisionBox;
+}
+
+void HHREnemy::OnCleanup()
+{
+    explodeSfx.OnCleanup();
 }
 
 HHREnemy::~HHREnemy()
