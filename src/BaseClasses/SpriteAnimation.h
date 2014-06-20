@@ -31,6 +31,7 @@ class SpriteAnimation: public BaseUnit
 {
     public:
         SpriteAnimation(void);
+        SpriteAnimation(SpriteAnimation &copyClass);
         SpriteAnimation(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop);
         bool CreateAnimatedSprite(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop);
         void SetLoop(bool);

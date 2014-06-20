@@ -24,6 +24,12 @@
 namespace HHR_Physics
 {
 
+Sphere::Sphere(Sphere &CopyClass)
+{
+    position = CopyClass.position;
+    radious = CopyClass.radious;
+}
+
 void Sphere::SetSphere(Vector3 &pos, real rad)
 {
     position = pos;

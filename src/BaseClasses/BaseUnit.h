@@ -42,6 +42,8 @@ class BaseUnit
 		public:
 			BaseUnit(void);
 
+            BaseUnit(BaseUnit& CopyClass);
+
 			virtual bool Load(char* File);
 
             virtual void OnLoop();

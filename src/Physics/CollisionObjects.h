@@ -21,6 +21,7 @@ namespace HHR_Physics
 
         public:
             BoundingBox(){}
+            BoundingBox(BoundingBox& CopyClass);
             BoundingBox(Vector3 Pos, Vector3 Ext):
             position(Pos), extension(Ext) {}
 
@@ -59,6 +60,7 @@ namespace HHR_Physics
         OrientedBoundingBox(){}
 
 
+
             OrientedBoundingBox(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent);
 
             void SetUpOBB(Vector3 &Pos, Vector3 &Ext, Vector3 &Orent);
@@ -90,7 +92,10 @@ namespace HHR_Physics
         friend class Collider;
 
         public:
+            OrientedBoundingBox2D(OrientedBoundingBox2D& CopyClass);
             OrientedBoundingBox2D(const Vector3& center, const real w, const real h, real angle);
+
+
             OrientedBoundingBox2D(){}
 
             void SetUpBox(const Vector3& center, const real w, const real h, real angle);
@@ -111,6 +116,7 @@ namespace HHR_Physics
             Vector3 localAxis[2];
             real    origin[2];
             real    extends[2];
+            real    CurrentAngle;
 
 
             Vector3 Positon;
@@ -126,11 +132,13 @@ namespace HHR_Physics
     class Sphere: public CollisionObject
     {
         public:
+
             Vector3 position;
             real radious;
 
         public:
             Sphere(){}
+            Sphere(Sphere& CopyClass);
             Sphere(Vector3 &pos, real rad):
                 position(pos), radious(rad){}
 

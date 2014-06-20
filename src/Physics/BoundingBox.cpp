@@ -26,6 +26,13 @@
 namespace HHR_Physics
 {
 
+BoundingBox::BoundingBox(BoundingBox &CopyClass)
+{
+    position = CopyClass.position;
+    extension = CopyClass.extension;
+
+}
+
 void BoundingBox::SetUpBB(Vector3 &Pos, Vector3 &Ext)
 {
     position = Pos;

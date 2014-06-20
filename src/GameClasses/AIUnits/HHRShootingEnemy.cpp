@@ -13,6 +13,13 @@ HHRShootingEnemy::HHRShootingEnemy()
     RunDeathSequence= false;
 }
 
+HHRShootingEnemy::HHRShootingEnemy(HHRShootingEnemy &CopyClass):HHREnemy(CopyClass)
+{
+
+     GunSfx = CopyClass.GunSfx;
+     bigBoomSfx = CopyClass.bigBoomSfx;
+}
+
 HHRShootingEnemy::HHRShootingEnemy(char *File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth)
 {
     SetHHRShootingEnemy(File,Columns,Rows,rate,Loop,MaxHealth);

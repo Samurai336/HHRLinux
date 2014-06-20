@@ -10,6 +10,11 @@ namespace HHR_Physics
 
     }
 
+    OrientedBoundingBox2D::OrientedBoundingBox2D(OrientedBoundingBox2D& CopyClass)
+    {
+        SetUpBox(CopyClass.Positon, CopyClass.width, CopyClass.height, CopyClass.CurrentAngle);
+    }
+
     void OrientedBoundingBox2D::SetUpBox(const Vector3& center, const real w, const real h, real angle)
     {
         Vector3 X( real_cos(DEGREES_TO_RADIANS(angle)), real_sin(DEGREES_TO_RADIANS(angle)), center.z);
@@ -17,6 +22,7 @@ namespace HHR_Physics
         width = w;
         height = h;
         Positon= center;
+        CurrentAngle= angle;
 
         localAxis[0] = X;
         localAxis[1] = Y;
@@ -58,6 +64,7 @@ namespace HHR_Physics
         corner[1] = ((center) + X+Y)+Translation;
         corner[0] = ((center) - X+Y)+Translation;
 
+        CurrentAngle= angle;
 
 
         computeAxes();

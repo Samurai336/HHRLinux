@@ -48,6 +48,25 @@ SpriteAnimation::SpriteAnimation(void)
     //ctor
 }
 
+SpriteAnimation::SpriteAnimation(SpriteAnimation &copyClass):BaseUnit(copyClass)
+{
+
+
+    Sprite_Rect = copyClass.Sprite_Rect;
+    numberOfColumns = copyClass.numberOfColumns;
+    numberOfRows = copyClass.numberOfRows;
+    LastUpDate = copyClass.LastUpDate;
+    Rate = copyClass.Rate;
+    currrentRow = copyClass.currrentRow;
+    currentColumn = copyClass.currentColumn;
+    loop = copyClass.loop;
+    AnimationPlaying = copyClass.AnimationPlaying;
+    AnimationCenter = copyClass.AnimationCenter;
+
+
+
+}
+
 
 SpriteAnimation::SpriteAnimation(char* File, unsigned int Columns, unsigned int Rows, Uint32 rate, bool Loop):
     numberOfColumns(Columns), numberOfRows(Rows), Rate(rate)

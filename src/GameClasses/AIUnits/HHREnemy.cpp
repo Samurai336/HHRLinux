@@ -13,6 +13,15 @@ HHREnemy::HHREnemy():HHRUnit()
     RunDeathSequence= false;
 }
 
+HHREnemy::HHREnemy(HHREnemy &CopyClass):HHRUnit(CopyClass)
+{
+
+    RunDeathSequence = CopyClass.RunDeathSequence;
+    BoxOffest = CopyClass.BoxOffest;
+    CollisionBox = HHR_Physics::BoundingBox(CopyClass.CollisionBox);
+    explodeSfx = CopyClass.explodeSfx;
+}
+
 HHREnemy::HHREnemy(char *File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth)
 {
     SetUpHHREnemy(File,Columns,Rows,rate,Loop,MaxHealth);

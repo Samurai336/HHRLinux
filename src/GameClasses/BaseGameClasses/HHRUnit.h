@@ -7,6 +7,7 @@ class HHRUnit : public SpriteAnimation
 {
     public:
         HHRUnit();
+        HHRUnit(HHRUnit& copyClass);
 
         HHRUnit(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int newMaxHealth);
 

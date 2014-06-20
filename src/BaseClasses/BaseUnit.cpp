@@ -40,6 +40,25 @@ BaseUnit::BaseUnit(void)
 
 }
 
+BaseUnit::BaseUnit(BaseUnit &CopyClass)
+{
+    unitTexture = CopyClass.unitTexture;
+
+    Position = CopyClass.Position;
+
+    width = CopyClass.width;
+
+    height = CopyClass.height;
+
+    rotation = CopyClass.rotation;
+
+    Scale = CopyClass.Scale;
+
+    renderOrder = CopyClass.renderOrder;
+
+
+}
+
 
 BaseUnit::~BaseUnit(void)
 {

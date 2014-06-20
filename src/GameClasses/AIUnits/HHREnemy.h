@@ -8,6 +8,7 @@ class HHREnemy : public HHRUnit
 {
     public:
         HHREnemy();
+        HHREnemy(HHREnemy& CopyClass);
         HHREnemy(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth = 100);
         bool SetUpHHREnemy(char* File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int MaxHealth = 100);
 

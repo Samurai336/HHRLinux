@@ -7,6 +7,16 @@ HHRUnit::HHRUnit()
     Living = true;
 }
 
+HHRUnit::HHRUnit(HHRUnit &copyClass):SpriteAnimation(copyClass)
+{
+
+   MaxHealth = copyClass.MaxHealth;
+
+    health = copyClass.health;
+    Living = copyClass.Living;
+    Velocity = copyClass.Velocity;
+}
+
 HHRUnit::HHRUnit(char *File, unsigned int Columns, unsigned int Rows, unsigned int rate, bool Loop, const unsigned int newMaxHealth)
 {
     CreateAnimatedSprite(File, Columns, Rows,rate,Loop);
