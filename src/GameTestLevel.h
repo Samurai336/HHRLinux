@@ -37,6 +37,8 @@
 #include "GameClasses/PlayableUnits/HenryHudson.h"
 #include "GameClasses/AIUnits/HHREnemy.h"
 #include "GameClasses/AIUnits/HHRShootingEnemy.h"
+#include "GameClasses/AI_Manager.h"
+
 
 
 

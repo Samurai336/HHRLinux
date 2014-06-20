@@ -42,6 +42,11 @@ int HHRUnit::GetMaxHealth() const
     return MaxHealth;
 }
 
+bool HHRUnit::IsLiving()
+{
+    return Living;
+}
+
 void HHRUnit::SetMaxHealth(unsigned int newMaxHealth)
 {
     MaxHealth= newMaxHealth;

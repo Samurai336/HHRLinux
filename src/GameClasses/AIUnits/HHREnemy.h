@@ -13,7 +13,7 @@ class HHREnemy : public HHRUnit
 
         virtual void OnLoop();
 
-        virtual void Kill();
+        virtual void Kill();       
 
         virtual void Reset();
 

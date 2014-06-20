@@ -18,6 +18,8 @@ class HHRUnit : public SpriteAnimation
 
         int GetMaxHealth() const;
 
+        bool IsLiving();
+
         void SetMaxHealth(unsigned int newMaxHealth);
 
         void ModifyHealth(const int ChangeHealthBy) ;
