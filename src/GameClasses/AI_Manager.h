@@ -12,6 +12,7 @@ class AI_Manager
         AI_Manager();
         void SetUpAI(HHR_Physics::Vector3 SetSpawnPoint, HHR_Physics::Vector3 setResetPoint, uint32_t setSpawnRate, T* SetUnitModel);
         void OnLoop();
+        void OnRender(MainRender	&theRenderer);
 
 
     private:
@@ -28,5 +29,9 @@ class AI_Manager
 
 
 };
+
+#define TEMPLATE_CPP_COMPILE
+#include "AI_Manager.cpp"
+#undef TEMPLATE_CPP_COMPILE
 
 #endif // AI_MANAGER_H

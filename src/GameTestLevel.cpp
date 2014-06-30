@@ -136,6 +136,14 @@ bool GameTestLevel::LoadLevel()
 
     aShootingEnemy.setRenderOrder(50);
 
+    HHREnemy* BasicEnemyModel = new HHREnemy("Assets/electricShip2.png",3,3,50,true);
+
+    BasicEnemyModel->setRenderOrder(50);
+
+    BasicEnemyModel->StartAnimating();
+
+    BasicEnemy.SetUpAI(HHR_Physics::Vector3((WWIDTH/2), (WHEIGHT/2),1.0f),HHR_Physics::Vector3((WWIDTH/2), (WHEIGHT),1.0f), 500, BasicEnemyModel);
+
 
     return true;
 }
@@ -158,6 +166,7 @@ void GameTestLevel::OnLoop()
     MainPlayer.OnLoop();
     anEnemy.OnLoop();
     aShootingEnemy.OnLoop();
+    BasicEnemy.OnLoop();
 
     //Test2.SetPosition(MainPlayer.GetAnimationCenter());
 
@@ -192,7 +201,9 @@ void GameTestLevel::OnRender(MainRender	&theRenderer)
     Henry.OnRender(theRenderer);
     MainPlayer.OnRender(theRenderer);
     anEnemy.OnRender(theRenderer);
-    aShootingEnemy.OnRender(theRenderer);
+    //aShootingEnemy.OnRender(theRenderer);
+
+    BasicEnemy.OnRender(theRenderer);
 
 #ifdef PHYSICS_DEBUG
     Test.GetCollisionObject().OnRender(theRenderer, Colliding);

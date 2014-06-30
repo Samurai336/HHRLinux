@@ -72,6 +72,7 @@ class GameTestLevel : public Level
         MusicSound BackGroundMusic;
         HHREnemy anEnemy;
         HHRShootingEnemy aShootingEnemy;
+        AI_Manager<HHREnemy> BasicEnemy;
 
 };
 

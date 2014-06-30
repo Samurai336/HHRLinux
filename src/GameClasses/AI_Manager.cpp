@@ -1,3 +1,5 @@
+#ifdef TEMPLATE_CPP_COMPILE
+
 #include "AI_Manager.h"
 
 template <class T>
@@ -12,6 +14,8 @@ void AI_Manager<T>::SetUpAI(HHR_Physics::Vector3 SetSpawnPoint, HHR_Physics::Vec
     ResetPoint = setResetPoint;
     SpawnRestTime = setSpawnRate;
     UnitModel = SetUnitModel;
+
+    SpawnCool = 0;
 }
 
 template <class T>
@@ -30,7 +34,7 @@ void AI_Manager<T>::OnLoop()
             NewUnits.push((*activeUnitsItor));
 
             activeUnitsItor--;
-            ActiveUnits.remove((*(activeUnitsItor+1)));
+            ActiveUnits.remove((*(activeUnitsItor++)));
         }
     }
 
@@ -40,6 +44,17 @@ void AI_Manager<T>::OnLoop()
         SpawnCool = SDL_GetTicks() + SpawnRestTime;
     }
 
+}
+
+template <class T>
+void AI_Manager<T>::OnRender(MainRender &theRenderer)
+{
+    typename std::list<T*>::iterator activeUnitsItor = ActiveUnits.begin();
+
+    for(; activeUnitsItor != ActiveUnits.end(); ++activeUnitsItor )
+    {
+        (*activeUnitsItor)->OnRender(theRenderer);
+    }
 }
 
 template <class T>
@@ -53,12 +68,16 @@ void AI_Manager<T>::SpawnNewUnit()
     }
     else
     {
-        newActiveUnit = new T(UnitModel);
+        newActiveUnit = new T((*UnitModel));
 
     }
 
     newActiveUnit->Reset();
     newActiveUnit->SetPosition(SpawnPoint);
 
+    ActiveUnits.push_back(newActiveUnit);
+
 
 }
+
+#endif
